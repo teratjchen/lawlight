@@ -1,3 +1,5 @@
+import datetime
+import html as html_lib
 import io
 import json
 import os
@@ -6,7 +8,7 @@ from pathlib import Path
 import anthropic
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel
 
 app = FastAPI(title="LawLight")
@@ -48,11 +50,20 @@ PERSONA_INSTRUCTIONS = {
     ),
 }
 
+# In-memory feedback store (persists until server restarts).
+feedback_db: list[dict] = []
+
 
 class AnalyzeRequest(BaseModel):
     text: str
     language: str = "English"
     persona: str = "intermediate"
+
+
+class FeedbackRequest(BaseModel):
+    name: str = ""
+    category: str = "general"
+    message: str
 
 
 @app.get("/")
@@ -132,3 +143,69 @@ async def extract_pdf(file: UploadFile = File(...)):
         raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to read PDF: {e}")
+
+
+@app.post("/feedback")
+async def submit_feedback(req: FeedbackRequest):
+    if not req.message.strip():
+        raise HTTPException(status_code=400, detail="Message cannot be empty.")
+    feedback_db.append({
+        "id": len(feedback_db) + 1,
+        "name": req.name.strip() or "Anonymous",
+        "category": req.category,
+        "message": req.message.strip(),
+        "timestamp": datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M UTC"),
+    })
+    return {"ok": True}
+
+
+@app.get("/admin")
+async def admin_view(key: str = ""):
+    admin_key = os.environ.get("ADMIN_KEY", "")
+    if not admin_key or key != admin_key:
+        raise HTTPException(status_code=403, detail="Access denied.")
+
+    CAT_COLORS = {
+        "question":   ("#dbeafe", "#1d4ed8"),
+        "suggestion": ("#dcfce7", "#15803d"),
+        "complaint":  ("#fee2e2", "#b91c1c"),
+        "other":      ("#f1f5f9", "#475569"),
+    }
+
+    rows = ""
+    for item in reversed(feedback_db):
+        bg, fg = CAT_COLORS.get(item["category"], CAT_COLORS["other"])
+        rows += f"""
+        <div style="border:1px solid #e2e8f0;border-radius:10px;padding:18px;margin-bottom:14px;background:#fff">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+            <strong style="font-size:15px">#{item['id']} &nbsp;{html_lib.escape(item['name'])}</strong>
+            <span style="background:{bg};color:{fg};padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600">
+              {item['category']}
+            </span>
+          </div>
+          <p style="margin:0 0 10px;line-height:1.6">{html_lib.escape(item['message'])}</p>
+          <small style="color:#94a3b8">{item['timestamp']}</small>
+        </div>"""
+
+    if not rows:
+        rows = "<p style='color:#94a3b8;text-align:center;padding:40px 0'>No feedback yet.</p>"
+
+    page = f"""<!DOCTYPE html>
+<html><head><title>LawLight — Feedback Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+       background:#f8f7f4;color:#1a1a2e;margin:0;padding:32px 16px}}
+  .wrap{{max-width:680px;margin:0 auto}}
+  h1{{font-size:22px;font-weight:800;margin-bottom:4px}}
+  .meta{{color:#64748b;font-size:14px;margin-bottom:28px}}
+</style>
+</head><body>
+<div class="wrap">
+  <h1>⚖️ LawLight — Feedback</h1>
+  <p class="meta">{len(feedback_db)} submission(s) total &nbsp;·&nbsp; newest first</p>
+  {rows}
+</div>
+</body></html>"""
+
+    return HTMLResponse(content=page)
