@@ -2550,12 +2550,17 @@ async function analyze() {
     document.getElementById('loadingMsg').textContent = loadSteps[i];
   }, 2000);
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 120_000); // 2-min hard timeout
+
   try {
     const res = await fetch('/analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text, language: lang, persona, user_location: userLocation }),
+      signal: controller.signal,
     });
+    clearTimeout(timeoutId);
     const data = await res.json();
     if (!res.ok) throw new Error(data.detail || 'Analysis failed');
     clearInterval(loadInterval);
@@ -2563,8 +2568,12 @@ async function analyze() {
     setUI('results');
     document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   } catch (e) {
+    clearTimeout(timeoutId);
     clearInterval(loadInterval);
-    document.getElementById('errorMsg').textContent = ' ' + e.message;
+    const msg = e.name === 'AbortError'
+      ? 'Request timed out — the document may be too complex. Try a shorter section.'
+      : e.message;
+    document.getElementById('errorMsg').textContent = msg;
     setUI('error');
   }
 }

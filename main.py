@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-load_dotenv()  # loads ANTHROPIC_API_KEY from .env if present
+load_dotenv(override=True)  # override shell env so .env always wins
 
 import anthropic
 from fastapi import FastAPI, File, HTTPException, UploadFile
