@@ -15,7 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from pydantic import BaseModel
 
-app = FastAPI(title="LawLight")
+app = FastAPI(title="VeriLex")
 
 app.add_middleware(
     CORSMiddleware,
@@ -325,7 +325,7 @@ async def admin_view(key: str = ""):
         rows = "<p style='color:#94a3b8;text-align:center;padding:40px 0'>No feedback yet.</p>"
 
     page = f"""<!DOCTYPE html>
-<html><head><title>LawLight — Feedback Admin</title>
+<html><head><title>VeriLex — Feedback Admin</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
   body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
@@ -336,7 +336,7 @@ async def admin_view(key: str = ""):
 </style>
 </head><body>
 <div class="wrap">
-  <h1>⚖️ LawLight — Feedback</h1>
+  <h1>⚖️ VeriLex — Feedback</h1>
   <p class="meta">{len(feedback_db)} submission(s) total &nbsp;·&nbsp; newest first</p>
   {rows}
 </div>
