@@ -950,11 +950,11 @@
         </svg>
       </div>
       <div style="position:relative;z-index:1">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#67e8f9;opacity:.8;margin-bottom:5px">The Name</div>
-        <p style="font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.4">
+        <div id="aboutNameLabel" style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#67e8f9;opacity:.8;margin-bottom:5px">The Name</div>
+        <p id="aboutNameTitle" style="font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.4">
           <span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Latin for <em style="font-style:italic;color:rgba(255,255,255,.85)">"truth"</em> and <em style="font-style:italic;color:rgba(255,255,255,.85)">"law"</em>
         </p>
-        <p style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;margin:0">We built VeriLex to do exactly what the name promises — reveal the truth of the law, in language anyone can understand.</p>
+        <p id="aboutNameDesc" style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;margin:0">We built VeriLex to do exactly what the name promises — reveal the truth of the law, in language anyone can understand.</p>
       </div>
     </div>
 
@@ -962,26 +962,26 @@
 
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
         <div style="font-size:32px;margin-bottom:12px">⚖️</div>
-        <h3 style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">The Problem</h3>
-        <p style="font-size:14px;color:var(--text);line-height:1.75">Millions of people receive legal documents — eviction notices, court summonses, debt letters — and have no idea what they mean or what rights they have. Legal jargon is a barrier that shouldn't exist.</p>
+        <h3 id="aboutCard1H" style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">The Problem</h3>
+        <p id="aboutCard1P" style="font-size:14px;color:var(--text);line-height:1.75">Millions of people receive legal documents — eviction notices, court summonses, debt letters — and have no idea what they mean or what rights they have. Legal jargon is a barrier that shouldn't exist.</p>
       </div>
 
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
         <div style="font-size:32px;margin-bottom:12px">💡</div>
-        <h3 style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Our Goal</h3>
-        <p style="font-size:14px;color:var(--text);line-height:1.75">VeriLex explains what any legal document says — in plain language, with specific laws cited, deadlines flagged, and free legal aid listed. We never give legal advice, but we make sure you understand exactly what you're dealing with.</p>
+        <h3 id="aboutCard2H" style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Our Goal</h3>
+        <p id="aboutCard2P" style="font-size:14px;color:var(--text);line-height:1.75">VeriLex explains what any legal document says — in plain language, with specific laws cited, deadlines flagged, and free legal aid listed. We never give legal advice, but we make sure you understand exactly what you're dealing with.</p>
       </div>
 
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
         <div style="font-size:32px;margin-bottom:12px">🌍</div>
-        <h3 style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Who It's For</h3>
-        <p style="font-size:14px;color:var(--text);line-height:1.75">Anyone who receives a legal document and feels overwhelmed — students, renters, immigrants, workers. No legal background needed. Supports 15 languages. Always free. No account required.</p>
+        <h3 id="aboutCard3H" style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Who It's For</h3>
+        <p id="aboutCard3P" style="font-size:14px;color:var(--text);line-height:1.75">Anyone who receives a legal document and feels overwhelmed — students, renters, immigrants, workers. No legal background needed. Supports 15 languages. Always free. No account required.</p>
       </div>
 
       <div style="background:linear-gradient(135deg,var(--amber-bg),#fff);border:1px solid rgba(59,130,246,.3);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
         <div style="font-size:32px;margin-bottom:12px">🔒</div>
-        <h3 style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Private by Design</h3>
-        <p style="font-size:14px;color:var(--text);line-height:1.75">Your documents are analyzed in real-time by Claude AI (Anthropic) and never stored, logged, or shared — not even temporarily. VeriLex is free, requires no account, and collects no personal data.</p>
+        <h3 id="aboutCard4H" style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Private by Design</h3>
+        <p id="aboutCard4P" style="font-size:14px;color:var(--text);line-height:1.75">Your documents are analyzed in real-time by Claude AI (Anthropic) and never stored, logged, or shared — not even temporarily. VeriLex is free, requires no account, and collects no personal data.</p>
       </div>
 
     </div>
@@ -1127,8 +1127,8 @@
              onclick="document.getElementById('pdfInput').click()"
              ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onDrop(event)">
           <div class="dz-icon">📎</div>
-          <p class="dz-text"><strong>Click to upload</strong> or drag and drop here</p>
-          <p class="dz-note">PDF only · Text-based PDFs extract instantly · Scanned PDFs use AI vision (~20s)</p>
+          <p id="pdfDzText" class="dz-text"><strong>Click to upload</strong> or drag and drop here</p>
+          <p id="pdfDzNote" class="dz-note">PDF only · Text-based PDFs extract instantly · Scanned PDFs use AI vision (~20s)</p>
           <div class="pdf-status" id="pdfStatus"></div>
           <p class="privacy-notice">🔒 Your document is processed by Claude AI and never stored on our servers.</p>
           <input type="file" id="pdfInput" accept=".pdf" onchange="onFileUpload(this.files[0])">
@@ -1138,8 +1138,8 @@
              onclick="document.getElementById('photoInput').click()"
              ondragover="onDragOver(event)" ondragleave="onDragLeave()" ondrop="onPhotoDrop(event)">
           <div class="dz-icon">📷</div>
-          <p class="dz-text"><strong>Click to upload a photo</strong> or drag and drop here</p>
-          <p class="dz-note">JPEG or PNG · Works with handwritten documents, physical mail, printed forms</p>
+          <p id="photoDzText" class="dz-text"><strong>Click to upload a photo</strong> or drag and drop here</p>
+          <p id="photoDzNote" class="dz-note">JPEG or PNG · Works with handwritten documents, physical mail, printed forms</p>
           <div class="pdf-status" id="photoStatus"></div>
           <p class="privacy-notice">🔒 Your photo is processed by Claude AI vision and never stored on our servers.</p>
           <input type="file" id="photoInput" accept=".jpg,.jpeg,.png,.webp" onchange="onPhotoUpload(this.files[0])">
@@ -1560,7 +1560,20 @@ const TRANSLATIONS = {
     step2Title:'AI reads the law', step2Desc:'Our AI identifies every applicable statute, case law precedent, and deadline.',
     step3Title:'Read plain English', step3Desc:'Get a clear breakdown with sources you can verify — in any of 15 languages.',
     appLabel:'Try it yourself', appTitle:'Paste your document below',
-    tabPaste:'Paste Text', tabUpload:'Upload PDF', sampleLabel:'Load a sample:',
+    tabPaste:'Paste Text', tabUpload:'Upload PDF', tabPhoto:'Upload Photo',
+    locLabel:'Share your location for local legal aid resources', locBtn:'Allow Location',
+    pdfDzText:'<strong>Click to upload</strong> or drag and drop here',
+    pdfDzNote:'PDF only · Text-based PDFs extract instantly · Scanned PDFs use AI vision (~20s)',
+    photoDzText:'<strong>Click to upload a photo</strong> or drag and drop here',
+    photoDzNote:'JPEG or PNG · Works with handwritten documents, physical mail, printed forms',
+    aboutNameLabel:'The Name',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Latin for <em style="font-style:italic;color:rgba(255,255,255,.85)">"truth"</em> and <em style="font-style:italic;color:rgba(255,255,255,.85)">"law"</em>',
+    aboutNameDesc:'We built VeriLex to do exactly what the name promises — reveal the truth of the law, in language anyone can understand.',
+    aboutCard1H:'The Problem', aboutCard1P:'Millions of people receive legal documents — eviction notices, court summonses, debt letters — and have no idea what they mean or what rights they have. Legal jargon is a barrier that shouldn\'t exist.',
+    aboutCard2H:'Our Goal', aboutCard2P:'VeriLex explains what any legal document says — in plain language, with specific laws cited, deadlines flagged, and free legal aid listed. We never give legal advice, but we make sure you understand exactly what you\'re dealing with.',
+    aboutCard3H:'Who It\'s For', aboutCard3P:'Anyone who receives a legal document and feels overwhelmed — students, renters, immigrants, workers. No legal background needed. Supports 15 languages. Always free. No account required.',
+    aboutCard4H:'Private by Design', aboutCard4P:'Your documents are analyzed in real-time by Claude AI (Anthropic) and never stored, logged, or shared — not even temporarily. VeriLex is free, requires no account, and collects no personal data.',
+    sampleLabel:'Load a sample:',
     personaQ:'How familiar are you with legal documents?',
     noviceTitle:'New to this', noviceDesc:'Explain everything simply, no jargon',
     interTitle:'Know the basics', interDesc:'Plain English, some terms are fine',
@@ -1609,7 +1622,20 @@ const TRANSLATIONS = {
     step2Title:'La IA lee la ley', step2Desc:'Nuestra IA identifica cada ley aplicable, precedente legal y fecha límite.',
     step3Title:'Lee en lenguaje claro', step3Desc:'Obtén un desglose claro con fuentes verificables en 15 idiomas.',
     appLabel:'Pruébalo tú mismo', appTitle:'Pega tu documento aquí',
-    tabPaste:'Pegar texto', tabUpload:'Subir PDF', sampleLabel:'Cargar un ejemplo:',
+    tabPaste:'Pegar texto', tabUpload:'Subir PDF', tabPhoto:'Subir foto',
+    locLabel:'Comparte tu ubicación para recursos legales locales', locBtn:'Permitir ubicación',
+    pdfDzText:'<strong>Haz clic para subir</strong> o arrastra y suelta aquí',
+    pdfDzNote:'Solo PDF · Los PDF de texto se extraen al instante · Los PDF escaneados usan visión IA (~20s)',
+    photoDzText:'<strong>Haz clic para subir una foto</strong> o arrastra y suelta aquí',
+    photoDzNote:'JPEG o PNG · Funciona con documentos escritos a mano, correo físico, formularios impresos',
+    aboutNameLabel:'El Nombre',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Latín para <em style="font-style:italic;color:rgba(255,255,255,.85)">"verdad"</em> y <em style="font-style:italic;color:rgba(255,255,255,.85)">"ley"</em>',
+    aboutNameDesc:'Construimos VeriLex para hacer exactamente lo que el nombre promete — revelar la verdad de la ley, en un lenguaje que todos puedan entender.',
+    aboutCard1H:'El Problema', aboutCard1P:'Millones de personas reciben documentos legales — avisos de desalojo, citaciones judiciales, cartas de deuda — y no tienen idea de qué significan o qué derechos tienen. El lenguaje legal es una barrera que no debería existir.',
+    aboutCard2H:'Nuestro objetivo', aboutCard2P:'VeriLex explica lo que dice cualquier documento legal — en lenguaje claro, con leyes específicas citadas, plazos marcados y ayuda legal gratuita listada. Nunca damos consejos legales, pero nos aseguramos de que entiendas exactamente con qué estás tratando.',
+    aboutCard3H:'¿Para quién es?', aboutCard3P:'Cualquier persona que recibe un documento legal y se siente abrumada — estudiantes, inquilinos, inmigrantes, trabajadores. No se necesita conocimiento legal. Soporta 15 idiomas. Siempre gratis. Sin cuenta requerida.',
+    aboutCard4H:'Privado por diseño', aboutCard4P:'Sus documentos son analizados en tiempo real por Claude AI (Anthropic) y nunca almacenados, registrados ni compartidos — ni siquiera temporalmente. VeriLex es gratuito, no requiere cuenta y no recopila datos personales.',
+    sampleLabel:'Cargar un ejemplo:',
     personaQ:'¿Qué tan familiarizado estás con documentos legales?',
     noviceTitle:'Soy nuevo', noviceDesc:'Explica todo de forma simple, sin jerga',
     interTitle:'Conozco lo básico', interDesc:'Lenguaje simple, algunos términos están bien',
@@ -1658,7 +1684,20 @@ const TRANSLATIONS = {
     step2Title:'AI解读法律', step2Desc:'我们的AI识别每一条适用法规、判例法先例和截止日期。',
     step3Title:'读懂清晰解释', step3Desc:'获得带有可验证来源的清晰分析，支持15种语言。',
     appLabel:'亲自试试', appTitle:'在下方粘贴您的文件',
-    tabPaste:'粘贴文本', tabUpload:'上传PDF', sampleLabel:'加载示例：',
+    tabPaste:'粘贴文本', tabUpload:'上传PDF', tabPhoto:'上传照片',
+    locLabel:'分享您的位置以获取本地法律援助资源', locBtn:'允许定位',
+    pdfDzText:'<strong>点击上传</strong>或拖放到这里',
+    pdfDzNote:'仅支持PDF · 文字PDF即时提取 · 扫描PDF使用AI视觉（约20秒）',
+    photoDzText:'<strong>点击上传照片</strong>或拖放到这里',
+    photoDzNote:'JPEG或PNG · 支持手写文件、实体信件、印刷表格',
+    aboutNameLabel:'名称由来',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — 拉丁语，意为<em style="font-style:italic;color:rgba(255,255,255,.85)">"真相"</em>和<em style="font-style:italic;color:rgba(255,255,255,.85)">"法律"</em>',
+    aboutNameDesc:'我们构建VeriLex就是为了实现这个名字所承诺的 — 揭示法律的真相，用每个人都能理解的语言。',
+    aboutCard1H:'问题所在', aboutCard1P:'数百万人收到法律文件 — 驱逐通知、法院传票、债务信函 — 却不知道这些文件的含义或他们拥有什么权利。法律术语是一道不应存在的障碍。',
+    aboutCard2H:'我们的目标', aboutCard2P:'VeriLex用通俗语言解释任何法律文件的内容，引用具体法律条文，标记截止日期，列出免费法律援助。我们从不给出法律建议，但我们确保您确切了解自己面临的情况。',
+    aboutCard3H:'适合谁使用', aboutCard3P:'任何收到法律文件并感到不知所措的人 — 学生、租户、移民、工人。无需法律背景。支持15种语言。永久免费。无需账户。',
+    aboutCard4H:'隐私优先设计', aboutCard4P:'您的文件由Claude AI（Anthropic）实时分析，不会被存储、记录或共享 — 即使是临时的也不会。VeriLex免费，无需账户，不收集任何个人数据。',
+    sampleLabel:'加载示例：',
     personaQ:'您对法律文件有多了解？',
     noviceTitle:'完全陌生', noviceDesc:'用简单语言解释，无术语',
     interTitle:'了解基础', interDesc:'通俗语言，一些术语可接受',
@@ -1707,7 +1746,20 @@ const TRANSLATIONS = {
     step2Title:'AI解讀法律', step2Desc:'我們的AI識別每一條適用法規、判例法先例和截止日期。',
     step3Title:'閱讀清晰說明', step3Desc:'獲得帶有可驗證來源的清晰分析，支援15種語言。',
     appLabel:'親自試試', appTitle:'在下方貼上您的文件',
-    tabPaste:'貼上文字', tabUpload:'上傳PDF', sampleLabel:'載入範例：',
+    tabPaste:'貼上文字', tabUpload:'上傳PDF', tabPhoto:'上傳照片',
+    locLabel:'分享您的位置以獲取本地法律援助資源', locBtn:'允許定位',
+    pdfDzText:'<strong>點擊上傳</strong>或拖放到這裡',
+    pdfDzNote:'僅支援PDF · 文字PDF即時提取 · 掃描PDF使用AI視覺（約20秒）',
+    photoDzText:'<strong>點擊上傳照片</strong>或拖放到這裡',
+    photoDzNote:'JPEG或PNG · 支援手寫文件、實體信件、印刷表格',
+    aboutNameLabel:'名稱由來',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — 拉丁語，意為<em style="font-style:italic;color:rgba(255,255,255,.85)">"真相"</em>和<em style="font-style:italic;color:rgba(255,255,255,.85)">"法律"</em>',
+    aboutNameDesc:'我們建立VeriLex就是為了實現這個名字所承諾的 — 揭示法律的真相，用每個人都能理解的語言。',
+    aboutCard1H:'問題所在', aboutCard1P:'數百萬人收到法律文件 — 驅逐通知、法院傳票、債務信函 — 卻不知道這些文件的含義或他們擁有什麼權利。法律術語是一道不應存在的障礙。',
+    aboutCard2H:'我們的目標', aboutCard2P:'VeriLex用通俗語言解釋任何法律文件的內容，引用具體法律條文，標記截止日期，列出免費法律援助。我們從不給出法律建議，但我們確保您確切了解自己面臨的情況。',
+    aboutCard3H:'適合誰使用', aboutCard3P:'任何收到法律文件並感到不知所措的人 — 學生、租戶、移民、工人。無需法律背景。支援15種語言。永久免費。無需帳戶。',
+    aboutCard4H:'隱私優先設計', aboutCard4P:'您的文件由Claude AI（Anthropic）即時分析，不會被儲存、記錄或共享 — 即使是暫時的也不會。VeriLex免費，無需帳戶，不收集任何個人資料。',
+    sampleLabel:'載入範例：',
     personaQ:'您對法律文件有多了解？',
     noviceTitle:'完全陌生', noviceDesc:'用簡單語言解釋，無術語',
     interTitle:'了解基礎', interDesc:'通俗語言，一些術語可接受',
@@ -1756,7 +1808,20 @@ const TRANSLATIONS = {
     step2Title:'AI đọc luật', step2Desc:'AI của chúng tôi xác định mọi luật, tiền lệ án lệ và thời hạn áp dụng.',
     step3Title:'Đọc giải thích rõ ràng', step3Desc:'Nhận phân tích rõ ràng với nguồn có thể xác minh, bằng 15 ngôn ngữ.',
     appLabel:'Thử tự làm', appTitle:'Dán tài liệu của bạn bên dưới',
-    tabPaste:'Dán văn bản', tabUpload:'Tải lên PDF', sampleLabel:'Tải mẫu:',
+    tabPaste:'Dán văn bản', tabUpload:'Tải lên PDF', tabPhoto:'Tải ảnh lên',
+    locLabel:'Chia sẻ vị trí để nhận tài nguyên hỗ trợ pháp lý địa phương', locBtn:'Cho phép vị trí',
+    pdfDzText:'<strong>Nhấp để tải lên</strong> hoặc kéo thả vào đây',
+    pdfDzNote:'Chỉ PDF · PDF văn bản trích xuất ngay · PDF quét dùng AI thị giác (~20 giây)',
+    photoDzText:'<strong>Nhấp để tải ảnh lên</strong> hoặc kéo thả vào đây',
+    photoDzNote:'JPEG hoặc PNG · Hỗ trợ tài liệu viết tay, thư vật lý, biểu mẫu in',
+    aboutNameLabel:'Tên gọi',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Tiếng Latin có nghĩa là <em style="font-style:italic;color:rgba(255,255,255,.85)">"sự thật"</em> và <em style="font-style:italic;color:rgba(255,255,255,.85)">"luật pháp"</em>',
+    aboutNameDesc:'Chúng tôi xây dựng VeriLex để làm đúng những gì tên gọi hứa hẹn — tiết lộ sự thật của pháp luật, bằng ngôn ngữ mà ai cũng có thể hiểu.',
+    aboutCard1H:'Vấn đề', aboutCard1P:'Hàng triệu người nhận được tài liệu pháp lý — thông báo trục xuất, trát hầu tòa, thư đòi nợ — và không biết chúng có nghĩa gì hay quyền của họ là gì. Thuật ngữ pháp lý là rào cản không nên tồn tại.',
+    aboutCard2H:'Mục tiêu của chúng tôi', aboutCard2P:'VeriLex giải thích bất kỳ tài liệu pháp lý nào nói gì — bằng ngôn ngữ đơn giản, trích dẫn luật cụ thể, đánh dấu thời hạn và liệt kê hỗ trợ pháp lý miễn phí. Chúng tôi không bao giờ đưa ra lời khuyên pháp lý nhưng đảm bảo bạn hiểu chính xác mình đang đối mặt.',
+    aboutCard3H:'Dành cho ai', aboutCard3P:'Bất kỳ ai nhận được tài liệu pháp lý và cảm thấy bị choáng ngợp — sinh viên, người thuê nhà, người nhập cư, người lao động. Không cần nền tảng pháp lý. Hỗ trợ 15 ngôn ngữ. Luôn miễn phí. Không cần tài khoản.',
+    aboutCard4H:'Thiết kế bảo mật riêng tư', aboutCard4P:'Tài liệu của bạn được phân tích theo thời gian thực bởi Claude AI (Anthropic) và không bao giờ được lưu trữ, ghi lại hay chia sẻ — dù chỉ tạm thời. VeriLex miễn phí, không cần tài khoản và không thu thập dữ liệu cá nhân.',
+    sampleLabel:'Tải mẫu:',
     personaQ:'Bạn quen thuộc với tài liệu pháp lý như thế nào?',
     noviceTitle:'Hoàn toàn mới', noviceDesc:'Giải thích đơn giản, không thuật ngữ',
     interTitle:'Biết cơ bản', interDesc:'Ngôn ngữ đơn giản, một số thuật ngữ ổn',
@@ -1805,7 +1870,20 @@ const TRANSLATIONS = {
     step2Title:'Binabasa ng AI ang batas', step2Desc:'Tinutukoy ng aming AI ang bawat naaangkop na batas, case law precedent, at deadline.',
     step3Title:'Basahin ang malinaw na paliwanag', step3Desc:'Makakuha ng malinaw na breakdown na may mga mapagkakatiwalaang pinagkukunan sa 15 wika.',
     appLabel:'Subukan mo mismo', appTitle:'I-paste ang iyong dokumento sa ibaba',
-    tabPaste:'I-paste ang Teksto', tabUpload:'Mag-upload ng PDF', sampleLabel:'Mag-load ng sample:',
+    tabPaste:'I-paste ang Teksto', tabUpload:'Mag-upload ng PDF', tabPhoto:'Mag-upload ng Larawan',
+    locLabel:'Ibahagi ang iyong lokasyon para sa lokal na tulong sa batas', locBtn:'Payagan ang Lokasyon',
+    pdfDzText:'<strong>Mag-click upang mag-upload</strong> o i-drag at i-drop dito',
+    pdfDzNote:'PDF lamang · Ang mga PDF na may teksto ay agad na nakuha · Ang mga na-scan na PDF ay gumagamit ng AI vision (~20s)',
+    photoDzText:'<strong>Mag-click upang mag-upload ng larawan</strong> o i-drag at i-drop dito',
+    photoDzNote:'JPEG o PNG · Gumagana sa mga sulat-kamay na dokumento, pisikal na sulat, mga nakalimbag na form',
+    aboutNameLabel:'Ang Pangalan',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Latin para sa <em style="font-style:italic;color:rgba(255,255,255,.85)">"katotohanan"</em> at <em style="font-style:italic;color:rgba(255,255,255,.85)">"batas"</em>',
+    aboutNameDesc:'Itinayo namin ang VeriLex upang gawin ang eksaktong inaaasahan ng pangalan — ibunyag ang katotohanan ng batas, sa wikang naiintindihan ng lahat.',
+    aboutCard1H:'Ang Problema', aboutCard1P:'Milyun-milyong tao ang nakatanggap ng mga legal na dokumento — mga abiso ng pagpapaalis, mga summons ng korte, mga liham ng utang — at walang ideya kung ano ang ibig sabihin nito o kung anong mga karapatan ang mayroon sila.',
+    aboutCard2H:'Ang Aming Layunin', aboutCard2P:'Ipinapaliwanag ng VeriLex kung ano ang sinasabi ng anumang legal na dokumento — sa simpleng wika, na may mga tukoy na batas na sinipi, mga deadline na minarkahan, at libreng tulong sa batas na nakalista.',
+    aboutCard3H:'Para Kanino', aboutCard3P:'Sinuman na nakatanggap ng legal na dokumento at nakaramdam ng pagkalito — mga estudyante, mga nangungupahan, mga imigrante, mga manggagawa. Hindi kailangan ng legal na kaalaman. Sumusuporta sa 15 wika. Palaging libre. Hindi kailangan ng account.',
+    aboutCard4H:'Pribado sa Disenyo', aboutCard4P:'Ang iyong mga dokumento ay sinusuri sa real-time ng Claude AI (Anthropic) at hindi kailanman naiimbak, nire-record, o ibinahagi — kahit pansamantala. Ang VeriLex ay libre, hindi nangangailangan ng account, at hindi nangongolekta ng personal na data.',
+    sampleLabel:'Mag-load ng sample:',
     personaQ:'Gaano ka pamilyar sa mga legal na dokumento?',
     noviceTitle:'Bago sa ito', noviceDesc:'Ipaliwanag ang lahat nang simple, walang jargon',
     interTitle:'Alam ang mga basic', interDesc:'Simpleng wika, okay lang ang ilang termino',
@@ -1854,7 +1932,20 @@ const TRANSLATIONS = {
     step2Title:'AI가 법률을 읽습니다', step2Desc:'우리 AI는 적용 가능한 모든 법령, 판례법 선례 및 마감일을 식별합니다.',
     step3Title:'쉽게 설명된 결과 읽기', step3Desc:'15개 언어로 검증 가능한 출처와 함께 명확한 분석을 받으세요.',
     appLabel:'직접 사용해보기', appTitle:'아래에 문서를 붙여넣으세요',
-    tabPaste:'텍스트 붙여넣기', tabUpload:'PDF 업로드', sampleLabel:'샘플 불러오기:',
+    tabPaste:'텍스트 붙여넣기', tabUpload:'PDF 업로드', tabPhoto:'사진 업로드',
+    locLabel:'지역 법률 지원 리소스를 위해 위치를 공유하세요', locBtn:'위치 허용',
+    pdfDzText:'<strong>클릭하여 업로드</strong>하거나 여기에 드래그 앤 드롭하세요',
+    pdfDzNote:'PDF만 가능 · 텍스트 PDF는 즉시 추출 · 스캔 PDF는 AI 비전 사용 (~20초)',
+    photoDzText:'<strong>클릭하여 사진 업로드</strong>하거나 여기에 드래그 앤 드롭하세요',
+    photoDzNote:'JPEG 또는 PNG · 손으로 쓴 문서, 우편물, 인쇄된 양식 지원',
+    aboutNameLabel:'이름의 의미',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — 라틴어로 <em style="font-style:italic;color:rgba(255,255,255,.85)">"진실"</em>과 <em style="font-style:italic;color:rgba(255,255,255,.85)">"법"</em>을 의미합니다',
+    aboutNameDesc:'VeriLex는 이름이 약속하는 것을 정확히 실현하기 위해 만들었습니다 — 누구나 이해할 수 있는 언어로 법의 진실을 밝히는 것입니다.',
+    aboutCard1H:'문제점', aboutCard1P:'수백만 명의 사람들이 퇴거 통지, 법원 소환장, 채무 서신 등의 법적 문서를 받지만 그 의미나 자신의 권리를 전혀 알지 못합니다. 법률 용어는 존재해서는 안 되는 장벽입니다.',
+    aboutCard2H:'우리의 목표', aboutCard2P:'VeriLex는 어떤 법적 문서든 쉬운 언어로 내용을 설명하고, 구체적인 법률을 인용하며, 기한을 표시하고, 무료 법률 지원을 목록으로 제공합니다. 법률 조언은 드리지 않지만 귀하가 정확히 무엇을 다루고 있는지 이해할 수 있도록 합니다.',
+    aboutCard3H:'대상', aboutCard3P:'법적 문서를 받고 당혹감을 느끼는 모든 분 — 학생, 세입자, 이민자, 근로자. 법률 지식이 필요 없습니다. 15개 언어를 지원합니다. 항상 무료입니다. 계정이 필요 없습니다.',
+    aboutCard4H:'프라이버시 우선 설계', aboutCard4P:'귀하의 문서는 Claude AI(Anthropic)에 의해 실시간으로 분석되며 임시적으로도 저장, 기록 또는 공유되지 않습니다. VeriLex는 무료이며 계정이 필요 없고 개인 데이터를 수집하지 않습니다.',
+    sampleLabel:'샘플 불러오기:',
     personaQ:'법률 문서에 얼마나 익숙하신가요?',
     noviceTitle:'처음 접하는 분', noviceDesc:'모든 것을 간단하게, 전문 용어 없이',
     interTitle:'기본을 아는 분', interDesc:'쉬운 언어, 일부 용어 괜찮음',
@@ -1903,7 +1994,20 @@ const TRANSLATIONS = {
     step2Title:'الذكاء الاصطناعي يقرأ القانون', step2Desc:'يحدد ذكاؤنا الاصطناعي كل قانون معمول به وسابقة قانونية وموعد نهائي.',
     step3Title:'اقرأ التفسير بلغة واضحة', step3Desc:'احصل على تحليل واضح مع مصادر قابلة للتحقق بـ 15 لغة.',
     appLabel:'جربه بنفسك', appTitle:'الصق مستندك أدناه',
-    tabPaste:'لصق النص', tabUpload:'رفع PDF', sampleLabel:'تحميل نموذج:',
+    tabPaste:'لصق النص', tabUpload:'رفع PDF', tabPhoto:'تحميل صورة',
+    locLabel:'شارك موقعك للحصول على موارد المساعدة القانونية المحلية', locBtn:'السماح بالموقع',
+    pdfDzText:'<strong>انقر للتحميل</strong> أو اسحب وأفلت هنا',
+    pdfDzNote:'PDF فقط · ملفات PDF النصية تُستخرج فوراً · ملفات PDF الممسوحة تستخدم رؤية AI (~20ثانية)',
+    photoDzText:'<strong>انقر لتحميل صورة</strong> أو اسحب وأفلت هنا',
+    photoDzNote:'JPEG أو PNG · يعمل مع الوثائق المكتوبة بخط اليد والبريد الورقي والنماذج المطبوعة',
+    aboutNameLabel:'اسم التطبيق',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — لاتينية تعني <em style="font-style:italic;color:rgba(255,255,255,.85)">"الحقيقة"</em> و<em style="font-style:italic;color:rgba(255,255,255,.85)">"القانون"</em>',
+    aboutNameDesc:'بنينا VeriLex لتحقيق ما يعد به الاسم تماماً — الكشف عن حقيقة القانون، بلغة يفهمها الجميع.',
+    aboutCard1H:'المشكلة', aboutCard1P:'يتلقى ملايين الأشخاص وثائق قانونية — إشعارات الإخلاء، أوامر الاستدعاء، رسائل الديون — ولا يعرفون ما تعنيه أو ما هي حقوقهم. اللغة القانونية حاجز لا ينبغي أن يوجد.',
+    aboutCard2H:'هدفنا', aboutCard2P:'يشرح VeriLex ما يقوله أي مستند قانوني — بلغة واضحة، مع استشهادات بقوانين محددة، وتحديد المواعيد النهائية، وإدراج المساعدة القانونية المجانية. لا نقدم نصائح قانونية، لكننا نضمن أن تفهم تماماً ما تواجهه.',
+    aboutCard3H:'لمن هو', aboutCard3P:'لأي شخص يتلقى وثيقة قانونية ويشعر بالإرهاق — الطلاب والمستأجرون والمهاجرون والعمال. لا تحتاج خلفية قانونية. يدعم 15 لغة. مجاني دائماً. لا تحتاج حساباً.',
+    aboutCard4H:'خصوصية بالتصميم', aboutCard4P:'تُحلَّل مستنداتك في الوقت الفعلي بواسطة Claude AI (Anthropic) ولا تُخزَّن أو تُسجَّل أو تُشارَك أبداً — حتى بشكل مؤقت. VeriLex مجاني، لا يتطلب حساباً، ولا يجمع أي بيانات شخصية.',
+    sampleLabel:'تحميل نموذج:',
     personaQ:'ما مدى إلمامك بالمستندات القانونية؟',
     noviceTitle:'جديد على هذا', noviceDesc:'اشرح كل شيء ببساطة، بدون مصطلحات',
     interTitle:'أعرف الأساسيات', interDesc:'لغة بسيطة، بعض المصطلحات مقبولة',
@@ -1952,7 +2056,20 @@ const TRANSLATIONS = {
     step2Title:'AI कानून पढ़ता है', step2Desc:'हमारा AI हर लागू क़ानून, केस लॉ मिसाल और डेडलाइन की पहचान करता है।',
     step3Title:'सरल स्पष्टीकरण पढ़ें', step3Desc:'15 भाषाओं में सत्यापन योग्य स्रोतों के साथ स्पष्ट विश्लेषण पाएं।',
     appLabel:'खुद आज़माएं', appTitle:'नीचे अपना दस्तावेज़ पेस्ट करें',
-    tabPaste:'पाठ पेस्ट करें', tabUpload:'PDF अपलोड करें', sampleLabel:'नमूना लोड करें:',
+    tabPaste:'पाठ पेस्ट करें', tabUpload:'PDF अपलोड करें', tabPhoto:'फ़ोटो अपलोड करें',
+    locLabel:'स्थानीय कानूनी सहायता संसाधनों के लिए अपना स्थान साझा करें', locBtn:'स्थान की अनुमति दें',
+    pdfDzText:'<strong>अपलोड करने के लिए क्लिक करें</strong> या यहाँ खींचें और छोड़ें',
+    pdfDzNote:'केवल PDF · टेक्स्ट PDF तुरंत निकाला जाता है · स्कैन PDF AI विजन का उपयोग करता है (~20 सेकंड)',
+    photoDzText:'<strong>फ़ोटो अपलोड करने के लिए क्लिक करें</strong> या यहाँ खींचें और छोड़ें',
+    photoDzNote:'JPEG या PNG · हस्तलिखित दस्तावेज़, भौतिक मेल, मुद्रित फ़ॉर्म के साथ काम करता है',
+    aboutNameLabel:'नाम का अर्थ',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — लैटिन में <em style="font-style:italic;color:rgba(255,255,255,.85)">"सत्य"</em> और <em style="font-style:italic;color:rgba(255,255,255,.85)">"कानून"</em>',
+    aboutNameDesc:'हमने VeriLex को ठीक वही करने के लिए बनाया जो नाम वादा करता है — कानून की सच्चाई को सामने लाना, ऐसी भाषा में जो कोई भी समझ सके।',
+    aboutCard1H:'समस्या', aboutCard1P:'लाखों लोग कानूनी दस्तावेज प्राप्त करते हैं — बेदखली के नोटिस, अदालती समन, कर्ज के पत्र — और उन्हें पता नहीं होता कि उनका क्या मतलब है या उनके क्या अधिकार हैं। कानूनी शब्दावली एक ऐसी बाधा है जो नहीं होनी चाहिए।',
+    aboutCard2H:'हमारा लक्ष्य', aboutCard2P:'VeriLex किसी भी कानूनी दस्तावेज की सामग्री को सरल भाषा में समझाता है — विशिष्ट कानूनों का हवाला देते हुए, समय सीमाएं चिह्नित करते हुए, और मुफ्त कानूनी सहायता सूचीबद्ध करते हुए। हम कभी कानूनी सलाह नहीं देते, लेकिन यह सुनिश्चित करते हैं कि आप समझें कि आप किससे निपट रहे हैं।',
+    aboutCard3H:'यह किसके लिए है', aboutCard3P:'कोई भी जो कानूनी दस्तावेज प्राप्त करता है और अभिभूत महसूस करता है — छात्र, किरायेदार, अप्रवासी, कामगार। कानूनी पृष्ठभूमि की जरूरत नहीं। 15 भाषाओं को समर्थन। हमेशा मुफ्त। कोई खाता आवश्यक नहीं।',
+    aboutCard4H:'गोपनीयता-प्रथम डिज़ाइन', aboutCard4P:'आपके दस्तावेजों का Claude AI (Anthropic) द्वारा रीयल-टाइम में विश्लेषण किया जाता है और कभी संग्रहीत, लॉग या साझा नहीं किया जाता — यहाँ तक कि अस्थायी रूप से भी नहीं। VeriLex मुफ्त है, किसी खाते की आवश्यकता नहीं है, और कोई व्यक्तिगत डेटा एकत्र नहीं करता।',
+    sampleLabel:'नमूना लोड करें:',
     personaQ:'आप कानूनी दस्तावेजों से कितने परिचित हैं?',
     noviceTitle:'नया हूं', noviceDesc:'सब कुछ सरल में बताएं, कोई जार्गन नहीं',
     interTitle:'बेसिक जानता हूं', interDesc:'सरल भाषा, कुछ शब्द ठीक हैं',
@@ -2001,7 +2118,20 @@ const TRANSLATIONS = {
     step2Title:'A IA lê a lei', step2Desc:'A nossa IA identifica cada lei aplicável, precedente de jurisprudência e prazo.',
     step3Title:'Leia a explicação clara', step3Desc:'Obtenha uma análise clara com fontes verificáveis em 15 idiomas.',
     appLabel:'Experimente você mesmo', appTitle:'Cole seu documento abaixo',
-    tabPaste:'Colar Texto', tabUpload:'Carregar PDF', sampleLabel:'Carregar amostra:',
+    tabPaste:'Colar Texto', tabUpload:'Carregar PDF', tabPhoto:'Enviar Foto',
+    locLabel:'Compartilhe sua localização para recursos de assistência jurídica local', locBtn:'Permitir Localização',
+    pdfDzText:'<strong>Clique para enviar</strong> ou arraste e solte aqui',
+    pdfDzNote:'Apenas PDF · PDFs com texto são extraídos instantaneamente · PDFs digitalizados usam visão IA (~20s)',
+    photoDzText:'<strong>Clique para enviar uma foto</strong> ou arraste e solte aqui',
+    photoDzNote:'JPEG ou PNG · Funciona com documentos manuscritos, correspondência física, formulários impressos',
+    aboutNameLabel:'O Nome',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Latim para <em style="font-style:italic;color:rgba(255,255,255,.85)">"verdade"</em> e <em style="font-style:italic;color:rgba(255,255,255,.85)">"lei"</em>',
+    aboutNameDesc:'Criamos o VeriLex para fazer exatamente o que o nome promete — revelar a verdade da lei, em linguagem que qualquer pessoa possa entender.',
+    aboutCard1H:'O Problema', aboutCard1P:'Milhões de pessoas recebem documentos legais — avisos de despejo, intimações judiciais, cartas de cobrança — e não fazem ideia do que significam ou que direitos possuem. O jargão jurídico é uma barreira que não deveria existir.',
+    aboutCard2H:'Nossa Missão', aboutCard2P:'O VeriLex explica o que qualquer documento legal diz — em linguagem simples, com leis específicas citadas, prazos sinalizados e assistência jurídica gratuita listada. Nunca damos aconselhamento jurídico, mas garantimos que você entenda exatamente o que está enfrentando.',
+    aboutCard3H:'Para Quem É', aboutCard3P:'Qualquer pessoa que receba um documento legal e se sinta sobrecarregada — estudantes, inquilinos, imigrantes, trabalhadores. Nenhum conhecimento jurídico necessário. Suporta 15 idiomas. Sempre gratuito. Sem conta necessária.',
+    aboutCard4H:'Privado por Design', aboutCard4P:'Seus documentos são analisados em tempo real pelo Claude AI (Anthropic) e nunca armazenados, registrados ou compartilhados — nem temporariamente. O VeriLex é gratuito, não requer conta e não coleta dados pessoais.',
+    sampleLabel:'Carregar amostra:',
     personaQ:'Quão familiarizado você está com documentos legais?',
     noviceTitle:'Sou novo nisso', noviceDesc:'Explique tudo de forma simples, sem jargão',
     interTitle:'Conheço o básico', interDesc:'Linguagem simples, alguns termos são bem-vindos',
@@ -2050,7 +2180,20 @@ const TRANSLATIONS = {
     step2Title:'ИИ читает закон', step2Desc:'Наш ИИ выявляет каждый применимый закон, прецедент и срок.',
     step3Title:'Читайте понятное объяснение', step3Desc:'Получите чёткий анализ с проверяемыми источниками на 15 языках.',
     appLabel:'Попробуйте сами', appTitle:'Вставьте документ ниже',
-    tabPaste:'Вставить текст', tabUpload:'Загрузить PDF', sampleLabel:'Загрузить пример:',
+    tabPaste:'Вставить текст', tabUpload:'Загрузить PDF', tabPhoto:'Загрузить фото',
+    locLabel:'Поделитесь местоположением для местных ресурсов правовой помощи', locBtn:'Разрешить',
+    pdfDzText:'<strong>Нажмите для загрузки</strong> или перетащите сюда',
+    pdfDzNote:'Только PDF · Текстовые PDF извлекаются мгновенно · Сканированные PDF используют ИИ-зрение (~20 сек)',
+    photoDzText:'<strong>Нажмите для загрузки фото</strong> или перетащите сюда',
+    photoDzNote:'JPEG или PNG · Работает с рукописными документами, физической почтой, печатными формами',
+    aboutNameLabel:'Название',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — по-латыни <em style="font-style:italic;color:rgba(255,255,255,.85)">"истина"</em> и <em style="font-style:italic;color:rgba(255,255,255,.85)">"закон"</em>',
+    aboutNameDesc:'Мы создали VeriLex, чтобы делать именно то, что обещает название — раскрывать правду о законе на языке, понятном каждому.',
+    aboutCard1H:'Проблема', aboutCard1P:'Миллионы людей получают юридические документы — уведомления о выселении, судебные повестки, письма о задолженности — и понятия не имеют, что они означают и какие у них права. Юридический жаргон — барьер, которого не должно существовать.',
+    aboutCard2H:'Наша цель', aboutCard2P:'VeriLex объясняет содержание любого юридического документа простым языком, с конкретными ссылками на законы, отмеченными сроками и списком бесплатной юридической помощи. Мы никогда не даём юридические советы, но гарантируем, что вы точно поймёте, с чем имеете дело.',
+    aboutCard3H:'Для кого', aboutCard3P:'Для всех, кто получил юридический документ и чувствует растерянность — студентов, арендаторов, иммигрантов, работников. Не нужно юридических знаний. Поддерживает 15 языков. Всегда бесплатно. Аккаунт не нужен.',
+    aboutCard4H:'Приватность по умолчанию', aboutCard4P:'Ваши документы анализируются в реальном времени Claude AI (Anthropic) и никогда не хранятся, не регистрируются и не передаются — даже временно. VeriLex бесплатен, не требует аккаунта и не собирает персональные данные.',
+    sampleLabel:'Загрузить пример:',
     personaQ:'Насколько вы знакомы с юридическими документами?',
     noviceTitle:'Впервые с этим', noviceDesc:'Объяснить всё просто, без терминов',
     interTitle:'Знаю основы', interDesc:'Простой язык, некоторые термины приемлемы',
@@ -2099,7 +2242,20 @@ const TRANSLATIONS = {
     step2Title:"L'IA lit la loi", step2Desc:'Notre IA identifie chaque loi applicable, précédent jurisprudentiel et délai.',
     step3Title:"Lire l'explication claire", step3Desc:'Obtenez une analyse claire avec des sources vérifiables en 15 langues.',
     appLabel:'Essayez vous-même', appTitle:'Collez votre document ci-dessous',
-    tabPaste:'Coller le texte', tabUpload:'Télécharger PDF', sampleLabel:'Charger un exemple:',
+    tabPaste:'Coller le texte', tabUpload:'Télécharger PDF', tabPhoto:'Télécharger une photo',
+    locLabel:'Partagez votre position pour des ressources d\'aide juridique locales', locBtn:'Autoriser',
+    pdfDzText:'<strong>Cliquez pour télécharger</strong> ou faites glisser-déposer ici',
+    pdfDzNote:'PDF uniquement · Les PDF textuels sont extraits instantanément · Les PDF scannés utilisent la vision IA (~20s)',
+    photoDzText:'<strong>Cliquez pour télécharger une photo</strong> ou faites glisser-déposer ici',
+    photoDzNote:'JPEG ou PNG · Fonctionne avec des documents manuscrits, du courrier physique, des formulaires imprimés',
+    aboutNameLabel:'Le Nom',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Latin pour <em style="font-style:italic;color:rgba(255,255,255,.85)">"vérité"</em> et <em style="font-style:italic;color:rgba(255,255,255,.85)">"loi"</em>',
+    aboutNameDesc:'Nous avons créé VeriLex pour faire exactement ce que le nom promet — révéler la vérité de la loi, dans un langage accessible à tous.',
+    aboutCard1H:'Le Problème', aboutCard1P:'Des millions de personnes reçoivent des documents juridiques — avis d\'expulsion, convocations judiciaires, lettres de créance — et n\'ont aucune idée de ce qu\'ils signifient ni de leurs droits. Le jargon juridique est une barrière qui ne devrait pas exister.',
+    aboutCard2H:'Notre Mission', aboutCard2P:'VeriLex explique ce que dit tout document juridique — en langage clair, avec des lois spécifiques citées, des délais signalés et une aide juridique gratuite répertoriée. Nous ne donnons jamais de conseils juridiques, mais veillons à ce que vous compreniez exactement ce à quoi vous avez affaire.',
+    aboutCard3H:'Pour Qui', aboutCard3P:'Toute personne qui reçoit un document juridique et se sent dépassée — étudiants, locataires, immigrants, travailleurs. Aucun bagage juridique nécessaire. Prend en charge 15 langues. Toujours gratuit. Aucun compte requis.',
+    aboutCard4H:'Privé par Conception', aboutCard4P:'Vos documents sont analysés en temps réel par Claude AI (Anthropic) et ne sont jamais stockés, enregistrés ou partagés — même temporairement. VeriLex est gratuit, ne nécessite pas de compte et ne collecte aucune donnée personnelle.',
+    sampleLabel:'Charger un exemple:',
     personaQ:'Quelle est votre familiarité avec les documents juridiques?',
     noviceTitle:'Nouveau dans ce domaine', noviceDesc:'Tout expliquer simplement, sans jargon',
     interTitle:'Je connais les bases', interDesc:'Langage simple, certains termes sont acceptables',
@@ -2148,7 +2304,20 @@ const TRANSLATIONS = {
     step2Title:'AI li lalwa', step2Desc:'AI nou idantifye chak lwa ki aplikab, presidan ka, ak dat limit.',
     step3Title:'Li eksplikasyon ki klè', step3Desc:'Jwenn analiz ki klè ak sous verifiyab nan 15 lang.',
     appLabel:'Eseye ou menm', appTitle:'Kole dokiman ou anba a',
-    tabPaste:'Kole Tèks', tabUpload:'Telechaje PDF', sampleLabel:'Chaje yon echantyon:',
+    tabPaste:'Kole Tèks', tabUpload:'Telechaje PDF', tabPhoto:'Telechaje Foto',
+    locLabel:'Pataje kote ou ye a pou resous èd legal lokal', locBtn:'Pèmèt Kote',
+    pdfDzText:'<strong>Klike pou telechaje</strong> oswa glise epi lage isit',
+    pdfDzNote:'PDF sèlman · PDF tèks ekstrè imedyatman · PDF eskane itilize vizyon AI (~20s)',
+    photoDzText:'<strong>Klike pou telechaje yon foto</strong> oswa glise epi lage isit',
+    photoDzNote:'JPEG oswa PNG · Travay ak dokiman alamen, lapòs fizik, fòm enprime',
+    aboutNameLabel:'Non an',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Laten pou <em style="font-style:italic;color:rgba(255,255,255,.85)">"verite"</em> ak <em style="font-style:italic;color:rgba(255,255,255,.85)">"lwa"</em>',
+    aboutNameDesc:'Nou bati VeriLex pou fè egzakteman sa non an pwomèt — revele verite lwa a, nan lang tout moun ka konprann.',
+    aboutCard1H:'Pwoblèm nan', aboutCard1P:'Plizyè milyon moun resevwa dokiman legal — avi ekspilsyon, konvokasyon tribinal, lèt dèt — epi yo pa gen okenn lide sa yo vle di oswa ki dwa yo genyen. Jagon legal se yon baryè ki pa ta dwe egziste.',
+    aboutCard2H:'Objektif nou', aboutCard2P:'VeriLex eksplike sa nenpòt dokiman legal di — nan lang senp, avèk lwa espesifik site, delè endike, ak èd legal gratis liste. Nou pa janm bay konsèy legal, men nou asire w konprann egzakteman sa ou ap fè fas.',
+    aboutCard3H:'Pou Ki Moun', aboutCard3P:'Nenpòt moun ki resevwa yon dokiman legal epi santi yo pèdi — elèv, lokatè, imigran, travayè. Pa bezwen konesans legal. Sipòte 15 lang. Toujou gratis. Pa bezwen kont.',
+    aboutCard4H:'Prive pa Konsepsyon', aboutCard4P:'Dokiman ou yo analize an tan reyèl pa Claude AI (Anthropic) epi yo pa janm estoke, anrejistre, oswa pataje — menm pou yon ti tan. VeriLex gratis, pa mande kont, epi pa kolekte okenn done pèsonèl.',
+    sampleLabel:'Chaje yon echantyon:',
     personaQ:'Kijan ou familye ak dokiman legal?',
     noviceTitle:'Nouvo nan sa', noviceDesc:'Eksplike tout bagay senp, san jargon',
     interTitle:'Konnen baz yo', interDesc:'Lang senp, kèk tèm ka akseptab',
@@ -2197,7 +2366,20 @@ const TRANSLATIONS = {
     step2Title:'AI ਕਾਨੂੰਨ ਪੜ੍ਹਦਾ ਹੈ', step2Desc:'ਸਾਡਾ AI ਹਰ ਲਾਗੂ ਕਾਨੂੰਨ ਅਤੇ ਸਮਾਂ-ਸੀਮਾ ਦੀ ਪਛਾਣ ਕਰਦਾ ਹੈ।',
     step3Title:'ਸਪੱਸ਼ਟ ਵਿਆਖਿਆ ਪੜ੍ਹੋ', step3Desc:'15 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ ਤਸਦੀਕਯੋਗ ਸਰੋਤਾਂ ਨਾਲ ਸਪੱਸ਼ਟ ਵਿਸ਼ਲੇਸ਼ਣ ਪ੍ਰਾਪਤ ਕਰੋ।',
     appLabel:'ਆਪ ਅਜ਼ਮਾਓ', appTitle:'ਹੇਠਾਂ ਆਪਣਾ ਦਸਤਾਵੇਜ਼ ਪੇਸਟ ਕਰੋ',
-    tabPaste:'ਪਾਠ ਪੇਸਟ ਕਰੋ', tabUpload:'PDF ਅਪਲੋਡ ਕਰੋ', sampleLabel:'ਨਮੂਨਾ ਲੋਡ ਕਰੋ:',
+    tabPaste:'ਪਾਠ ਪੇਸਟ ਕਰੋ', tabUpload:'PDF ਅਪਲੋਡ ਕਰੋ', tabPhoto:'ਫੋਟੋ ਅਪਲੋਡ ਕਰੋ',
+    locLabel:'ਸਥਾਨਕ ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ ਸਰੋਤਾਂ ਲਈ ਆਪਣੀ ਸਥਿਤੀ ਸਾਂਝੀ ਕਰੋ', locBtn:'ਸਥਿਤੀ ਦੀ ਆਗਿਆ ਦਿਓ',
+    pdfDzText:'<strong>ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ</strong> ਜਾਂ ਇੱਥੇ ਖਿੱਚੋ ਅਤੇ ਛੱਡੋ',
+    pdfDzNote:'ਸਿਰਫ਼ PDF · ਟੈਕਸਟ PDF ਤੁਰੰਤ ਕੱਢੇ ਜਾਂਦੇ ਹਨ · ਸਕੈਨ PDF AI ਵਿਜ਼ਨ ਵਰਤਦੇ ਹਨ (~20 ਸਕਿੰਟ)',
+    photoDzText:'<strong>ਫੋਟੋ ਅਪਲੋਡ ਕਰਨ ਲਈ ਕਲਿੱਕ ਕਰੋ</strong> ਜਾਂ ਇੱਥੇ ਖਿੱਚੋ ਅਤੇ ਛੱਡੋ',
+    photoDzNote:'JPEG ਜਾਂ PNG · ਹੱਥ ਲਿਖੇ ਦਸਤਾਵੇਜ਼, ਭੌਤਿਕ ਡਾਕ, ਛਾਪੇ ਗਏ ਫਾਰਮਾਂ ਨਾਲ ਕੰਮ ਕਰਦਾ ਹੈ',
+    aboutNameLabel:'ਨਾਮ ਦਾ ਅਰਥ',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — ਲਾਤੀਨੀ ਵਿੱਚ <em style="font-style:italic;color:rgba(255,255,255,.85)">"ਸੱਚਾਈ"</em> ਅਤੇ <em style="font-style:italic;color:rgba(255,255,255,.85)">"ਕਾਨੂੰਨ"</em>',
+    aboutNameDesc:'ਅਸੀਂ VeriLex ਨੂੰ ਠੀਕ ਉਹੀ ਕਰਨ ਲਈ ਬਣਾਇਆ ਜੋ ਨਾਮ ਵਾਅਦਾ ਕਰਦਾ ਹੈ — ਕਾਨੂੰਨ ਦੀ ਸੱਚਾਈ ਨੂੰ ਉਜਾਗਰ ਕਰਨਾ, ਅਜਿਹੀ ਭਾਸ਼ਾ ਵਿੱਚ ਜੋ ਕੋਈ ਵੀ ਸਮਝ ਸਕੇ।',
+    aboutCard1H:'ਸਮੱਸਿਆ', aboutCard1P:'ਲੱਖਾਂ ਲੋਕਾਂ ਨੂੰ ਕਾਨੂੰਨੀ ਦਸਤਾਵੇਜ਼ ਮਿਲਦੇ ਹਨ — ਬੇਦਖਲੀ ਨੋਟਿਸ, ਅਦਾਲਤੀ ਸੁਮਨ, ਕਰਜ਼ੇ ਦੀਆਂ ਚਿੱਠੀਆਂ — ਅਤੇ ਉਨ੍ਹਾਂ ਨੂੰ ਕੋਈ ਅੰਦਾਜ਼ਾ ਨਹੀਂ ਕਿ ਇਹਨਾਂ ਦਾ ਕੀ ਮਤਲਬ ਹੈ ਜਾਂ ਉਨ੍ਹਾਂ ਦੇ ਕੀ ਅਧਿਕਾਰ ਹਨ।',
+    aboutCard2H:'ਸਾਡਾ ਟੀਚਾ', aboutCard2P:'VeriLex ਕਿਸੇ ਵੀ ਕਾਨੂੰਨੀ ਦਸਤਾਵੇਜ਼ ਦੀ ਸਮੱਗਰੀ ਨੂੰ ਸਰਲ ਭਾਸ਼ਾ ਵਿੱਚ ਸਮਝਾਉਂਦਾ ਹੈ — ਖਾਸ ਕਾਨੂੰਨਾਂ ਦਾ ਹਵਾਲਾ ਦਿੰਦੇ ਹੋਏ, ਡੈੱਡਲਾਈਨਾਂ ਨੂੰ ਨਿਸ਼ਾਨਦੇਹੀ ਕਰਦੇ ਹੋਏ, ਅਤੇ ਮੁਫ਼ਤ ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ ਸੂਚੀਬੱਧ ਕਰਦੇ ਹੋਏ।',
+    aboutCard3H:'ਕਿਸ ਲਈ', aboutCard3P:'ਕੋਈ ਵੀ ਜੋ ਕਾਨੂੰਨੀ ਦਸਤਾਵੇਜ਼ ਪ੍ਰਾਪਤ ਕਰਦਾ ਹੈ ਅਤੇ ਬੇਵੱਸ ਮਹਿਸੂਸ ਕਰਦਾ ਹੈ — ਵਿਦਿਆਰਥੀ, ਕਿਰਾਏਦਾਰ, ਪ੍ਰਵਾਸੀ, ਕਾਮੇ। 15 ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ। ਹਮੇਸ਼ਾ ਮੁਫ਼ਤ। ਕੋਈ ਖਾਤਾ ਜ਼ਰੂਰੀ ਨਹੀਂ।',
+    aboutCard4H:'ਗੋਪਨੀਯਤਾ ਪਹਿਲਾਂ ਡਿਜ਼ਾਈਨ', aboutCard4P:'ਤੁਹਾਡੇ ਦਸਤਾਵੇਜ਼ਾਂ ਦਾ Claude AI (Anthropic) ਦੁਆਰਾ ਅਸਲ ਸਮੇਂ ਵਿੱਚ ਵਿਸ਼ਲੇਸ਼ਣ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਅਤੇ ਕਦੇ ਸੰਭਾਲੇ, ਲੌਗ ਜਾਂ ਸਾਂਝੇ ਨਹੀਂ ਕੀਤੇ ਜਾਂਦੇ। VeriLex ਮੁਫ਼ਤ ਹੈ, ਕੋਈ ਖਾਤਾ ਨਹੀਂ ਚਾਹੀਦਾ, ਕੋਈ ਡੇਟਾ ਇਕੱਤਰ ਨਹੀਂ ਹੁੰਦਾ।',
+    sampleLabel:'ਨਮੂਨਾ ਲੋਡ ਕਰੋ:',
     personaQ:'ਤੁਸੀਂ ਕਾਨੂੰਨੀ ਦਸਤਾਵੇਜ਼ਾਂ ਤੋਂ ਕਿੰਨੇ ਜਾਣੂ ਹੋ?',
     noviceTitle:'ਨਵਾਂ ਹਾਂ', noviceDesc:'ਸਭ ਕੁਝ ਸਰਲਤਾ ਨਾਲ ਸਮਝਾਓ',
     interTitle:'ਮੂਲ ਜਾਣਦਾ ਹਾਂ', interDesc:'ਸਰਲ ਭਾਸ਼ਾ, ਕੁਝ ਸ਼ਬਦ ਠੀਕ ਹਨ',
@@ -2246,7 +2428,20 @@ const TRANSLATIONS = {
     step2Title:'AI ሕጉን ያነባል', step2Desc:'AI ሁሉንም ተፈጻሚ ሕጎች፣ ቀዳሚ ፍርዶች እና የጊዜ ገደቦችን ይለያል።',
     step3Title:'ግልጽ ማብራሪያ ያንብቡ', step3Desc:'በ15 ቋንቋዎች ሊረጋገጡ የሚችሉ ምንጮች ግልጽ ትንተና ያግኙ።',
     appLabel:'እራስዎ ይሞክሩ', appTitle:'ሰነዱን ከዚህ በታች ለጥፍ',
-    tabPaste:'ጽሑፍ ለጥፍ', tabUpload:'PDF ጫን', sampleLabel:'ናሙና ጫን:',
+    tabPaste:'ጽሑፍ ለጥፍ', tabUpload:'PDF ጫን', tabPhoto:'ፎቶ ስቀል',
+    locLabel:'የአካባቢ ህጋዊ እርዳታ ሀብቶችን ለማግኘት ቦታዎን ያጋሩ', locBtn:'ቦታ ፍቀድ',
+    pdfDzText:'<strong>ለስቀሉ ጠቅ ያድርጉ</strong> ወይም እዚህ ጎትተው ያቆዩ',
+    pdfDzNote:'ፒዲኤፍ ብቻ · የጽሑፍ ፒዲኤፍዎች ወዲያውኑ ይወጣሉ · የተቃኙ ፒዲኤፍዎች AI ዕይታ ይጠቀማሉ (~20 ሰ)',
+    photoDzText:'<strong>ፎቶ ለስቀሉ ጠቅ ያድርጉ</strong> ወይም እዚህ ጎትተው ያቆዩ',
+    photoDzNote:'JPEG ወይም PNG · ከእጅ የተፃፉ ሰነዶች፣ አካላዊ ደብዳቤ፣ የታተሙ ቅጾች ይሰራል',
+    aboutNameLabel:'ስሙ',
+    aboutNameTitle:'<span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — ላቲን <em style="font-style:italic;color:rgba(255,255,255,.85)">"እውነት"</em> እና <em style="font-style:italic;color:rgba(255,255,255,.85)">"ህግ"</em> ማለት ነው',
+    aboutNameDesc:'VeriLex ስሙ የሚሰጠውን ቃልኪዳን ትክክለኛ ለማሟላት ሠራን — ማንም ሊረዳ በሚችል ቋንቋ፣ የህጉን እውነት ይፋ ማድረግ።',
+    aboutCard1H:'ችግሩ', aboutCard1P:'ሚሊዮኖች ህጋዊ ሰነዶችን ይቀበላሉ — የማስወጣት ማስታወቂያዎች፣ የፍርድ ቤት ጥሪዎች፣ የዕዳ ደብዳቤዎች — ምንም ማለት እንደሆነ ወይም ምን መብቶች እንዳሏቸው ሳያውቁ። ህጋዊ ቃላት ሊኖር የማይገባ እንቅፋት ናቸው።',
+    aboutCard2H:'ዓላማችን', aboutCard2P:'VeriLex ማንኛውም ህጋዊ ሰነድ ምን እንደሚለው ይገልጻል — በቀላል ቋንቋ፣ ልዩ ህጎች ተጠቅሰው፣ የጊዜ ገደቦች ምልክት ተደርጎ፣ ነፃ ህጋዊ እርዳታ ተዘርዝሮ። ህጋዊ ምክር አንሰጥም፣ ምን ፊት ለፊት እንደሆንክ በትክክል እንደምትረዳ እናረጋግጣለን።',
+    aboutCard3H:'ለማን ነው', aboutCard3P:'ህጋዊ ሰነድ ተቀብሎ የተጨናነቀ ማንኛውም ሰው — ተማሪዎች፣ ተከራዮች፣ ስደተኞች፣ ሰራተኞች። ህጋዊ ዳራ አያስፈልግም። 15 ቋንቋዎችን ይደግፋል። ሁልጊዜ ነፃ። ምንም መለያ አያስፈልግም።',
+    aboutCard4H:'በዲዛይን ግላዊ', aboutCard4P:'ሰነዶቻችሁ በClaude AI (Anthropic) በቅጽበት ይተነተናሉ እናም ጊዜያዊ ቢሆን — ተቀምጠው፣ ተጻፉ ወይም ተጋሩ አይሆኑም። VeriLex ነፃ ነው፣ ምንም መለያ አያስፈልግም፣ ምንም የግል መረጃ አይሰበስብም።',
+    sampleLabel:'ናሙና ጫን:',
     personaQ:'ሕጋዊ ሰነዶችን ምን ያህል ያውቃሉ?',
     noviceTitle:'አዲስ ነኝ', noviceDesc:'ሁሉንም ቀለል አድርጎ ያብራሩ',
     interTitle:'መሠረቱን አውቃለሁ', interDesc:'ቀላል ቋንቋ፣ አንዳንድ ቃላት ደህናም ናቸው',
@@ -2307,6 +2502,24 @@ const UI_ELEMENTS = [
   { sel:'#app .section-title', key:'appTitle' },
   { id:'itab-paste', key:'tabPaste' },
   { id:'itab-pdf', key:'tabUpload' },
+  { id:'itab-photo', key:'tabPhoto' },
+  { id:'locLabel', key:'locLabel' },
+  { id:'locBtn', key:'locBtn' },
+  { id:'pdfDzText', key:'pdfDzText', html:true },
+  { id:'pdfDzNote', key:'pdfDzNote' },
+  { id:'photoDzText', key:'photoDzText', html:true },
+  { id:'photoDzNote', key:'photoDzNote' },
+  { id:'aboutNameLabel', key:'aboutNameLabel' },
+  { id:'aboutNameTitle', key:'aboutNameTitle', html:true },
+  { id:'aboutNameDesc', key:'aboutNameDesc' },
+  { id:'aboutCard1H', key:'aboutCard1H' },
+  { id:'aboutCard1P', key:'aboutCard1P' },
+  { id:'aboutCard2H', key:'aboutCard2H' },
+  { id:'aboutCard2P', key:'aboutCard2P' },
+  { id:'aboutCard3H', key:'aboutCard3H' },
+  { id:'aboutCard3P', key:'aboutCard3P' },
+  { id:'aboutCard4H', key:'aboutCard4H' },
+  { id:'aboutCard4P', key:'aboutCard4P' },
   { sel:'.sample-label', key:'sampleLabel' },
   { sel:'.persona-question', key:'personaQ' },
   { sel:'.persona-options .persona-btn:nth-child(1) .pb-title', key:'noviceTitle' },
