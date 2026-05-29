@@ -6,6 +6,9 @@ import json
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()  # loads ANTHROPIC_API_KEY from .env if present
+
 import anthropic
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -59,6 +62,7 @@ class AnalyzeRequest(BaseModel):
     text: str
     language: str = "English"
     persona: str = "intermediate"
+    user_location: str = ""  # e.g. "Oakland, California, United States"
 
 
 class FeedbackRequest(BaseModel):
@@ -92,8 +96,16 @@ async def analyze(req: AnalyzeRequest):
         )
 
     persona_ctx = PERSONA_INSTRUCTIONS.get(req.persona, PERSONA_INSTRUCTIONS["intermediate"])
+    location_ctx = (
+        f"USER LOCATION: {req.user_location}. "
+        f"Prioritize legal aid organizations, court resources, and statutes specific to this location. "
+        f"In local_resources, include real organizations that serve this area, with accurate phone numbers and URLs.\n\n"
+        if req.user_location else
+        "USER LOCATION: Unknown. Include a mix of national resources and note that local resources may vary by state.\n\n"
+    )
     user_msg = (
         f"{persona_ctx}\n\n"
+        f"{location_ctx}"
         f"Respond entirely in {req.language}.\n\n"
         f"DOCUMENT:\n{text}"
     )

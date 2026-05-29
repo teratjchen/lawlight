@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LexVera — Legal Documents in Plain English</title>
+  <title>VeriLex — Legal Documents in Plain English</title>
   <meta name="description" content="Upload or paste any legal document and get a plain-language explanation with cited laws, case references, and deadlines. Free. 15 languages.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,9 +14,12 @@
     :root {
       --ink:       #0f172a;
       --ink-mid:   #1e293b;
-      --amber:     #f59e0b;
-      --amber-dim: #d97706;
-      --amber-bg:  #fffbeb;
+      --amber:     #2563eb;
+      --amber-dim: #1d4ed8;
+      --amber-bg:  #eff6ff;
+      --sky:       #0ea5e9;
+      --teal:      #0891b2;
+      --violet:    #4f46e5;
       --sky:       #3b82f6;
       --bg:        #f8f7f4;
       --surface:   #ffffff;
@@ -50,7 +53,7 @@
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .logo-icon {
       width: 34px; height: 34px; border-radius: 9px;
-      background: var(--amber); display: flex; align-items: center;
+      background: linear-gradient(135deg, #2563eb 0%, #0891b2 100%); display: flex; align-items: center;
       justify-content: center; font-size: 18px;
     }
     .logo-name { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -.3px; }
@@ -94,21 +97,34 @@
 
     /* ── HERO ────────────────────────────────────────── */
     .hero {
-      background: linear-gradient(160deg, #0f1e38 0%, #080e1f 55%, #060b18 100%);
+      background: linear-gradient(160deg, #0a1628 0%, #060f1e 45%, #040a15 100%);
       min-height: 100vh; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       padding: 100px 24px 80px; text-align: center; position: relative; overflow: hidden;
     }
     .hero::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 70% 50% at 50% 40%, rgba(245,158,11,.08) 0%, transparent 70%);
-      pointer-events: none;
+      background:
+        radial-gradient(ellipse 38% 32% at 50% 44%, rgba(37,99,235,.28) 0%, transparent 55%),
+        radial-gradient(ellipse 75% 60% at 50% 44%, rgba(8,145,178,.13) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 28% at 78% 68%, rgba(79,70,229,.15) 0%, transparent 55%),
+        radial-gradient(ellipse 30% 25% at 22% 72%, rgba(14,165,233,.10) 0%, transparent 55%);
+      pointer-events: none; z-index: 0;
     }
+    .hero::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(ellipse 60% 55% at 50% 42%, black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 60% 55% at 50% 42%, black 0%, transparent 80%);
+      pointer-events: none; z-index: 0;
+    }
+    .hero > * { position: relative; z-index: 1; }
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.25);
+      background: rgba(8,145,178,.12); border: 1px solid rgba(8,145,178,.30);
       border-radius: 20px; padding: 5px 14px; margin-bottom: 28px;
-      font-size: 13px; font-weight: 600; color: var(--amber);
+      font-size: 13px; font-weight: 600; color: #67e8f9;
       animation: fadeInDown .6s ease both;
     }
     .hero h1 {
@@ -117,7 +133,11 @@
       letter-spacing: -1.5px;
       animation: fadeInUp .7s .1s ease both;
     }
-    .hero h1 #ht2 { color: var(--amber); }
+    .hero h1 #ht2 {
+      background: linear-gradient(90deg, #60a5fa 0%, #38bdf8 45%, #67e8f9 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .hero p {
       font-size: clamp(16px, 2vw, 19px); color: rgba(255,255,255,.65);
       max-width: 620px; margin: 0 auto 36px; line-height: 1.65;
@@ -125,12 +145,13 @@
     }
     .hero-cta {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--amber); color: var(--ink); border: none;
+      background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+      color: #fff; border: none;
       border-radius: 50px; padding: 14px 32px; font-size: 16px; font-weight: 800;
       cursor: pointer; text-decoration: none;
-      box-shadow: 0 0 0 0 rgba(245,158,11,.4);
+      box-shadow: 0 0 0 0 rgba(37,99,235,.4);
       animation: fadeInUp .7s .3s ease both, pulse-glow 2.5s 1s ease infinite;
-      transition: transform .15s, box-shadow .15s;
+      transition: transform .15s, box-shadow .15s, background .2s;
     }
     .hero-cta:hover { transform: translateY(-2px); }
     .hero-chips {
@@ -143,7 +164,7 @@
       border-radius: 20px; padding: 6px 14px; font-size: 13px; color: rgba(255,255,255,.7);
       cursor: pointer; transition: all .15s; white-space: nowrap;
     }
-    .doc-chip:hover { background: rgba(245,158,11,.15); border-color: rgba(245,158,11,.4); color: var(--amber); }
+    .doc-chip:hover { background: rgba(59,130,246,.15); border-color: rgba(59,130,246,.4); color: var(--amber); }
     .hero-scroll {
       position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
       color: rgba(255,255,255,.3); font-size: 22px;
@@ -233,7 +254,7 @@
       color: var(--text); background: #fafafa; transition: border-color .15s;
       line-height: 1.6;
     }
-    textarea#docText:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px rgba(245,158,11,.12); background: #fff; }
+    textarea#docText:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px rgba(59,130,246,.12); background: #fff; }
 
     .dropzone {
       border: 2px dashed var(--border); border-radius: 8px;
@@ -269,7 +290,7 @@
     .persona-btn:hover { border-color: var(--amber); background: var(--amber-bg); }
     .persona-btn.active {
       border-color: var(--amber); background: var(--amber-bg);
-      box-shadow: 0 0 0 3px rgba(245,158,11,.15);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.15);
     }
     .persona-btn.active::after {
       content: '✓'; position: absolute; top: 8px; right: 10px;
@@ -424,8 +445,8 @@
     .plain-explain { font-size: 14px; line-height: 1.75; color: var(--text); }
     .term-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
     .term-chip {
-      font-size: 12px; background: rgba(245,158,11,.1); color: var(--amber-dim);
-      border: 1px solid rgba(245,158,11,.25); border-radius: 12px;
+      font-size: 12px; background: rgba(59,130,246,.1); color: var(--amber-dim);
+      border: 1px solid rgba(59,130,246,.25); border-radius: 12px;
       padding: 3px 10px; cursor: pointer; transition: all .1s;
     }
     .term-chip:hover { background: var(--amber-bg); }
@@ -479,6 +500,23 @@
       box-shadow: var(--shadow);
     }
 
+    /* Location bar */
+    .location-bar {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 28px; border-bottom: 1px solid var(--border);
+      background: var(--bg); font-size: 13px;
+    }
+    .location-bar .loc-label { color: var(--muted); flex: 1; }
+    .location-bar .loc-detected { color: var(--low); font-weight: 600; }
+    .location-bar .loc-btn {
+      font-size: 12px; font-weight: 600; color: var(--sky);
+      background: none; border: 1px solid rgba(59,130,246,.3);
+      border-radius: 20px; padding: 3px 12px; cursor: pointer;
+      transition: all .15s;
+    }
+    .location-bar .loc-btn:hover { background: rgba(59,130,246,.08); }
+    .location-bar .loc-btn.detecting { color: var(--muted); border-color: var(--border); cursor: default; }
+
     /* Resources */
     .resource-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 20px; }
     .resource-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 18px; box-shadow: var(--shadow); }
@@ -522,7 +560,7 @@
     @keyframes fadeInDown { from { opacity:0; transform:translateY(-14px) } to { opacity:1; transform:none } }
     @keyframes pulse      { 0%,100%{opacity:1} 50%{opacity:.5} }
     @keyframes pulse-ring { 0%{transform:scale(.9);opacity:.8} 100%{transform:scale(1.5);opacity:0} }
-    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 0 0 rgba(245,158,11,.4)} 50%{box-shadow:0 0 0 12px rgba(245,158,11,0)} }
+    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.4)} 50%{box-shadow:0 0 0 12px rgba(59,130,246,0)} }
     @keyframes bounce     { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
     @keyframes blink      { 0%,100%{opacity:1} 50%{opacity:.4} }
 
@@ -545,7 +583,7 @@
       transition: border-color .2s, color .2s; letter-spacing: .04em;
     }
     .text-size-btn:hover { border-color: rgba(255,255,255,.5); color: #fff; }
-    .text-size-btn.active { border-color: var(--amber); color: var(--amber); background: rgba(245,158,11,.12); }
+    .text-size-btn.active { border-color: var(--amber); color: var(--amber); background: rgba(59,130,246,.12); }
     /* Comprehensive large-text overrides — every px-sized element bumped ~2px */
     body.large-text .hero-eyebrow   { font-size: 15px; }
     body.large-text .hero p         { font-size: clamp(18px,2.2vw,21px); }
@@ -736,7 +774,7 @@
         <path d="M13.6 12.5 Q15.8 14.3 18 12.5" stroke-width="1.3"/>
       </svg>
     </div>
-    <span class="logo-name">LexVera</span>
+    <span class="logo-name">VeriLex</span>
   </a>
   <div class="nav-right">
     <a href="#about" class="nav-link" id="navAbout">About</a>
@@ -838,6 +876,20 @@
       <div class="section-label" id="aboutLabel">About</div>
       <h2 class="section-title" id="aboutTitle">Our purpose</h2>
     </div>
+
+    <!-- Name origin callout -->
+    <div style="display:flex;align-items:flex-start;gap:16px;background:linear-gradient(135deg,#0a1628 0%,#071520 50%,#040e18 100%);border:1px solid rgba(37,99,235,.28);border-radius:14px;padding:22px 26px;margin-bottom:28px;position:relative;overflow:hidden">
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 0% 50%,rgba(8,145,178,.12) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 100% 50%,rgba(79,70,229,.10) 0%,transparent 60%);pointer-events:none;"></div>
+      <div style="flex-shrink:0;width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,rgba(37,99,235,.25),rgba(8,145,178,.2));border:1px solid rgba(37,99,235,.4);display:flex;align-items:center;justify-content:center;font-size:20px;position:relative;z-index:1">⚖️</div>
+      <div style="position:relative;z-index:1">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#67e8f9;opacity:.8;margin-bottom:5px">The Name</div>
+        <p style="font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.4">
+          <span style="color:#60a5fa">Veri</span> + <span style="color:#67e8f9">Lex</span> — Latin for <em style="font-style:italic;color:rgba(255,255,255,.85)">"truth"</em> and <em style="font-style:italic;color:rgba(255,255,255,.85)">"law"</em>
+        </p>
+        <p style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;margin:0">We built VeriLex to do exactly what the name promises — reveal the truth of the law, in language anyone can understand.</p>
+      </div>
+    </div>
+
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
 
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
@@ -849,7 +901,7 @@
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
         <div style="font-size:32px;margin-bottom:12px">💡</div>
         <h3 style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Our Goal</h3>
-        <p style="font-size:14px;color:var(--text);line-height:1.75">LexVera explains what any legal document says — in plain language, with specific laws cited, deadlines flagged, and free legal aid listed. We never give legal advice, but we make sure you understand exactly what you're dealing with.</p>
+        <p style="font-size:14px;color:var(--text);line-height:1.75">VeriLex explains what any legal document says — in plain language, with specific laws cited, deadlines flagged, and free legal aid listed. We never give legal advice, but we make sure you understand exactly what you're dealing with.</p>
       </div>
 
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
@@ -858,10 +910,10 @@
         <p style="font-size:14px;color:var(--text);line-height:1.75">Anyone who receives a legal document and feels overwhelmed — students, renters, immigrants, workers. No legal background needed. Supports 15 languages. Always free. No account required.</p>
       </div>
 
-      <div style="background:linear-gradient(135deg,var(--amber-bg),#fff);border:1px solid rgba(245,158,11,.3);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
-        <div style="font-size:32px;margin-bottom:12px">🛡️</div>
+      <div style="background:linear-gradient(135deg,var(--amber-bg),#fff);border:1px solid rgba(59,130,246,.3);border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
+        <div style="font-size:32px;margin-bottom:12px">🔒</div>
         <h3 style="font-size:17px;font-weight:800;color:var(--ink);margin-bottom:10px">Private by Design</h3>
-        <p style="font-size:14px;color:var(--text);line-height:1.75">Your documents are analyzed in real-time by Claude AI (Anthropic) and never stored, logged, or shared — not even temporarily. LexVera is free, requires no account, and collects no personal data.</p>
+        <p style="font-size:14px;color:var(--text);line-height:1.75">Your documents are analyzed in real-time by Claude AI (Anthropic) and never stored, logged, or shared — not even temporarily. VeriLex is free, requires no account, and collects no personal data.</p>
       </div>
 
     </div>
@@ -883,7 +935,7 @@
         <span class="faq-chevron">▼</span>
       </button>
       <div class="faq-a" id="faq1a">
-        No — LexVera provides <strong>legal information</strong>, not legal advice. There's an important difference: legal information explains what the law says in general; legal advice applies the law to your specific situation and requires a licensed attorney. LexVera helps you understand what a document means and what laws apply, but it does not tell you what to do. For advice specific to your case, please consult a licensed attorney. We include links to free legal aid organizations on every result.
+        No — VeriLex provides <strong>legal information</strong>, not legal advice. There's an important difference: legal information explains what the law says in general; legal advice applies the law to your specific situation and requires a licensed attorney. VeriLex helps you understand what a document means and what laws apply, but it does not tell you what to do. For advice specific to your case, please consult a licensed attorney. We include links to free legal aid organizations on every result.
       </div>
     </div>
 
@@ -903,7 +955,7 @@
         <span class="faq-chevron">▼</span>
       </button>
       <div class="faq-a" id="faq3a">
-        LexVera works with almost any legal document: eviction notices, debt collection letters, lease agreements, court summonses, employment contracts, immigration notices (Notice to Appear, RFEs), IRS and tax letters, traffic citations, and more. You can paste text directly or upload a PDF. PDFs with selectable text are extracted instantly; scanned or handwritten PDFs are processed with AI vision (takes ~20 seconds). You can also upload a JPEG or PNG photo of a physical document.
+        VeriLex works with almost any legal document: eviction notices, debt collection letters, lease agreements, court summonses, employment contracts, immigration notices (Notice to Appear, RFEs), IRS and tax letters, traffic citations, and more. You can paste text directly or upload a PDF. PDFs with selectable text are extracted instantly; scanned or handwritten PDFs are processed with AI vision (takes ~20 seconds). You can also upload a JPEG or PNG photo of a physical document.
       </div>
     </div>
 
@@ -913,7 +965,7 @@
         <span class="faq-chevron">▼</span>
       </button>
       <div class="faq-a" id="faq4a">
-        LexVera supports 15 languages for both the website interface and the AI analysis output: English, Spanish, Simplified Chinese, Traditional Chinese, Vietnamese, Tagalog, Korean, Arabic, Hindi, Portuguese, Russian, French, Haitian Creole, Punjabi, and Amharic. Select your preferred output language from the dropdown in the analysis form. You can also switch the entire website interface using the language button in the top navigation bar.
+        VeriLex supports 15 languages for both the website interface and the AI analysis output: English, Spanish, Simplified Chinese, Traditional Chinese, Vietnamese, Tagalog, Korean, Arabic, Hindi, Portuguese, Russian, French, Haitian Creole, Punjabi, and Amharic. Select your preferred output language from the dropdown in the analysis form. You can also switch the entire website interface using the language button in the top navigation bar.
       </div>
     </div>
 
@@ -923,7 +975,7 @@
         <span class="faq-chevron">▼</span>
       </button>
       <div class="faq-a" id="faq5a">
-        LexVera uses Claude AI by Anthropic, which is highly capable of identifying relevant statutes and citing them accurately. All statute citations include a direct link to the official text (e.g., leginfo.legislature.ca.gov for California law) so you can verify them yourself. For case law, we only include citations the AI is confident about — a missing citation is always better than a fabricated one. Laws change over time, so always verify current versions before relying on them.
+        VeriLex uses Claude AI by Anthropic, which is highly capable of identifying relevant statutes and citing them accurately. All statute citations include a direct link to the official text (e.g., leginfo.legislature.ca.gov for California law) so you can verify them yourself. For case law, we only include citations the AI is confident about — a missing citation is always better than a fabricated one. Laws change over time, so always verify current versions before relying on them.
       </div>
     </div>
 
@@ -933,7 +985,7 @@
         <span class="faq-chevron">▼</span>
       </button>
       <div class="faq-a" id="faq6a">
-        First, paste or upload the document to LexVera to understand exactly what it says and what your rights are. Pay close attention to the <strong>Key Dates &amp; Deadlines</strong> section — missing a deadline can seriously harm your case. For high-urgency notices, LexVera will show a "What to do right now" action box. Then reach out to a legal aid organization immediately. In the Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 and <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 offer free help.
+        First, paste or upload the document to VeriLex to understand exactly what it says and what your rights are. Pay close attention to the <strong>Key Dates &amp; Deadlines</strong> section — missing a deadline can seriously harm your case. For high-urgency notices, VeriLex will show a "What to do right now" action box. Then reach out to a legal aid organization immediately. In the Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 and <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 offer free help.
       </div>
     </div>
 
@@ -967,6 +1019,13 @@
         <button id="sbtn6" class="sample-btn" onclick="loadSample('immigration')">🛂 Immigration Notice</button>
         <button id="sbtn7" class="sample-btn" onclick="loadSample('irs')">📬 IRS Letter</button>
         <button id="sbtn8" class="sample-btn" onclick="loadSample('traffic')">🚗 Traffic Citation</button>
+      </div>
+
+      <!-- Location bar -->
+      <div class="location-bar" id="locationBar">
+        <span>📍</span>
+        <span class="loc-label" id="locLabel">Share your location for local legal aid resources</span>
+        <button class="loc-btn" id="locBtn" onclick="requestLocation()">Allow Location</button>
       </div>
 
       <div class="persona-row">
@@ -1105,7 +1164,7 @@
   <div style="max-width:560px;margin:0 auto">
     <div class="section-label" id="fb-section-label" style="text-align:center">Feedback</div>
     <h2 class="section-title" id="fb-title" style="text-align:center;font-size:clamp(22px,3vw,30px);margin-bottom:8px">Have a question or suggestion?</h2>
-    <p id="fb-sub" style="text-align:center;color:var(--muted);margin-bottom:32px;font-size:15px">We read every message. Your feedback helps improve LexVera.</p>
+    <p id="fb-sub" style="text-align:center;color:var(--muted);margin-bottom:32px;font-size:15px">We read every message. Your feedback helps improve VeriLex.</p>
 
     <div style="background:#fff;border-radius:var(--r);padding:28px;box-shadow:var(--shadow)">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
@@ -1177,9 +1236,9 @@
         <path d="M13.6 12.5 Q15.8 14.3 18 12.5" stroke-width="1.3"/>
       </svg>
     </div>
-    <span>LexVera</span>
+    <span>VeriLex</span>
   </div>
-  <p><strong>Legal information only.</strong> LexVera explains what documents say and what the law provides. It does not give legal advice, make recommendations, or create an attorney-client relationship. For advice specific to your situation, consult a licensed attorney.</p>
+  <p><strong>Legal information only.</strong> VeriLex explains what documents say and what the law provides. It does not give legal advice, make recommendations, or create an attorney-client relationship. For advice specific to your situation, consult a licensed attorney.</p>
   <div class="footer-links">
     <a href="https://selfhelp.courts.ca.gov" target="_blank" rel="noopener">CA Courts Self-Help</a>
     <a href="https://lawhelpca.org" target="_blank" rel="noopener">LawHelp California</a>
@@ -1366,6 +1425,42 @@ Court: San Francisco Superior Court — Traffic Division
 let inputMode = 'paste';
 let pdfText = '';
 let persona = 'novice';
+let userLocation = ''; // e.g. "Oakland, California, United States"
+
+async function requestLocation() {
+  const btn = document.getElementById('locBtn');
+  const label = document.getElementById('locLabel');
+  if (!navigator.geolocation) {
+    label.textContent = 'Geolocation not supported by your browser';
+    return;
+  }
+  btn.textContent = 'Detecting…';
+  btn.classList.add('detecting');
+  btn.onclick = null;
+  navigator.geolocation.getCurrentPosition(async pos => {
+    try {
+      const { latitude: lat, longitude: lon } = pos.coords;
+      const r = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`,
+        { headers: { 'Accept-Language': 'en', 'User-Agent': 'VeriLex/1.0' } }
+      );
+      const geo = await r.json();
+      const city = geo.address.city || geo.address.town || geo.address.county || '';
+      const state = geo.address.state || '';
+      const country = geo.address.country || '';
+      userLocation = [city, state, country].filter(Boolean).join(', ');
+      label.innerHTML = `<span class="loc-detected">📍 ${userLocation}</span> — resources will be tailored to your area`;
+      document.getElementById('locationBar').style.borderLeft = '3px solid var(--low)';
+      btn.style.display = 'none';
+    } catch {
+      label.textContent = 'Could not detect location — using general resources';
+      btn.style.display = 'none';
+    }
+  }, () => {
+    label.textContent = 'Location access denied — using general resources';
+    btn.style.display = 'none';
+  });
+}
 
 function setPersona(p, btn) {
   persona = p;
@@ -1404,7 +1499,7 @@ const TRANSLATIONS = {
     sample7:'📬 IRS Letter', sample8:'🚗 Traffic Citation',
     navAbout:'About', navFaq:'FAQ', aboutLabel:'About', aboutTitle:'Our purpose',
     fbLabel:'Feedback', fbTitle:'Have a question or suggestion?',
-    fbSub:'We read every message. Your feedback helps improve LexVera.',
+    fbSub:'We read every message. Your feedback helps improve VeriLex.',
     fbNameLabel:'Your name (optional)', fbCatLabel:'Category',
     fbEmailLabel:"Email (optional — if you'd like a reply)",
     fbMsgLabel:'Message', fbSubmit:'Send Feedback',
@@ -1412,17 +1507,17 @@ const TRANSLATIONS = {
     fbNamePh:'Anonymous', fbMsgPh:"Tell us what's on your mind…",
     faqLabel:'FAQ', faqTitle:'Common questions', faqSub:'Everything you need to know before you start.',
     faq1q:'Is this real legal advice?',
-    faq1a:'No — LexVera provides <strong>legal information</strong>, not legal advice. There\'s an important difference: legal information explains what the law says in general; legal advice applies the law to your specific situation and requires a licensed attorney. LexVera helps you understand what a document means and what laws apply, but it does not tell you what to do. For advice specific to your case, please consult a licensed attorney. We include links to free legal aid organizations on every result.',
+    faq1a:'No — VeriLex provides <strong>legal information</strong>, not legal advice. There\'s an important difference: legal information explains what the law says in general; legal advice applies the law to your specific situation and requires a licensed attorney. VeriLex helps you understand what a document means and what laws apply, but it does not tell you what to do. For advice specific to your case, please consult a licensed attorney. We include links to free legal aid organizations on every result.',
     faq2q:'Is my document kept private?',
     faq2a:'Your document is sent securely to Claude AI (by Anthropic) for analysis and is <strong>never stored on our servers</strong>. We do not log, save, or share the content of any document you upload or paste. The analysis result is displayed only in your browser and discarded when you leave the page. For highly sensitive documents (e.g., immigration papers), you may want to redact personal identifiers like full names and ID numbers before uploading.',
     faq3q:'What types of documents can I analyze?',
-    faq3a:'LexVera works with almost any legal document: eviction notices, debt collection letters, lease agreements, court summonses, employment contracts, immigration notices (Notice to Appear, RFEs), IRS and tax letters, traffic citations, and more. You can paste text directly or upload a PDF. PDFs with selectable text are extracted instantly; scanned or handwritten PDFs are processed with AI vision (takes ~20 seconds). You can also upload a JPEG or PNG photo of a physical document.',
+    faq3a:'VeriLex works with almost any legal document: eviction notices, debt collection letters, lease agreements, court summonses, employment contracts, immigration notices (Notice to Appear, RFEs), IRS and tax letters, traffic citations, and more. You can paste text directly or upload a PDF. PDFs with selectable text are extracted instantly; scanned or handwritten PDFs are processed with AI vision (takes ~20 seconds). You can also upload a JPEG or PNG photo of a physical document.',
     faq4q:'Which languages are supported?',
-    faq4a:'LexVera supports 15 languages for both the website interface and the AI analysis output: English, Spanish, Simplified Chinese, Traditional Chinese, Vietnamese, Tagalog, Korean, Arabic, Hindi, Portuguese, Russian, French, Haitian Creole, Punjabi, and Amharic. Select your preferred output language from the dropdown in the analysis form. You can also switch the entire website interface using the language button in the top navigation bar.',
+    faq4a:'VeriLex supports 15 languages for both the website interface and the AI analysis output: English, Spanish, Simplified Chinese, Traditional Chinese, Vietnamese, Tagalog, Korean, Arabic, Hindi, Portuguese, Russian, French, Haitian Creole, Punjabi, and Amharic. Select your preferred output language from the dropdown in the analysis form. You can also switch the entire website interface using the language button in the top navigation bar.',
     faq5q:'How accurate are the legal citations?',
-    faq5a:'LexVera uses Claude AI by Anthropic, which is highly capable of identifying relevant statutes and citing them accurately. All statute citations include a direct link to the official text (e.g., leginfo.legislature.ca.gov for California law) so you can verify them yourself. For case law, we only include citations the AI is confident about — a missing citation is always better than a fabricated one. Laws change over time, so always verify current versions before relying on them.',
+    faq5a:'VeriLex uses Claude AI by Anthropic, which is highly capable of identifying relevant statutes and citing them accurately. All statute citations include a direct link to the official text (e.g., leginfo.legislature.ca.gov for California law) so you can verify them yourself. For case law, we only include citations the AI is confident about — a missing citation is always better than a fabricated one. Laws change over time, so always verify current versions before relying on them.',
     faq6q:'I got an eviction / court notice — what should I do?',
-    faq6a:'First, paste or upload the document to LexVera to understand exactly what it says and what your rights are. Pay close attention to the <strong>Key Dates &amp; Deadlines</strong> section — missing a deadline can seriously harm your case. For high-urgency notices, LexVera will show a “What to do right now” action box. Then reach out to a legal aid organization immediately. In the Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 and <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 offer free help.',
+    faq6a:'First, paste or upload the document to VeriLex to understand exactly what it says and what your rights are. Pay close attention to the <strong>Key Dates &amp; Deadlines</strong> section — missing a deadline can seriously harm your case. For high-urgency notices, VeriLex will show a “What to do right now” action box. Then reach out to a legal aid organization immediately. In the Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 and <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 offer free help.',
   },
   es: {
     navBadge:'Solo información legal', heroBadge:'✦ Gratis · Sin cuenta · 15 idiomas',
@@ -1453,7 +1548,7 @@ const TRANSLATIONS = {
     sample7:'📬 Carta del IRS', sample8:'🚗 Citación de Tráfico',
     navAbout:'Acerca de', navFaq:'Preguntas', aboutLabel:'Acerca de', aboutTitle:'Nuestro propósito',
     fbLabel:'Comentarios', fbTitle:'¿Tienes una pregunta o sugerencia?',
-    fbSub:'Leemos cada mensaje. Tu opinión ayuda a mejorar LexVera.',
+    fbSub:'Leemos cada mensaje. Tu opinión ayuda a mejorar VeriLex.',
     fbNameLabel:'Tu nombre (opcional)', fbCatLabel:'Categoría',
     fbEmailLabel:'Correo electrónico (opcional — si deseas respuesta)',
     fbMsgLabel:'Mensaje', fbSubmit:'Enviar comentario',
@@ -1461,17 +1556,17 @@ const TRANSLATIONS = {
     fbNamePh:'Anónimo', fbMsgPh:'Cuéntanos lo que piensas…',
     faqLabel:'FAQ', faqTitle:'Preguntas frecuentes', faqSub:'Todo lo que necesitas saber antes de comenzar.',
     faq1q:'¿Esto es asesoramiento legal real?',
-    faq1a:'No — LexVera proporciona <strong>información legal</strong>, no asesoramiento legal. Hay una diferencia importante: la información legal explica lo que dice la ley en general; el asesoramiento legal aplica la ley a su situación específica y requiere un abogado autorizado. LexVera le ayuda a entender qué significa un documento y qué leyes aplican, pero no le dice qué hacer. Para asesoramiento específico a su caso, consulte a un abogado autorizado. Incluimos enlaces a organizaciones de ayuda legal gratuita en cada resultado.',
+    faq1a:'No — VeriLex proporciona <strong>información legal</strong>, no asesoramiento legal. Hay una diferencia importante: la información legal explica lo que dice la ley en general; el asesoramiento legal aplica la ley a su situación específica y requiere un abogado autorizado. VeriLex le ayuda a entender qué significa un documento y qué leyes aplican, pero no le dice qué hacer. Para asesoramiento específico a su caso, consulte a un abogado autorizado. Incluimos enlaces a organizaciones de ayuda legal gratuita en cada resultado.',
     faq2q:'¿Mi documento se mantiene privado?',
     faq2a:'Su documento se envía de forma segura a Claude AI (de Anthropic) para su análisis y <strong>nunca se almacena en nuestros servidores</strong>. No registramos, guardamos ni compartimos el contenido de ningún documento que cargue o pegue. El resultado del análisis se muestra solo en su navegador y se descarta cuando abandona la página. Para documentos muy sensibles (por ejemplo, papeles de inmigración), es posible que desee eliminar identificadores personales como nombres completos y números de identificación antes de cargar.',
     faq3q:'¿Qué tipos de documentos puedo analizar?',
-    faq3a:'LexVera funciona con casi cualquier documento legal: avisos de desalojo, cartas de cobro de deudas, contratos de arrendamiento, citaciones judiciales, contratos de trabajo, avisos de inmigración (Notice to Appear, RFEs), cartas del IRS e impuestos, citaciones de tráfico y más. Puede pegar texto directamente o cargar un PDF. Los PDFs con texto seleccionable se extraen instantáneamente; los PDFs escaneados o escritos a mano se procesan con visión de IA (~20 segundos). También puede cargar una foto JPEG o PNG de un documento físico.',
+    faq3a:'VeriLex funciona con casi cualquier documento legal: avisos de desalojo, cartas de cobro de deudas, contratos de arrendamiento, citaciones judiciales, contratos de trabajo, avisos de inmigración (Notice to Appear, RFEs), cartas del IRS e impuestos, citaciones de tráfico y más. Puede pegar texto directamente o cargar un PDF. Los PDFs con texto seleccionable se extraen instantáneamente; los PDFs escaneados o escritos a mano se procesan con visión de IA (~20 segundos). También puede cargar una foto JPEG o PNG de un documento físico.',
     faq4q:'¿Qué idiomas son compatibles?',
-    faq4a:'LexVera admite 15 idiomas tanto para la interfaz del sitio web como para la salida del análisis de IA: inglés, español, chino simplificado, chino tradicional, vietnamita, tagalo, coreano, árabe, hindi, portugués, ruso, francés, criollo haitiano, punjabi y amhárico. Seleccione su idioma de salida preferido en el menú desplegable del formulario de análisis. También puede cambiar toda la interfaz del sitio web usando el botón de idioma en la barra de navegación superior.',
+    faq4a:'VeriLex admite 15 idiomas tanto para la interfaz del sitio web como para la salida del análisis de IA: inglés, español, chino simplificado, chino tradicional, vietnamita, tagalo, coreano, árabe, hindi, portugués, ruso, francés, criollo haitiano, punjabi y amhárico. Seleccione su idioma de salida preferido en el menú desplegable del formulario de análisis. También puede cambiar toda la interfaz del sitio web usando el botón de idioma en la barra de navegación superior.',
     faq5q:'¿Qué tan precisas son las citas legales?',
-    faq5a:'LexVera utiliza Claude AI de Anthropic, que tiene una alta capacidad para identificar estatutos relevantes y citarlos con precisión. Todas las citas de estatutos incluyen un enlace directo al texto oficial (p. ej., leginfo.legislature.ca.gov para la ley de California) para que pueda verificarlos usted mismo. Para la jurisprudencia, solo incluimos citas de las que la IA está segura — una cita que falta siempre es mejor que una fabricada. Las leyes cambian con el tiempo, así que siempre verifique las versiones actuales antes de confiar en ellas.',
+    faq5a:'VeriLex utiliza Claude AI de Anthropic, que tiene una alta capacidad para identificar estatutos relevantes y citarlos con precisión. Todas las citas de estatutos incluyen un enlace directo al texto oficial (p. ej., leginfo.legislature.ca.gov para la ley de California) para que pueda verificarlos usted mismo. Para la jurisprudencia, solo incluimos citas de las que la IA está segura — una cita que falta siempre es mejor que una fabricada. Las leyes cambian con el tiempo, así que siempre verifique las versiones actuales antes de confiar en ellas.',
     faq6q:'Recibí un aviso de desalojo / tribunal — ¿qué debo hacer?',
-    faq6a:'Primero, pegue o cargue el documento en LexVera para entender exactamente qué dice y cuáles son sus derechos. Preste mucha atención a la sección de <strong>Fechas Clave y Plazos</strong> — perder un plazo puede dañar seriamente su caso. Para avisos de alta urgencia, LexVera mostrará un cuadro de acción "Qué hacer ahora mismo". Luego comuníquese con una organización de ayuda legal de inmediato. En el Área de la Bahía: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 y <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ofrecen ayuda gratuita.',
+    faq6a:'Primero, pegue o cargue el documento en VeriLex para entender exactamente qué dice y cuáles son sus derechos. Preste mucha atención a la sección de <strong>Fechas Clave y Plazos</strong> — perder un plazo puede dañar seriamente su caso. Para avisos de alta urgencia, VeriLex mostrará un cuadro de acción "Qué hacer ahora mismo". Luego comuníquese con una organización de ayuda legal de inmediato. En el Área de la Bahía: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 y <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ofrecen ayuda gratuita.',
   },
   zh: {
     navBadge:'仅供法律信息', heroBadge:'✦ 免费 · 无需账户 · 15种语言',
@@ -1502,7 +1597,7 @@ const TRANSLATIONS = {
     sample7:'📬 IRS 信函', sample8:'🚗 交通违章',
     navAbout:'关于', navFaq:'常见问题', aboutLabel:'关于', aboutTitle:'我们的目标',
     fbLabel:'反馈', fbTitle:'有问题或建议？',
-    fbSub:'我们阅读每一条留言。您的反馈有助于改进 LexVera。',
+    fbSub:'我们阅读每一条留言。您的反馈有助于改进 VeriLex。',
     fbNameLabel:'您的姓名（可选）', fbCatLabel:'类别',
     fbEmailLabel:'电子邮件（可选 — 如需回复）',
     fbMsgLabel:'留言', fbSubmit:'发送反馈',
@@ -1510,17 +1605,17 @@ const TRANSLATIONS = {
     fbNamePh:'匿名', fbMsgPh:'告诉我们您的想法…',
     faqLabel:'常见问题', faqTitle:'常见问题解答', faqSub:'开始使用前您需要了解的一切。',
     faq1q:'这是真正的法律建议吗？',
-    faq1a:'不 — LexVera 提供<strong>法律信息</strong>，而非法律建议。两者有重要区别：法律信息解释法律的一般规定；法律建议将法律应用于您的具体情况，需要持照律师。LexVera 帮助您理解文件含义和适用法律，但不告诉您该怎么做。如需针对您具体情况的建议，请咨询持照律师。每份分析结果都包含免费法律援助机构的链接。',
+    faq1a:'不 — VeriLex 提供<strong>法律信息</strong>，而非法律建议。两者有重要区别：法律信息解释法律的一般规定；法律建议将法律应用于您的具体情况，需要持照律师。VeriLex 帮助您理解文件含义和适用法律，但不告诉您该怎么做。如需针对您具体情况的建议，请咨询持照律师。每份分析结果都包含免费法律援助机构的链接。',
     faq2q:'我的文件会保持私密吗？',
     faq2a:'您的文件通过安全方式发送给 Claude AI（由 Anthropic 提供）进行分析，<strong>从不存储在我们的服务器上</strong>。我们不记录、保存或分享您上传或粘贴的任何文件内容。分析结果仅显示在您的浏览器中，当您离开页面时即被丢弃。对于高度敏感的文件（例如移民文件），您可能需要在上传前隐去全名和身份证号等个人信息。',
     faq3q:'我可以分析哪些类型的文件？',
-    faq3a:'LexVera 几乎可以处理任何法律文件：驱逐通知、债务催收函、租赁协议、法院传票、劳动合同、移民通知（出庭通知、RFE）、IRS 及税务信函、交通违章通知等。您可以直接粘贴文本或上传 PDF。可选取文字的 PDF 可即时提取；扫描或手写的 PDF 通过 AI 视觉处理（约需 20 秒）。也可上传实体文件的 JPEG 或 PNG 照片。',
+    faq3a:'VeriLex 几乎可以处理任何法律文件：驱逐通知、债务催收函、租赁协议、法院传票、劳动合同、移民通知（出庭通知、RFE）、IRS 及税务信函、交通违章通知等。您可以直接粘贴文本或上传 PDF。可选取文字的 PDF 可即时提取；扫描或手写的 PDF 通过 AI 视觉处理（约需 20 秒）。也可上传实体文件的 JPEG 或 PNG 照片。',
     faq4q:'支持哪些语言？',
-    faq4a:'LexVera 在网站界面和 AI 分析输出方面均支持 15 种语言：英语、西班牙语、简体中文、繁体中文、越南语、他加禄语、韩语、阿拉伯语、印地语、葡萄牙语、俄语、法语、海地克里奥尔语、旁遮普语和阿姆哈拉语。在分析表单的下拉菜单中选择您偏好的输出语言，也可点击顶部导航栏的语言按钮切换整个网站界面。',
+    faq4a:'VeriLex 在网站界面和 AI 分析输出方面均支持 15 种语言：英语、西班牙语、简体中文、繁体中文、越南语、他加禄语、韩语、阿拉伯语、印地语、葡萄牙语、俄语、法语、海地克里奥尔语、旁遮普语和阿姆哈拉语。在分析表单的下拉菜单中选择您偏好的输出语言，也可点击顶部导航栏的语言按钮切换整个网站界面。',
     faq5q:'法律引用的准确性如何？',
-    faq5a:'LexVera 使用 Anthropic 的 Claude AI，能够高准确度地识别相关法规并进行引用。所有法规引用均包含指向官方文本的直接链接（例如加州法律为 leginfo.legislature.ca.gov），供您自行核实。对于判例法，我们仅收录 AI 有把握的引用——引用缺失永远优于引用错误。法律会随时间变化，请在依赖任何引用前确认当前有效版本。',
+    faq5a:'VeriLex 使用 Anthropic 的 Claude AI，能够高准确度地识别相关法规并进行引用。所有法规引用均包含指向官方文本的直接链接（例如加州法律为 leginfo.legislature.ca.gov），供您自行核实。对于判例法，我们仅收录 AI 有把握的引用——引用缺失永远优于引用错误。法律会随时间变化，请在依赖任何引用前确认当前有效版本。',
     faq6q:'我收到了驱逐通知 / 法院通知 — 应该怎么办？',
-    faq6a:'首先，将文件粘贴或上传至 LexVera，了解其确切内容及您的权利。请密切关注<strong>关键日期和截止日期</strong>部分——错过截止日期可能严重损害您的权益。对于高紧急度通知，LexVera 将显示"立即采取行动"提示框。然后立即联系法律援助机构。在湾区：<a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">东湾社区法律中心</a> (510) 548-4040 和 <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">湾区法律援助</a> (415) 982-1300 提供免费帮助。',
+    faq6a:'首先，将文件粘贴或上传至 VeriLex，了解其确切内容及您的权利。请密切关注<strong>关键日期和截止日期</strong>部分——错过截止日期可能严重损害您的权益。对于高紧急度通知，VeriLex 将显示"立即采取行动"提示框。然后立即联系法律援助机构。在湾区：<a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">东湾社区法律中心</a> (510) 548-4040 和 <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">湾区法律援助</a> (415) 982-1300 提供免费帮助。',
   },
   'zh-TW': {
     navBadge:'僅供法律資訊', heroBadge:'✦ 免費 · 無需帳戶 · 15種語言',
@@ -1551,7 +1646,7 @@ const TRANSLATIONS = {
     sample7:'📬 IRS 信函', sample8:'🚗 交通違規',
     navAbout:'關於', navFaq:'常見問題', aboutLabel:'關於', aboutTitle:'我們的目標',
     fbLabel:'回饋', fbTitle:'有問題或建議？',
-    fbSub:'我們閱讀每一條訊息。您的回饋有助於改進 LexVera。',
+    fbSub:'我們閱讀每一條訊息。您的回饋有助於改進 VeriLex。',
     fbNameLabel:'您的姓名（選填）', fbCatLabel:'類別',
     fbEmailLabel:'電子郵件（選填 — 如需回覆）',
     fbMsgLabel:'訊息', fbSubmit:'發送回饋',
@@ -1559,17 +1654,17 @@ const TRANSLATIONS = {
     fbNamePh:'匿名', fbMsgPh:'告訴我們您的想法…',
     faqLabel:'常見問題', faqTitle:'常見問題解答', faqSub:'開始使用前您需要了解的一切。',
     faq1q:'這是真正的法律建議嗎？',
-    faq1a:'不 — LexVera 提供<strong>法律資訊</strong>，而非法律建議。兩者有重要區別：法律資訊解釋法律的一般規定；法律建議將法律應用於您的具體情況，需要持照律師。LexVera 幫助您理解文件含義和適用法律，但不告訴您該怎麼做。如需針對您具體情況的建議，請諮詢持照律師。每份分析結果都包含免費法律援助機構的連結。',
+    faq1a:'不 — VeriLex 提供<strong>法律資訊</strong>，而非法律建議。兩者有重要區別：法律資訊解釋法律的一般規定；法律建議將法律應用於您的具體情況，需要持照律師。VeriLex 幫助您理解文件含義和適用法律，但不告訴您該怎麼做。如需針對您具體情況的建議，請諮詢持照律師。每份分析結果都包含免費法律援助機構的連結。',
     faq2q:'我的文件會保持私密嗎？',
     faq2a:'您的文件透過安全方式發送給 Claude AI（由 Anthropic 提供）進行分析，<strong>從不儲存在我們的伺服器上</strong>。我們不記錄、儲存或分享您上傳或貼上的任何文件內容。分析結果僅顯示在您的瀏覽器中，當您離開頁面時即被刪除。對於高度敏感的文件（例如移民文件），您可能需要在上傳前隱去全名和身份證號等個人資訊。',
     faq3q:'我可以分析哪些類型的文件？',
-    faq3a:'LexVera 幾乎可以處理任何法律文件：驅逐通知、債務催收函、租賃協議、法院傳票、勞動合約、移民通知（出庭通知、RFE）、IRS 及稅務信函、交通違規通知等。您可以直接貼上文字或上傳 PDF。可選取文字的 PDF 可即時提取；掃描或手寫的 PDF 透過 AI 視覺處理（約需 20 秒）。也可上傳實體文件的 JPEG 或 PNG 照片。',
+    faq3a:'VeriLex 幾乎可以處理任何法律文件：驅逐通知、債務催收函、租賃協議、法院傳票、勞動合約、移民通知（出庭通知、RFE）、IRS 及稅務信函、交通違規通知等。您可以直接貼上文字或上傳 PDF。可選取文字的 PDF 可即時提取；掃描或手寫的 PDF 透過 AI 視覺處理（約需 20 秒）。也可上傳實體文件的 JPEG 或 PNG 照片。',
     faq4q:'支援哪些語言？',
-    faq4a:'LexVera 在網站介面和 AI 分析輸出方面均支援 15 種語言：英語、西班牙語、簡體中文、繁體中文、越南語、他加祿語、韓語、阿拉伯語、印地語、葡萄牙語、俄語、法語、海地克里奧爾語、旁遮普語和阿姆哈拉語。在分析表單的下拉選單中選擇您偏好的輸出語言，也可點選頂部導覽列的語言按鈕切換整個網站介面。',
+    faq4a:'VeriLex 在網站介面和 AI 分析輸出方面均支援 15 種語言：英語、西班牙語、簡體中文、繁體中文、越南語、他加祿語、韓語、阿拉伯語、印地語、葡萄牙語、俄語、法語、海地克里奧爾語、旁遮普語和阿姆哈拉語。在分析表單的下拉選單中選擇您偏好的輸出語言，也可點選頂部導覽列的語言按鈕切換整個網站介面。',
     faq5q:'法律引用的準確性如何？',
-    faq5a:'LexVera 使用 Anthropic 的 Claude AI，能夠高準確度地識別相關法規並進行引用。所有法規引用均包含指向官方文字的直接連結（例如加州法律為 leginfo.legislature.ca.gov），供您自行核實。對於判例法，我們僅收錄 AI 有把握的引用——引用缺失永遠優於引用錯誤。法律會隨時間變化，請在依賴任何引用前確認當前有效版本。',
+    faq5a:'VeriLex 使用 Anthropic 的 Claude AI，能夠高準確度地識別相關法規並進行引用。所有法規引用均包含指向官方文字的直接連結（例如加州法律為 leginfo.legislature.ca.gov），供您自行核實。對於判例法，我們僅收錄 AI 有把握的引用——引用缺失永遠優於引用錯誤。法律會隨時間變化，請在依賴任何引用前確認當前有效版本。',
     faq6q:'我收到了驅逐通知 / 法院通知 — 應該怎麼辦？',
-    faq6a:'首先，將文件貼上或上傳至 LexVera，了解其確切內容及您的權利。請密切關注<strong>關鍵日期和截止日期</strong>部分——錯過截止日期可能嚴重損害您的權益。對於高緊急度通知，LexVera 將顯示「立即採取行動」提示框。然後立即聯繫法律援助機構。在灣區：<a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">東灣社區法律中心</a> (510) 548-4040 和 <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">灣區法律援助</a> (415) 982-1300 提供免費幫助。',
+    faq6a:'首先，將文件貼上或上傳至 VeriLex，了解其確切內容及您的權利。請密切關注<strong>關鍵日期和截止日期</strong>部分——錯過截止日期可能嚴重損害您的權益。對於高緊急度通知，VeriLex 將顯示「立即採取行動」提示框。然後立即聯繫法律援助機構。在灣區：<a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">東灣社區法律中心</a> (510) 548-4040 和 <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">灣區法律援助</a> (415) 982-1300 提供免費幫助。',
   },
   vi: {
     navBadge:'Chỉ thông tin pháp lý', heroBadge:'✦ Miễn phí · Không cần tài khoản · 15 ngôn ngữ',
@@ -1600,7 +1695,7 @@ const TRANSLATIONS = {
     sample7:'📬 Thư IRS', sample8:'🚗 Giấy Phạt GT',
     navAbout:'Giới thiệu', navFaq:'Câu hỏi', aboutLabel:'Giới thiệu', aboutTitle:'Mục đích của chúng tôi',
     fbLabel:'Phản hồi', fbTitle:'Bạn có câu hỏi hoặc gợi ý?',
-    fbSub:'Chúng tôi đọc từng tin nhắn. Phản hồi của bạn giúp cải thiện LexVera.',
+    fbSub:'Chúng tôi đọc từng tin nhắn. Phản hồi của bạn giúp cải thiện VeriLex.',
     fbNameLabel:'Tên của bạn (tùy chọn)', fbCatLabel:'Danh mục',
     fbEmailLabel:'Email (tùy chọn — nếu muốn nhận phản hồi)',
     fbMsgLabel:'Tin nhắn', fbSubmit:'Gửi phản hồi',
@@ -1608,17 +1703,17 @@ const TRANSLATIONS = {
     fbNamePh:'Ẩn danh', fbMsgPh:'Cho chúng tôi biết suy nghĩ của bạn…',
     faqLabel:'Câu hỏi', faqTitle:'Câu hỏi thường gặp', faqSub:'Mọi thứ bạn cần biết trước khi bắt đầu.',
     faq1q:'Đây có phải là tư vấn pháp lý thực sự không?',
-    faq1a:'Không — LexVera cung cấp <strong>thông tin pháp lý</strong>, không phải tư vấn pháp lý. Có sự khác biệt quan trọng: thông tin pháp lý giải thích những gì luật nói một cách chung; tư vấn pháp lý áp dụng luật vào tình huống cụ thể của bạn và đòi hỏi luật sư có giấy phép. LexVera giúp bạn hiểu tài liệu có nghĩa gì và luật nào áp dụng, nhưng không nói cho bạn biết phải làm gì. Để được tư vấn cho trường hợp cụ thể, hãy tham khảo ý kiến luật sư có giấy phép. Chúng tôi bao gồm các liên kết đến các tổ chức trợ giúp pháp lý miễn phí trong mỗi kết quả.',
+    faq1a:'Không — VeriLex cung cấp <strong>thông tin pháp lý</strong>, không phải tư vấn pháp lý. Có sự khác biệt quan trọng: thông tin pháp lý giải thích những gì luật nói một cách chung; tư vấn pháp lý áp dụng luật vào tình huống cụ thể của bạn và đòi hỏi luật sư có giấy phép. VeriLex giúp bạn hiểu tài liệu có nghĩa gì và luật nào áp dụng, nhưng không nói cho bạn biết phải làm gì. Để được tư vấn cho trường hợp cụ thể, hãy tham khảo ý kiến luật sư có giấy phép. Chúng tôi bao gồm các liên kết đến các tổ chức trợ giúp pháp lý miễn phí trong mỗi kết quả.',
     faq2q:'Tài liệu của tôi có được bảo mật không?',
     faq2a:'Tài liệu của bạn được gửi an toàn đến Claude AI (của Anthropic) để phân tích và <strong>không bao giờ được lưu trữ trên máy chủ của chúng tôi</strong>. Chúng tôi không ghi lại, lưu hoặc chia sẻ nội dung của bất kỳ tài liệu nào bạn tải lên hoặc dán. Kết quả phân tích chỉ được hiển thị trong trình duyệt và bị xóa khi bạn rời khỏi trang. Đối với các tài liệu nhạy cảm cao (ví dụ: giấy tờ nhập cư), bạn nên xóa thông tin nhận dạng cá nhân trước khi tải lên.',
     faq3q:'Tôi có thể phân tích những loại tài liệu nào?',
-    faq3a:'LexVera hoạt động với hầu hết mọi tài liệu pháp lý: thông báo đuổi nhà, thư đòi nợ, hợp đồng thuê nhà, trát hầu tòa, hợp đồng lao động, thông báo nhập cư (Notice to Appear, RFE), thư IRS và thuế, giấy phạt giao thông và nhiều hơn. Bạn có thể dán văn bản trực tiếp hoặc tải lên PDF. PDF có văn bản có thể chọn được trích xuất ngay lập tức; PDF được quét hoặc viết tay được xử lý bằng thị giác AI (~20 giây). Bạn cũng có thể tải lên ảnh JPEG hoặc PNG của tài liệu vật lý.',
+    faq3a:'VeriLex hoạt động với hầu hết mọi tài liệu pháp lý: thông báo đuổi nhà, thư đòi nợ, hợp đồng thuê nhà, trát hầu tòa, hợp đồng lao động, thông báo nhập cư (Notice to Appear, RFE), thư IRS và thuế, giấy phạt giao thông và nhiều hơn. Bạn có thể dán văn bản trực tiếp hoặc tải lên PDF. PDF có văn bản có thể chọn được trích xuất ngay lập tức; PDF được quét hoặc viết tay được xử lý bằng thị giác AI (~20 giây). Bạn cũng có thể tải lên ảnh JPEG hoặc PNG của tài liệu vật lý.',
     faq4q:'Những ngôn ngữ nào được hỗ trợ?',
-    faq4a:'LexVera hỗ trợ 15 ngôn ngữ cho cả giao diện trang web và đầu ra phân tích AI: tiếng Anh, Tây Ban Nha, tiếng Trung giản thể, tiếng Trung phồn thể, tiếng Việt, tiếng Tagalog, tiếng Hàn, tiếng Ả Rập, tiếng Hindi, tiếng Bồ Đào Nha, tiếng Nga, tiếng Pháp, tiếng Creole Haiti, tiếng Punjab và tiếng Amharic. Chọn ngôn ngữ đầu ra ưa thích từ menu thả xuống trong biểu mẫu phân tích. Bạn cũng có thể chuyển đổi toàn bộ giao diện trang web bằng nút ngôn ngữ trong thanh điều hướng trên cùng.',
+    faq4a:'VeriLex hỗ trợ 15 ngôn ngữ cho cả giao diện trang web và đầu ra phân tích AI: tiếng Anh, Tây Ban Nha, tiếng Trung giản thể, tiếng Trung phồn thể, tiếng Việt, tiếng Tagalog, tiếng Hàn, tiếng Ả Rập, tiếng Hindi, tiếng Bồ Đào Nha, tiếng Nga, tiếng Pháp, tiếng Creole Haiti, tiếng Punjab và tiếng Amharic. Chọn ngôn ngữ đầu ra ưa thích từ menu thả xuống trong biểu mẫu phân tích. Bạn cũng có thể chuyển đổi toàn bộ giao diện trang web bằng nút ngôn ngữ trong thanh điều hướng trên cùng.',
     faq5q:'Các trích dẫn pháp lý chính xác đến mức nào?',
-    faq5a:'LexVera sử dụng Claude AI của Anthropic, có khả năng cao trong việc xác định các đạo luật liên quan và trích dẫn chúng chính xác. Tất cả các trích dẫn đạo luật đều bao gồm liên kết trực tiếp đến văn bản chính thức (ví dụ: leginfo.legislature.ca.gov cho luật California) để bạn có thể tự xác minh. Đối với luật án lệ, chúng tôi chỉ bao gồm các trích dẫn mà AI tự tin — một trích dẫn bị thiếu luôn tốt hơn một trích dẫn giả mạo. Luật thay đổi theo thời gian, vì vậy hãy luôn xác minh các phiên bản hiện tại trước khi dựa vào chúng.',
+    faq5a:'VeriLex sử dụng Claude AI của Anthropic, có khả năng cao trong việc xác định các đạo luật liên quan và trích dẫn chúng chính xác. Tất cả các trích dẫn đạo luật đều bao gồm liên kết trực tiếp đến văn bản chính thức (ví dụ: leginfo.legislature.ca.gov cho luật California) để bạn có thể tự xác minh. Đối với luật án lệ, chúng tôi chỉ bao gồm các trích dẫn mà AI tự tin — một trích dẫn bị thiếu luôn tốt hơn một trích dẫn giả mạo. Luật thay đổi theo thời gian, vì vậy hãy luôn xác minh các phiên bản hiện tại trước khi dựa vào chúng.',
     faq6q:'Tôi nhận được thông báo đuổi nhà / tòa án — tôi phải làm gì?',
-    faq6a:'Đầu tiên, dán hoặc tải tài liệu lên LexVera để hiểu chính xác nội dung và quyền của bạn. Chú ý kỹ đến phần <strong>Ngày Quan Trọng và Hạn Chót</strong> — bỏ lỡ hạn chót có thể gây hại nghiêm trọng cho trường hợp của bạn. Đối với thông báo khẩn cấp cao, LexVera sẽ hiển thị hộp hành động "Phải làm gì ngay bây giờ". Sau đó liên hệ ngay với tổ chức trợ giúp pháp lý. Ở Vùng Vịnh: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 và <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 cung cấp hỗ trợ miễn phí.',
+    faq6a:'Đầu tiên, dán hoặc tải tài liệu lên VeriLex để hiểu chính xác nội dung và quyền của bạn. Chú ý kỹ đến phần <strong>Ngày Quan Trọng và Hạn Chót</strong> — bỏ lỡ hạn chót có thể gây hại nghiêm trọng cho trường hợp của bạn. Đối với thông báo khẩn cấp cao, VeriLex sẽ hiển thị hộp hành động "Phải làm gì ngay bây giờ". Sau đó liên hệ ngay với tổ chức trợ giúp pháp lý. Ở Vùng Vịnh: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 và <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 cung cấp hỗ trợ miễn phí.',
   },
   tl: {
     navBadge:'Impormasyon sa Batas Lamang', heroBadge:'✦ Libre · Walang account · 15 wika',
@@ -1649,7 +1744,7 @@ const TRANSLATIONS = {
     sample7:'📬 Liham IRS', sample8:'🚗 Multa sa Trapiko',
     navAbout:'Tungkol sa', navFaq:'FAQ', aboutLabel:'Tungkol sa', aboutTitle:'Aming layunin',
     fbLabel:'Feedback', fbTitle:'May tanong o mungkahi ka?',
-    fbSub:'Binabasa namin ang bawat mensahe. Ang iyong feedback ay tumutulong sa pagpapabuti ng LexVera.',
+    fbSub:'Binabasa namin ang bawat mensahe. Ang iyong feedback ay tumutulong sa pagpapabuti ng VeriLex.',
     fbNameLabel:'Iyong pangalan (opsyonal)', fbCatLabel:'Kategorya',
     fbEmailLabel:'Email (opsyonal — kung gusto mong makatanggap ng tugon)',
     fbMsgLabel:'Mensahe', fbSubmit:'Ipadala ang Feedback',
@@ -1657,17 +1752,17 @@ const TRANSLATIONS = {
     fbNamePh:'Anonymous', fbMsgPh:'Sabihin sa amin ang iyong nasa isip…',
     faqLabel:'FAQ', faqTitle:'Mga karaniwang tanong', faqSub:'Lahat ng kailangan mong malaman bago magsimula.',
     faq1q:'Ito ba ay tunay na legal na payo?',
-    faq1a:'Hindi — Nagbibigay ang LexVera ng <strong>legal na impormasyon</strong>, hindi legal na payo. May mahalagang pagkakaiba: ang legal na impormasyon ay nagpapaliwanag ng sinasabi ng batas sa pangkalahatan; ang legal na payo ay inilalapat ang batas sa iyong partikular na sitwasyon at nangangailangan ng lisensyadong abogado. Tinutulungan ka ng LexVera na maunawaan ang ibig sabihin ng isang dokumento at kung anong mga batas ang naaangkop, ngunit hindi nito sinasabi sa iyo kung ano ang dapat gawin. Para sa payo na tukoy sa iyong kaso, kumonsulta sa lisensyadong abogado. Nagsasama kami ng mga link sa mga libreng organisasyon ng legal na tulong sa bawat resulta.',
+    faq1a:'Hindi — Nagbibigay ang VeriLex ng <strong>legal na impormasyon</strong>, hindi legal na payo. May mahalagang pagkakaiba: ang legal na impormasyon ay nagpapaliwanag ng sinasabi ng batas sa pangkalahatan; ang legal na payo ay inilalapat ang batas sa iyong partikular na sitwasyon at nangangailangan ng lisensyadong abogado. Tinutulungan ka ng VeriLex na maunawaan ang ibig sabihin ng isang dokumento at kung anong mga batas ang naaangkop, ngunit hindi nito sinasabi sa iyo kung ano ang dapat gawin. Para sa payo na tukoy sa iyong kaso, kumonsulta sa lisensyadong abogado. Nagsasama kami ng mga link sa mga libreng organisasyon ng legal na tulong sa bawat resulta.',
     faq2q:'Ang aking dokumento ba ay pinapanatiling pribado?',
     faq2a:'Ang iyong dokumento ay ligtas na ipinapadala sa Claude AI (ng Anthropic) para sa pagsusuri at <strong>hindi kailanman naiimbak sa aming mga server</strong>. Hindi namin ini-log, nini-save, o ibinabahagi ang nilalaman ng anumang dokumentong ina-upload o ini-paste mo. Ang resulta ng pagsusuri ay ipinapakita lamang sa iyong browser at tinatanggal kapag umalis ka sa pahina. Para sa mga napaka-sensitibong dokumento (hal., mga papel sa imigrasyon), maaaring gusto mong tanggalin ang mga personal na identifier bago mag-upload.',
     faq3q:'Anong uri ng mga dokumento ang maaari kong suriin?',
-    faq3a:'Gumagana ang LexVera sa halos anumang legal na dokumento: mga abiso ng pagpapaalis, mga sulat ng koleksyon ng utang, mga kasunduan sa pag-upa, mga summons ng korte, mga kontrata sa trabaho, mga abiso sa imigrasyon (Notice to Appear, mga RFE), mga liham ng IRS at buwis, mga multa sa trapiko, at iba pa. Maaari kang mag-paste ng teksto nang direkta o mag-upload ng PDF. Ang mga PDF na may mapipiling teksto ay agad na kinukuha; ang mga na-scan o sulat-kamay na PDF ay pinoproseso ng AI vision (~20 segundo). Maaari ka ring mag-upload ng JPEG o PNG na larawan ng isang pisikal na dokumento.',
+    faq3a:'Gumagana ang VeriLex sa halos anumang legal na dokumento: mga abiso ng pagpapaalis, mga sulat ng koleksyon ng utang, mga kasunduan sa pag-upa, mga summons ng korte, mga kontrata sa trabaho, mga abiso sa imigrasyon (Notice to Appear, mga RFE), mga liham ng IRS at buwis, mga multa sa trapiko, at iba pa. Maaari kang mag-paste ng teksto nang direkta o mag-upload ng PDF. Ang mga PDF na may mapipiling teksto ay agad na kinukuha; ang mga na-scan o sulat-kamay na PDF ay pinoproseso ng AI vision (~20 segundo). Maaari ka ring mag-upload ng JPEG o PNG na larawan ng isang pisikal na dokumento.',
     faq4q:'Anong mga wika ang sinusuportahan?',
-    faq4a:'Sinusuportahan ng LexVera ang 15 wika para sa parehong interface ng website at output ng pagsusuri ng AI: Ingles, Espanyol, Simplified Chinese, Traditional Chinese, Vietnamese, Tagalog, Korean, Arabe, Hindi, Portuges, Ruso, Pranses, Haitian Creole, Punjabi, at Amharic. Piliin ang iyong gustong output na wika mula sa dropdown sa form ng pagsusuri. Maaari ka ring lumipat ng buong interface ng website gamit ang pindutan ng wika sa itaas na navigation bar.',
+    faq4a:'Sinusuportahan ng VeriLex ang 15 wika para sa parehong interface ng website at output ng pagsusuri ng AI: Ingles, Espanyol, Simplified Chinese, Traditional Chinese, Vietnamese, Tagalog, Korean, Arabe, Hindi, Portuges, Ruso, Pranses, Haitian Creole, Punjabi, at Amharic. Piliin ang iyong gustong output na wika mula sa dropdown sa form ng pagsusuri. Maaari ka ring lumipat ng buong interface ng website gamit ang pindutan ng wika sa itaas na navigation bar.',
     faq5q:'Gaano katumpak ang mga legal na sanggunian?',
-    faq5a:'Gumagamit ang LexVera ng Claude AI ng Anthropic, na may mataas na kakayahang tukuyin ang mga kaugnay na batas at banggitin ang mga ito nang tumpak. Lahat ng sanggunian sa batas ay may kasamang direktang link sa opisyal na teksto (hal., leginfo.legislature.ca.gov para sa batas ng California) para mapatunayan mo ang mga ito mismo. Para sa case law, isinama lamang namin ang mga sanggunian na tiwala ang AI — ang nawawalang sanggunian ay palaging mas mabuti kaysa sa gawa-gawa. Nagbabago ang mga batas sa paglipas ng panahon, kaya palaging i-verify ang mga kasalukuyang bersyon bago umasa sa mga ito.',
+    faq5a:'Gumagamit ang VeriLex ng Claude AI ng Anthropic, na may mataas na kakayahang tukuyin ang mga kaugnay na batas at banggitin ang mga ito nang tumpak. Lahat ng sanggunian sa batas ay may kasamang direktang link sa opisyal na teksto (hal., leginfo.legislature.ca.gov para sa batas ng California) para mapatunayan mo ang mga ito mismo. Para sa case law, isinama lamang namin ang mga sanggunian na tiwala ang AI — ang nawawalang sanggunian ay palaging mas mabuti kaysa sa gawa-gawa. Nagbabago ang mga batas sa paglipas ng panahon, kaya palaging i-verify ang mga kasalukuyang bersyon bago umasa sa mga ito.',
     faq6q:'Nakatanggap ako ng abiso ng pagpapaalis / korte — ano ang dapat kong gawin?',
-    faq6a:'Una, i-paste o i-upload ang dokumento sa LexVera upang maunawaan nang eksakto ang sinasabi nito at ang iyong mga karapatan. Bigyang-pansin ang seksyon ng <strong>Mga Pangunahing Petsa at Deadline</strong> — ang pagkawala ng deadline ay maaaring seryosong makapinsala sa iyong kaso. Para sa mga abisong may mataas na pagkamadalian, ipapakita ng LexVera ang kahon ng aksyon na "Ano ang dapat gawin ngayon". Pagkatapos makipag-ugnayan kaagad sa isang organisasyon ng legal na tulong. Sa Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 at <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ay nag-aalok ng libreng tulong.',
+    faq6a:'Una, i-paste o i-upload ang dokumento sa VeriLex upang maunawaan nang eksakto ang sinasabi nito at ang iyong mga karapatan. Bigyang-pansin ang seksyon ng <strong>Mga Pangunahing Petsa at Deadline</strong> — ang pagkawala ng deadline ay maaaring seryosong makapinsala sa iyong kaso. Para sa mga abisong may mataas na pagkamadalian, ipapakita ng VeriLex ang kahon ng aksyon na "Ano ang dapat gawin ngayon". Pagkatapos makipag-ugnayan kaagad sa isang organisasyon ng legal na tulong. Sa Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 at <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ay nag-aalok ng libreng tulong.',
   },
   ko: {
     navBadge:'법적 정보만 제공', heroBadge:'✦ 무료 · 계정 불필요 · 15개 언어',
@@ -1698,7 +1793,7 @@ const TRANSLATIONS = {
     sample7:'📬 IRS 서신', sample8:'🚗 교통 위반 딱지',
     navAbout:'소개', navFaq:'자주 묻는 질문', aboutLabel:'소개', aboutTitle:'목적',
     fbLabel:'의견', fbTitle:'질문이나 제안이 있으신가요?',
-    fbSub:'모든 메시지를 읽습니다. 여러분의 피드백은 LexVera 개선에 도움이 됩니다.',
+    fbSub:'모든 메시지를 읽습니다. 여러분의 피드백은 VeriLex 개선에 도움이 됩니다.',
     fbNameLabel:'이름 (선택사항)', fbCatLabel:'카테고리',
     fbEmailLabel:'이메일 (선택사항 — 답변을 원하시면)',
     fbMsgLabel:'메시지', fbSubmit:'의견 보내기',
@@ -1706,17 +1801,17 @@ const TRANSLATIONS = {
     fbNamePh:'익명', fbMsgPh:'의견을 알려주세요…',
     faqLabel:'자주 묻는 질문', faqTitle:'자주 묻는 질문', faqSub:'시작하기 전에 알아야 할 모든 것.',
     faq1q:'이것이 실제 법률 조언인가요?',
-    faq1a:'아니요 — LexVera는 법률 조언이 아닌 <strong>법률 정보</strong>를 제공합니다. 중요한 차이가 있습니다: 법률 정보는 법률이 일반적으로 무엇을 말하는지 설명하고, 법률 조언은 법률을 귀하의 특정 상황에 적용하며 면허를 가진 변호사가 필요합니다. LexVera는 문서가 무엇을 의미하는지 이해하는 데 도움을 드리지만, 무엇을 해야 하는지는 알려드리지 않습니다. 귀하의 사례에 특정한 조언을 위해 면허를 가진 변호사와 상담하세요. 모든 결과에 무료 법률 지원 단체 링크를 포함합니다.',
+    faq1a:'아니요 — VeriLex는 법률 조언이 아닌 <strong>법률 정보</strong>를 제공합니다. 중요한 차이가 있습니다: 법률 정보는 법률이 일반적으로 무엇을 말하는지 설명하고, 법률 조언은 법률을 귀하의 특정 상황에 적용하며 면허를 가진 변호사가 필요합니다. VeriLex는 문서가 무엇을 의미하는지 이해하는 데 도움을 드리지만, 무엇을 해야 하는지는 알려드리지 않습니다. 귀하의 사례에 특정한 조언을 위해 면허를 가진 변호사와 상담하세요. 모든 결과에 무료 법률 지원 단체 링크를 포함합니다.',
     faq2q:'제 문서는 비공개로 유지되나요?',
     faq2a:'귀하의 문서는 분석을 위해 Claude AI(Anthropic 제공)에 안전하게 전송되며 <strong>우리 서버에 저장되지 않습니다</strong>. 업로드하거나 붙여넣은 문서의 내용을 기록, 저장 또는 공유하지 않습니다. 분석 결과는 귀하의 브라우저에만 표시되며 페이지를 떠나면 삭제됩니다. 매우 민감한 문서(예: 이민 서류)의 경우 업로드 전에 개인 식별 정보를 가리는 것이 좋습니다.',
     faq3q:'어떤 유형의 문서를 분석할 수 있나요?',
-    faq3a:'LexVera는 거의 모든 법률 문서와 함께 작동합니다: 퇴거 통지, 채무 추심 서신, 임대 계약서, 법원 소환장, 고용 계약서, 이민 통지(출석 통지, RFE), IRS 및 세금 서신, 교통 위반 딱지 등. 텍스트를 직접 붙여넣거나 PDF를 업로드할 수 있습니다. 선택 가능한 텍스트가 있는 PDF는 즉시 추출됩니다; 스캔되거나 손으로 쓴 PDF는 AI 비전으로 처리됩니다(약 20초 소요). 실제 문서의 JPEG 또는 PNG 사진을 업로드할 수도 있습니다.',
+    faq3a:'VeriLex는 거의 모든 법률 문서와 함께 작동합니다: 퇴거 통지, 채무 추심 서신, 임대 계약서, 법원 소환장, 고용 계약서, 이민 통지(출석 통지, RFE), IRS 및 세금 서신, 교통 위반 딱지 등. 텍스트를 직접 붙여넣거나 PDF를 업로드할 수 있습니다. 선택 가능한 텍스트가 있는 PDF는 즉시 추출됩니다; 스캔되거나 손으로 쓴 PDF는 AI 비전으로 처리됩니다(약 20초 소요). 실제 문서의 JPEG 또는 PNG 사진을 업로드할 수도 있습니다.',
     faq4q:'어떤 언어가 지원되나요?',
-    faq4a:'LexVera는 웹사이트 인터페이스와 AI 분석 출력 모두에 15개 언어를 지원합니다: 영어, 스페인어, 중국어(간체), 중국어(번체), 베트남어, 타갈로그어, 한국어, 아랍어, 힌디어, 포르투갈어, 러시아어, 프랑스어, 아이티 크리올어, 펀자브어, 암하라어. 분석 양식의 드롭다운에서 원하는 출력 언어를 선택하세요. 상단 탐색 모음의 언어 버튼을 사용하여 전체 웹사이트 인터페이스를 전환할 수도 있습니다.',
+    faq4a:'VeriLex는 웹사이트 인터페이스와 AI 분석 출력 모두에 15개 언어를 지원합니다: 영어, 스페인어, 중국어(간체), 중국어(번체), 베트남어, 타갈로그어, 한국어, 아랍어, 힌디어, 포르투갈어, 러시아어, 프랑스어, 아이티 크리올어, 펀자브어, 암하라어. 분석 양식의 드롭다운에서 원하는 출력 언어를 선택하세요. 상단 탐색 모음의 언어 버튼을 사용하여 전체 웹사이트 인터페이스를 전환할 수도 있습니다.',
     faq5q:'법률 인용의 정확도는 어떻습니까?',
-    faq5a:'LexVera는 Anthropic의 Claude AI를 사용하며, 관련 법령을 식별하고 정확하게 인용하는 능력이 뛰어납니다. 모든 법령 인용은 공식 텍스트에 대한 직접 링크(예: 캘리포니아 법률의 경우 leginfo.legislature.ca.gov)를 포함하여 직접 확인할 수 있습니다. 판례법의 경우 AI가 확신하는 인용만 포함합니다 — 누락된 인용이 항상 조작된 인용보다 낫습니다. 법률은 시간이 지남에 따라 변경되므로 의존하기 전에 항상 현재 버전을 확인하세요.',
+    faq5a:'VeriLex는 Anthropic의 Claude AI를 사용하며, 관련 법령을 식별하고 정확하게 인용하는 능력이 뛰어납니다. 모든 법령 인용은 공식 텍스트에 대한 직접 링크(예: 캘리포니아 법률의 경우 leginfo.legislature.ca.gov)를 포함하여 직접 확인할 수 있습니다. 판례법의 경우 AI가 확신하는 인용만 포함합니다 — 누락된 인용이 항상 조작된 인용보다 낫습니다. 법률은 시간이 지남에 따라 변경되므로 의존하기 전에 항상 현재 버전을 확인하세요.',
     faq6q:'퇴거 / 법원 통지를 받았습니다 — 어떻게 해야 하나요?',
-    faq6a:'먼저 LexVera에 문서를 붙여넣거나 업로드하여 정확히 무엇을 말하는지, 귀하의 권리가 무엇인지 이해하세요. <strong>주요 날짜 및 기한</strong> 섹션에 주의를 기울이세요 — 기한을 놓치면 귀하의 사례에 심각한 해를 끼칠 수 있습니다. 긴급한 통지의 경우 LexVera에 "지금 해야 할 일" 행동 상자가 표시됩니다. 그런 다음 즉시 법률 지원 단체에 연락하세요. 베이 에어리어: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 및 <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300에서 무료 도움을 제공합니다.',
+    faq6a:'먼저 VeriLex에 문서를 붙여넣거나 업로드하여 정확히 무엇을 말하는지, 귀하의 권리가 무엇인지 이해하세요. <strong>주요 날짜 및 기한</strong> 섹션에 주의를 기울이세요 — 기한을 놓치면 귀하의 사례에 심각한 해를 끼칠 수 있습니다. 긴급한 통지의 경우 VeriLex에 "지금 해야 할 일" 행동 상자가 표시됩니다. 그런 다음 즉시 법률 지원 단체에 연락하세요. 베이 에어리어: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 및 <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300에서 무료 도움을 제공합니다.',
   },
   ar: {
     navBadge:'معلومات قانونية فقط', heroBadge:'✦ مجاني · بدون حساب · 15 لغة',
@@ -1747,7 +1842,7 @@ const TRANSLATIONS = {
     sample7:'📬 رسالة IRS', sample8:'🚗 مخالفة مرورية',
     navAbout:'حول', navFaq:'الأسئلة', aboutLabel:'حول', aboutTitle:'هدفنا',
     fbLabel:'ملاحظات', fbTitle:'هل لديك سؤال أو اقتراح؟',
-    fbSub:'نقرأ كل رسالة. تساعد ملاحظاتك في تحسين LexVera.',
+    fbSub:'نقرأ كل رسالة. تساعد ملاحظاتك في تحسين VeriLex.',
     fbNameLabel:'اسمك (اختياري)', fbCatLabel:'الفئة',
     fbEmailLabel:'البريد الإلكتروني (اختياري — إذا أردت ردًا)',
     fbMsgLabel:'الرسالة', fbSubmit:'إرسال الملاحظات',
@@ -1755,17 +1850,17 @@ const TRANSLATIONS = {
     fbNamePh:'مجهول', fbMsgPh:'أخبرنا بما يدور في ذهنك…',
     faqLabel:'الأسئلة الشائعة', faqTitle:'الأسئلة الشائعة', faqSub:'كل ما تحتاج معرفته قبل البدء.',
     faq1q:'هل هذه نصيحة قانونية حقيقية؟',
-    faq1a:'لا — يوفر LexVera <strong>معلومات قانونية</strong>، وليس نصائح قانونية. هناك فرق مهم: المعلومات القانونية تشرح ما يقوله القانون بشكل عام؛ النصيحة القانونية تطبّق القانون على وضعك المحدد وتتطلب محامياً مرخصاً. يساعدك LexVera على فهم معنى المستند وما هي القوانين المطبّقة، لكنه لا يخبرك بما يجب فعله. للحصول على نصيحة خاصة بحالتك، استشر محامياً مرخصاً. نضمّن روابط لمنظمات المساعدة القانونية المجانية في كل نتيجة.',
+    faq1a:'لا — يوفر VeriLex <strong>معلومات قانونية</strong>، وليس نصائح قانونية. هناك فرق مهم: المعلومات القانونية تشرح ما يقوله القانون بشكل عام؛ النصيحة القانونية تطبّق القانون على وضعك المحدد وتتطلب محامياً مرخصاً. يساعدك VeriLex على فهم معنى المستند وما هي القوانين المطبّقة، لكنه لا يخبرك بما يجب فعله. للحصول على نصيحة خاصة بحالتك، استشر محامياً مرخصاً. نضمّن روابط لمنظمات المساعدة القانونية المجانية في كل نتيجة.',
     faq2q:'هل يُحفظ مستندي بشكل خاص؟',
     faq2a:'يُرسَل مستندك بأمان إلى Claude AI (من Anthropic) للتحليل و<strong>لا يُخزَّن أبداً على خوادمنا</strong>. لا نسجّل أو نحفظ أو نشارك محتوى أي مستند تحمّله أو تلصقه. يُعرض نتيجة التحليل فقط في متصفحك ويُحذف عند مغادرة الصفحة. بالنسبة للمستندات شديدة الحساسية (مثل وثائق الهجرة)، قد ترغب في حذف المعرّفات الشخصية قبل الرفع.',
     faq3q:'ما أنواع المستندات التي يمكنني تحليلها؟',
-    faq3a:'يعمل LexVera مع تقريباً أي مستند قانوني: إشعارات الإخلاء، رسائل تحصيل الديون، عقود الإيجار، أوامر المثول أمام المحكمة، عقود العمل، إشعارات الهجرة (Notice to Appear، RFEs)، رسائل IRS والضرائب، مخالفات المرور، وغير ذلك. يمكنك لصق النص مباشرةً أو رفع ملف PDF. يتم استخراج ملفات PDF ذات النصوص القابلة للتحديد فورياً؛ الملفات الممسوحة أو المكتوبة بخط اليد تُعالَج برؤية الذكاء الاصطناعي (~20 ثانية). يمكنك أيضاً رفع صورة JPEG أو PNG لمستند ورقي.',
+    faq3a:'يعمل VeriLex مع تقريباً أي مستند قانوني: إشعارات الإخلاء، رسائل تحصيل الديون، عقود الإيجار، أوامر المثول أمام المحكمة، عقود العمل، إشعارات الهجرة (Notice to Appear، RFEs)، رسائل IRS والضرائب، مخالفات المرور، وغير ذلك. يمكنك لصق النص مباشرةً أو رفع ملف PDF. يتم استخراج ملفات PDF ذات النصوص القابلة للتحديد فورياً؛ الملفات الممسوحة أو المكتوبة بخط اليد تُعالَج برؤية الذكاء الاصطناعي (~20 ثانية). يمكنك أيضاً رفع صورة JPEG أو PNG لمستند ورقي.',
     faq4q:'ما اللغات المدعومة؟',
-    faq4a:'يدعم LexVera 15 لغة لواجهة الموقع وإخراج تحليل الذكاء الاصطناعي: الإنجليزية، الإسبانية، الصينية المبسّطة، الصينية التقليدية، الفيتنامية، التاغالوغية، الكورية، العربية، الهندية، البرتغالية، الروسية، الفرنسية، الكريولية الهايتية، البنجابية، والأمهرية. اختر لغة الإخراج المفضّلة من القائمة المنسدلة في نموذج التحليل. يمكنك أيضاً تبديل واجهة الموقع بالكامل باستخدام زر اللغة في شريط التنقل العلوي.',
+    faq4a:'يدعم VeriLex 15 لغة لواجهة الموقع وإخراج تحليل الذكاء الاصطناعي: الإنجليزية، الإسبانية، الصينية المبسّطة، الصينية التقليدية، الفيتنامية، التاغالوغية، الكورية، العربية، الهندية، البرتغالية، الروسية، الفرنسية، الكريولية الهايتية، البنجابية، والأمهرية. اختر لغة الإخراج المفضّلة من القائمة المنسدلة في نموذج التحليل. يمكنك أيضاً تبديل واجهة الموقع بالكامل باستخدام زر اللغة في شريط التنقل العلوي.',
     faq5q:'ما مدى دقة الاستشهادات القانونية؟',
-    faq5a:'يستخدم LexVera Claude AI من Anthropic، الذي يتمتع بقدرة عالية على تحديد القوانين ذات الصلة والاستشهاد بها بدقة. تتضمن جميع استشهادات القوانين رابطاً مباشراً للنص الرسمي (مثلاً: leginfo.legislature.ca.gov لقانون كاليفورنيا) حتى تتمكن من التحقق منها. بالنسبة للسوابق القضائية، نضمّن فقط الاستشهادات التي يكون الذكاء الاصطناعي واثقاً منها — الاستشهاد الناقص دائماً أفضل من المزوّر. تتغير القوانين بمرور الوقت، لذا تحقق دائماً من الإصدارات الحالية.',
+    faq5a:'يستخدم VeriLex Claude AI من Anthropic، الذي يتمتع بقدرة عالية على تحديد القوانين ذات الصلة والاستشهاد بها بدقة. تتضمن جميع استشهادات القوانين رابطاً مباشراً للنص الرسمي (مثلاً: leginfo.legislature.ca.gov لقانون كاليفورنيا) حتى تتمكن من التحقق منها. بالنسبة للسوابق القضائية، نضمّن فقط الاستشهادات التي يكون الذكاء الاصطناعي واثقاً منها — الاستشهاد الناقص دائماً أفضل من المزوّر. تتغير القوانين بمرور الوقت، لذا تحقق دائماً من الإصدارات الحالية.',
     faq6q:'تلقيت إشعار إخلاء / محكمة — ماذا يجب أن أفعل؟',
-    faq6a:'أولاً، الصق أو ارفع المستند إلى LexVera لتفهم تماماً ما يقوله وما هي حقوقك. انتبه جيداً لقسم <strong>التواريخ والمواعيد النهائية الرئيسية</strong> — فإغفال موعد نهائي قد يضرّ بحالتك بشدة. بالنسبة للإشعارات عالية الإلحاح، سيعرض LexVera مربع إجراءات "ماذا تفعل الآن". ثم تواصل فوراً مع منظمة مساعدة قانونية. في منطقة البي أريا: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 و<a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 تقدمان مساعدة مجانية.',
+    faq6a:'أولاً، الصق أو ارفع المستند إلى VeriLex لتفهم تماماً ما يقوله وما هي حقوقك. انتبه جيداً لقسم <strong>التواريخ والمواعيد النهائية الرئيسية</strong> — فإغفال موعد نهائي قد يضرّ بحالتك بشدة. بالنسبة للإشعارات عالية الإلحاح، سيعرض VeriLex مربع إجراءات "ماذا تفعل الآن". ثم تواصل فوراً مع منظمة مساعدة قانونية. في منطقة البي أريا: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 و<a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 تقدمان مساعدة مجانية.',
   },
   hi: {
     navBadge:'केवल कानूनी जानकारी', heroBadge:'✦ मुफ़्त · कोई खाता नहीं · 15 भाषाएं',
@@ -1796,7 +1891,7 @@ const TRANSLATIONS = {
     sample7:'📬 IRS पत्र', sample8:'🚗 ट्रैफ़िक उल्लंघन',
     navAbout:'परिचय', navFaq:'सवाल', aboutLabel:'परिचय', aboutTitle:'हमारा लक्ष्य',
     fbLabel:'प्रतिक्रिया', fbTitle:'कोई प्रश्न या सुझाव है?',
-    fbSub:'हम हर संदेश पढ़ते हैं। आपकी प्रतिक्रिया LexVera को बेहतर बनाने में मदद करती है।',
+    fbSub:'हम हर संदेश पढ़ते हैं। आपकी प्रतिक्रिया VeriLex को बेहतर बनाने में मदद करती है।',
     fbNameLabel:'आपका नाम (वैकल्पिक)', fbCatLabel:'श्रेणी',
     fbEmailLabel:'ईमेल (वैकल्पिक — यदि उत्तर चाहते हैं)',
     fbMsgLabel:'संदेश', fbSubmit:'प्रतिक्रिया भेजें',
@@ -1804,17 +1899,17 @@ const TRANSLATIONS = {
     fbNamePh:'अनाम', fbMsgPh:'हमें बताएं आपके मन में क्या है…',
     faqLabel:'सामान्य प्रश्न', faqTitle:'सामान्य प्रश्न', faqSub:'शुरू करने से पहले आपको जो कुछ जानना चाहिए।',
     faq1q:'क्या यह असली कानूनी सलाह है?',
-    faq1a:'नहीं — LexVera <strong>कानूनी जानकारी</strong> प्रदान करता है, न कि कानूनी सलाह। एक महत्वपूर्ण अंतर है: कानूनी जानकारी सामान्य रूप से बताती है कि कानून क्या कहता है; कानूनी सलाह आपकी विशिष्ट स्थिति में कानून लागू करती है और लाइसेंस प्राप्त वकील की आवश्यकता होती है। LexVera आपको दस्तावेज़ का अर्थ समझने में मदद करता है, लेकिन यह नहीं बताता कि क्या करना है। अपने मामले के लिए सलाह के लिए कृपया लाइसेंस प्राप्त वकील से परामर्श करें। हम हर परिणाम में मुफ्त कानूनी सहायता संगठनों के लिंक शामिल करते हैं।',
+    faq1a:'नहीं — VeriLex <strong>कानूनी जानकारी</strong> प्रदान करता है, न कि कानूनी सलाह। एक महत्वपूर्ण अंतर है: कानूनी जानकारी सामान्य रूप से बताती है कि कानून क्या कहता है; कानूनी सलाह आपकी विशिष्ट स्थिति में कानून लागू करती है और लाइसेंस प्राप्त वकील की आवश्यकता होती है। VeriLex आपको दस्तावेज़ का अर्थ समझने में मदद करता है, लेकिन यह नहीं बताता कि क्या करना है। अपने मामले के लिए सलाह के लिए कृपया लाइसेंस प्राप्त वकील से परामर्श करें। हम हर परिणाम में मुफ्त कानूनी सहायता संगठनों के लिंक शामिल करते हैं।',
     faq2q:'क्या मेरा दस्तावेज़ गोपनीय रहता है?',
     faq2a:'आपका दस्तावेज़ विश्लेषण के लिए सुरक्षित रूप से Claude AI (Anthropic द्वारा) को भेजा जाता है और <strong>कभी हमारे सर्वर पर संग्रहीत नहीं किया जाता</strong>। हम आपके द्वारा अपलोड या पेस्ट किए गए किसी भी दस्तावेज़ की सामग्री को लॉग, सहेज या साझा नहीं करते हैं। विश्लेषण परिणाम केवल आपके ब्राउज़र में प्रदर्शित होता है। अत्यधिक संवेदनशील दस्तावेज़ों (जैसे, आव्रजन कागजात) के लिए, अपलोड करने से पहले व्यक्तिगत पहचानकर्ताओं को हटाना बेहतर हो सकता है।',
     faq3q:'मैं किस प्रकार के दस्तावेज़ों का विश्लेषण कर सकता हूं?',
-    faq3a:'LexVera लगभग किसी भी कानूनी दस्तावेज़ के साथ काम करता है: बेदखली नोटिस, ऋण वसूली पत्र, लीज़ समझौते, कोर्ट समन, रोजगार अनुबंध, आव्रजन नोटिस (Notice to Appear, RFE), IRS और कर पत्र, ट्रैफ़िक उल्लंघन, और अधिक। आप पाठ सीधे पेस्ट कर सकते हैं या PDF अपलोड कर सकते हैं। चयन योग्य पाठ वाले PDF तुरंत निकाले जाते हैं; स्कैन या हस्तलिखित PDF को AI दृष्टि से संसाधित किया जाता है (~20 सेकंड)। आप भौतिक दस्तावेज़ की JPEG या PNG फ़ोटो भी अपलोड कर सकते हैं।',
+    faq3a:'VeriLex लगभग किसी भी कानूनी दस्तावेज़ के साथ काम करता है: बेदखली नोटिस, ऋण वसूली पत्र, लीज़ समझौते, कोर्ट समन, रोजगार अनुबंध, आव्रजन नोटिस (Notice to Appear, RFE), IRS और कर पत्र, ट्रैफ़िक उल्लंघन, और अधिक। आप पाठ सीधे पेस्ट कर सकते हैं या PDF अपलोड कर सकते हैं। चयन योग्य पाठ वाले PDF तुरंत निकाले जाते हैं; स्कैन या हस्तलिखित PDF को AI दृष्टि से संसाधित किया जाता है (~20 सेकंड)। आप भौतिक दस्तावेज़ की JPEG या PNG फ़ोटो भी अपलोड कर सकते हैं।',
     faq4q:'कौन सी भाषाएं समर्थित हैं?',
-    faq4a:'LexVera वेबसाइट इंटरफेस और AI विश्लेषण आउटपुट दोनों के लिए 15 भाषाओं का समर्थन करता है: अंग्रेजी, स्पेनिश, सरलीकृत चीनी, पारंपरिक चीनी, वियतनामी, तागालोग, कोरियाई, अरबी, हिंदी, पुर्तगाली, रूसी, फ्रेंच, हाईटियन क्रियोल, पंजाबी, और अम्हारिक। विश्लेषण फ़ॉर्म में ड्रॉपडाउन से अपनी पसंदीदा भाषा चुनें। शीर्ष नेविगेशन बार में भाषा बटन से पूरे इंटरफेस को भी बदल सकते हैं।',
+    faq4a:'VeriLex वेबसाइट इंटरफेस और AI विश्लेषण आउटपुट दोनों के लिए 15 भाषाओं का समर्थन करता है: अंग्रेजी, स्पेनिश, सरलीकृत चीनी, पारंपरिक चीनी, वियतनामी, तागालोग, कोरियाई, अरबी, हिंदी, पुर्तगाली, रूसी, फ्रेंच, हाईटियन क्रियोल, पंजाबी, और अम्हारिक। विश्लेषण फ़ॉर्म में ड्रॉपडाउन से अपनी पसंदीदा भाषा चुनें। शीर्ष नेविगेशन बार में भाषा बटन से पूरे इंटरफेस को भी बदल सकते हैं।',
     faq5q:'कानूनी उद्धरण कितने सटीक हैं?',
-    faq5a:'LexVera Anthropic के Claude AI का उपयोग करता है, जो प्रासंगिक क़ानूनों की पहचान और सटीक उद्धरण में अत्यधिक सक्षम है। सभी क़ानून उद्धरणों में आधिकारिक पाठ का सीधा लिंक शामिल है (उदाहरण के लिए, कैलिफ़ोर्निया कानून के लिए leginfo.legislature.ca.gov) ताकि आप उन्हें स्वयं सत्यापित कर सकें। केस लॉ के लिए, हम केवल वे उद्धरण शामिल करते हैं जिनके बारे में AI आश्वस्त है। कानून समय के साथ बदलते हैं, इसलिए भरोसा करने से पहले वर्तमान संस्करणों की जांच करें।',
+    faq5a:'VeriLex Anthropic के Claude AI का उपयोग करता है, जो प्रासंगिक क़ानूनों की पहचान और सटीक उद्धरण में अत्यधिक सक्षम है। सभी क़ानून उद्धरणों में आधिकारिक पाठ का सीधा लिंक शामिल है (उदाहरण के लिए, कैलिफ़ोर्निया कानून के लिए leginfo.legislature.ca.gov) ताकि आप उन्हें स्वयं सत्यापित कर सकें। केस लॉ के लिए, हम केवल वे उद्धरण शामिल करते हैं जिनके बारे में AI आश्वस्त है। कानून समय के साथ बदलते हैं, इसलिए भरोसा करने से पहले वर्तमान संस्करणों की जांच करें।',
     faq6q:'मुझे बेदखली / कोर्ट का नोटिस मिला — मुझे क्या करना चाहिए?',
-    faq6a:'सबसे पहले, दस्तावेज़ को LexVera पर पेस्ट या अपलोड करें और जानें कि यह क्या कहता है और आपके अधिकार क्या हैं। <strong>मुख्य तारीखें और समय सीमाएं</strong> अनुभाग पर ध्यान दें — एक समय सीमा चूकना आपके मामले को गंभीर रूप से नुकसान पहुंचा सकता है। फिर तुरंत एक कानूनी सहायता संगठन से संपर्क करें। बे एरिया में: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 और <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 मुफ़्त सहायता प्रदान करते हैं।',
+    faq6a:'सबसे पहले, दस्तावेज़ को VeriLex पर पेस्ट या अपलोड करें और जानें कि यह क्या कहता है और आपके अधिकार क्या हैं। <strong>मुख्य तारीखें और समय सीमाएं</strong> अनुभाग पर ध्यान दें — एक समय सीमा चूकना आपके मामले को गंभीर रूप से नुकसान पहुंचा सकता है। फिर तुरंत एक कानूनी सहायता संगठन से संपर्क करें। बे एरिया में: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 और <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 मुफ़्त सहायता प्रदान करते हैं।',
   },
   pt: {
     navBadge:'Apenas Informação Legal', heroBadge:'✦ Grátis · Sem conta · 15 idiomas',
@@ -1845,7 +1940,7 @@ const TRANSLATIONS = {
     sample7:'📬 Carta do IRS', sample8:'🚗 Multa de Trânsito',
     navAbout:'Sobre', navFaq:'Perguntas', aboutLabel:'Sobre', aboutTitle:'Nossa missão',
     fbLabel:'Comentários', fbTitle:'Tem uma pergunta ou sugestão?',
-    fbSub:'Lemos cada mensagem. O seu feedback ajuda a melhorar o LexVera.',
+    fbSub:'Lemos cada mensagem. O seu feedback ajuda a melhorar o VeriLex.',
     fbNameLabel:'Seu nome (opcional)', fbCatLabel:'Categoria',
     fbEmailLabel:'Email (opcional — se quiser uma resposta)',
     fbMsgLabel:'Mensagem', fbSubmit:'Enviar feedback',
@@ -1853,17 +1948,17 @@ const TRANSLATIONS = {
     fbNamePh:'Anônimo', fbMsgPh:'Conte-nos o que está pensando…',
     faqLabel:'Perguntas', faqTitle:'Perguntas frequentes', faqSub:'Tudo o que precisa de saber antes de começar.',
     faq1q:'Isso é aconselhamento jurídico real?',
-    faq1a:'Não — o LexVera fornece <strong>informação jurídica</strong>, não aconselhamento jurídico. Há uma diferença importante: a informação jurídica explica o que a lei diz em geral; o aconselhamento jurídico aplica a lei à sua situação específica e requer um advogado licenciado. O LexVera ajuda-o a entender o que um documento significa e quais as leis que se aplicam, mas não lhe diz o que fazer. Para aconselhamento específico ao seu caso, consulte um advogado licenciado. Incluímos links para organizações de assistência jurídica gratuita em cada resultado.',
+    faq1a:'Não — o VeriLex fornece <strong>informação jurídica</strong>, não aconselhamento jurídico. Há uma diferença importante: a informação jurídica explica o que a lei diz em geral; o aconselhamento jurídico aplica a lei à sua situação específica e requer um advogado licenciado. O VeriLex ajuda-o a entender o que um documento significa e quais as leis que se aplicam, mas não lhe diz o que fazer. Para aconselhamento específico ao seu caso, consulte um advogado licenciado. Incluímos links para organizações de assistência jurídica gratuita em cada resultado.',
     faq2q:'O meu documento é mantido em privado?',
     faq2a:'O seu documento é enviado de forma segura ao Claude AI (da Anthropic) para análise e <strong>nunca é armazenado nos nossos servidores</strong>. Não registamos, guardamos nem partilhamos o conteúdo de qualquer documento que carregue ou cole. O resultado da análise é exibido apenas no seu navegador e descartado quando sai da página. Para documentos altamente sensíveis (por ex., papéis de imigração), pode querer redigir identificadores pessoais antes de carregar.',
     faq3q:'Que tipos de documentos posso analisar?',
-    faq3a:'O LexVera funciona com quase qualquer documento jurídico: avisos de despejo, cartas de cobrança de dívidas, contratos de arrendamento, intimações judiciais, contratos de trabalho, avisos de imigração (Notice to Appear, RFEs), cartas do IRS e impostos, multas de trânsito e mais. Pode colar texto diretamente ou carregar um PDF. PDFs com texto selecionável são extraídos instantaneamente; PDFs digitalizados ou escritos à mão são processados com visão de IA (~20 segundos). Também pode carregar uma foto JPEG ou PNG de um documento físico.',
+    faq3a:'O VeriLex funciona com quase qualquer documento jurídico: avisos de despejo, cartas de cobrança de dívidas, contratos de arrendamento, intimações judiciais, contratos de trabalho, avisos de imigração (Notice to Appear, RFEs), cartas do IRS e impostos, multas de trânsito e mais. Pode colar texto diretamente ou carregar um PDF. PDFs com texto selecionável são extraídos instantaneamente; PDFs digitalizados ou escritos à mão são processados com visão de IA (~20 segundos). Também pode carregar uma foto JPEG ou PNG de um documento físico.',
     faq4q:'Quais idiomas são suportados?',
-    faq4a:'O LexVera suporta 15 idiomas tanto para a interface do website como para o output da análise de IA: inglês, espanhol, chinês simplificado, chinês tradicional, vietnamita, tagalo, coreano, árabe, hindi, português, russo, francês, crioulo haitiano, punjabi e amárico. Selecione o seu idioma de output preferido no menu suspenso no formulário de análise. Também pode mudar toda a interface do website usando o botão de idioma na barra de navegação superior.',
+    faq4a:'O VeriLex suporta 15 idiomas tanto para a interface do website como para o output da análise de IA: inglês, espanhol, chinês simplificado, chinês tradicional, vietnamita, tagalo, coreano, árabe, hindi, português, russo, francês, crioulo haitiano, punjabi e amárico. Selecione o seu idioma de output preferido no menu suspenso no formulário de análise. Também pode mudar toda a interface do website usando o botão de idioma na barra de navegação superior.',
     faq5q:'Qual a precisão das citações jurídicas?',
-    faq5a:'O LexVera usa o Claude AI da Anthropic, que é altamente capaz de identificar estatutos relevantes e citá-los com precisão. Todas as citações de estatutos incluem um link direto para o texto oficial (por ex., leginfo.legislature.ca.gov para a lei da Califórnia). Para jurisprudência, apenas incluímos citações das quais a IA tem confiança — uma citação em falta é sempre melhor do que uma fabricada. As leis mudam com o tempo, por isso verifique sempre as versões atuais.',
+    faq5a:'O VeriLex usa o Claude AI da Anthropic, que é altamente capaz de identificar estatutos relevantes e citá-los com precisão. Todas as citações de estatutos incluem um link direto para o texto oficial (por ex., leginfo.legislature.ca.gov para a lei da Califórnia). Para jurisprudência, apenas incluímos citações das quais a IA tem confiança — uma citação em falta é sempre melhor do que uma fabricada. As leis mudam com o tempo, por isso verifique sempre as versões atuais.',
     faq6q:'Recebi um aviso de despejo / tribunal — o que devo fazer?',
-    faq6a:'Primeiro, cole ou carregue o documento no LexVera para entender exatamente o que diz e quais são os seus direitos. Preste muita atenção à secção de <strong>Datas e Prazos Importantes</strong> — perder um prazo pode prejudicar seriamente o seu caso. Para avisos de alta urgência, o LexVera mostrará uma caixa de ação "O que fazer agora". Em seguida, contacte imediatamente uma organização de assistência jurídica. Na Área da Baía: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 e <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 oferecem ajuda gratuita.',
+    faq6a:'Primeiro, cole ou carregue o documento no VeriLex para entender exatamente o que diz e quais são os seus direitos. Preste muita atenção à secção de <strong>Datas e Prazos Importantes</strong> — perder um prazo pode prejudicar seriamente o seu caso. Para avisos de alta urgência, o VeriLex mostrará uma caixa de ação "O que fazer agora". Em seguida, contacte imediatamente uma organização de assistência jurídica. Na Área da Baía: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 e <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 oferecem ajuda gratuita.',
   },
   ru: {
     navBadge:'Только правовая информация', heroBadge:'✦ Бесплатно · Без аккаунта · 15 языков',
@@ -1894,7 +1989,7 @@ const TRANSLATIONS = {
     sample7:'📬 Письмо IRS', sample8:'🚗 Штраф за нарушение ПДД',
     navAbout:'О нас', navFaq:'Вопросы', aboutLabel:'О нас', aboutTitle:'Наша цель',
     fbLabel:'Отзывы', fbTitle:'Есть вопрос или предложение?',
-    fbSub:'Мы читаем каждое сообщение. Ваши отзывы помогают улучшать LexVera.',
+    fbSub:'Мы читаем каждое сообщение. Ваши отзывы помогают улучшать VeriLex.',
     fbNameLabel:'Ваше имя (необязательно)', fbCatLabel:'Категория',
     fbEmailLabel:'Email (необязательно — если хотите ответ)',
     fbMsgLabel:'Сообщение', fbSubmit:'Отправить отзыв',
@@ -1902,17 +1997,17 @@ const TRANSLATIONS = {
     fbNamePh:'Аноним', fbMsgPh:'Расскажите нам, что у вас на уме…',
     faqLabel:'Вопросы', faqTitle:'Часто задаваемые вопросы', faqSub:'Всё, что нужно знать перед началом работы.',
     faq1q:'Это настоящая юридическая консультация?',
-    faq1a:'Нет — LexVera предоставляет <strong>правовую информацию</strong>, а не юридическую консультацию. Есть важное различие: правовая информация объясняет, что говорит закон в целом; юридическая консультация применяет закон к вашей конкретной ситуации и требует лицензированного адвоката. LexVera помогает понять, что означает документ и какие законы применяются, но не говорит вам, что делать. Для консультации по вашему делу обратитесь к лицензированному адвокату. В каждом результате мы включаем ссылки на организации бесплатной юридической помощи.',
+    faq1a:'Нет — VeriLex предоставляет <strong>правовую информацию</strong>, а не юридическую консультацию. Есть важное различие: правовая информация объясняет, что говорит закон в целом; юридическая консультация применяет закон к вашей конкретной ситуации и требует лицензированного адвоката. VeriLex помогает понять, что означает документ и какие законы применяются, но не говорит вам, что делать. Для консультации по вашему делу обратитесь к лицензированному адвокату. В каждом результате мы включаем ссылки на организации бесплатной юридической помощи.',
     faq2q:'Мой документ остаётся конфиденциальным?',
     faq2a:'Ваш документ безопасно отправляется в Claude AI (от Anthropic) для анализа и <strong>никогда не хранится на наших серверах</strong>. Мы не записываем, не сохраняем и не передаём содержимое документов, которые вы загружаете или вставляете. Результат анализа отображается только в вашем браузере и удаляется, когда вы покидаете страницу. Для особо конфиденциальных документов рекомендуется замаскировать личные данные перед загрузкой.',
     faq3q:'Какие типы документов я могу анализировать?',
-    faq3a:'LexVera работает почти с любыми юридическими документами: уведомлениями о выселении, письмами о взыскании долгов, договорами аренды, судебными повестками, трудовыми договорами, иммиграционными уведомлениями (Notice to Appear, RFE), письмами IRS и налоговыми уведомлениями, штрафами за нарушение ПДД и другими. Вы можете вставить текст напрямую или загрузить PDF. PDF с выделяемым текстом извлекаются мгновенно; отсканированные или рукописные PDF обрабатываются с помощью AI-зрения (~20 секунд). Также можно загрузить фото документа в формате JPEG или PNG.',
+    faq3a:'VeriLex работает почти с любыми юридическими документами: уведомлениями о выселении, письмами о взыскании долгов, договорами аренды, судебными повестками, трудовыми договорами, иммиграционными уведомлениями (Notice to Appear, RFE), письмами IRS и налоговыми уведомлениями, штрафами за нарушение ПДД и другими. Вы можете вставить текст напрямую или загрузить PDF. PDF с выделяемым текстом извлекаются мгновенно; отсканированные или рукописные PDF обрабатываются с помощью AI-зрения (~20 секунд). Также можно загрузить фото документа в формате JPEG или PNG.',
     faq4q:'Какие языки поддерживаются?',
-    faq4a:'LexVera поддерживает 15 языков как для интерфейса сайта, так и для вывода AI-анализа: английский, испанский, упрощённый китайский, традиционный китайский, вьетнамский, тагальский, корейский, арабский, хинди, португальский, русский, французский, гаитянский креольский, панджаби и амхарский. Выберите предпочтительный язык вывода в выпадающем списке формы анализа. Переключить весь интерфейс сайта можно с помощью кнопки языка в верхней панели навигации.',
+    faq4a:'VeriLex поддерживает 15 языков как для интерфейса сайта, так и для вывода AI-анализа: английский, испанский, упрощённый китайский, традиционный китайский, вьетнамский, тагальский, корейский, арабский, хинди, португальский, русский, французский, гаитянский креольский, панджаби и амхарский. Выберите предпочтительный язык вывода в выпадающем списке формы анализа. Переключить весь интерфейс сайта можно с помощью кнопки языка в верхней панели навигации.',
     faq5q:'Насколько точны правовые ссылки?',
-    faq5a:'LexVera использует Claude AI от Anthropic, который отличается высокой способностью выявлять соответствующие законы и точно их цитировать. Все ссылки на законодательство включают прямую ссылку на официальный текст (например, leginfo.legislature.ca.gov для законов Калифорнии). Для прецедентного права мы включаем только те ссылки, в которых AI уверен — отсутствующая ссылка всегда лучше ложной. Законы меняются со временем, поэтому всегда проверяйте актуальные версии.',
+    faq5a:'VeriLex использует Claude AI от Anthropic, который отличается высокой способностью выявлять соответствующие законы и точно их цитировать. Все ссылки на законодательство включают прямую ссылку на официальный текст (например, leginfo.legislature.ca.gov для законов Калифорнии). Для прецедентного права мы включаем только те ссылки, в которых AI уверен — отсутствующая ссылка всегда лучше ложной. Законы меняются со временем, поэтому всегда проверяйте актуальные версии.',
     faq6q:'Я получил уведомление о выселении / из суда — что делать?',
-    faq6a:'Сначала вставьте или загрузите документ в LexVera, чтобы точно понять, что в нём написано и каковы ваши права. Обратите особое внимание на раздел <strong>Ключевые даты и сроки</strong> — пропущенный срок может серьёзно навредить вашему делу. Для срочных уведомлений LexVera покажет блок действий "Что сделать прямо сейчас". Затем немедленно обратитесь в организацию юридической помощи. В Бэй-Эрии: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 и <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 предлагают бесплатную помощь.',
+    faq6a:'Сначала вставьте или загрузите документ в VeriLex, чтобы точно понять, что в нём написано и каковы ваши права. Обратите особое внимание на раздел <strong>Ключевые даты и сроки</strong> — пропущенный срок может серьёзно навредить вашему делу. Для срочных уведомлений VeriLex покажет блок действий "Что сделать прямо сейчас". Затем немедленно обратитесь в организацию юридической помощи. В Бэй-Эрии: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 и <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 предлагают бесплатную помощь.',
   },
   fr: {
     navBadge:'Informations juridiques uniquement', heroBadge:'✦ Gratuit · Sans compte · 15 langues',
@@ -1943,7 +2038,7 @@ const TRANSLATIONS = {
     sample7:'📬 Lettre IRS', sample8:'🚗 Contravention',
     navAbout:'À propos', navFaq:'FAQ', aboutLabel:'À propos', aboutTitle:'Notre mission',
     fbLabel:'Commentaires', fbTitle:'Vous avez une question ou une suggestion?',
-    fbSub:'Nous lisons chaque message. Vos commentaires aident à améliorer LexVera.',
+    fbSub:'Nous lisons chaque message. Vos commentaires aident à améliorer VeriLex.',
     fbNameLabel:'Votre nom (facultatif)', fbCatLabel:'Catégorie',
     fbEmailLabel:'Email (facultatif — si vous souhaitez une réponse)',
     fbMsgLabel:'Message', fbSubmit:'Envoyer le commentaire',
@@ -1951,17 +2046,17 @@ const TRANSLATIONS = {
     fbNamePh:'Anonyme', fbMsgPh:'Dites-nous ce que vous pensez…',
     faqLabel:'FAQ', faqTitle:'Questions fréquentes', faqSub:'Tout ce que vous devez savoir avant de commencer.',
     faq1q:"S'agit-il de vrais conseils juridiques?",
-    faq1a:"Non — LexVera fournit des <strong>informations juridiques</strong>, et non des conseils juridiques. Il y a une différence importante : les informations juridiques expliquent ce que dit la loi en général ; les conseils juridiques appliquent la loi à votre situation spécifique et nécessitent un avocat agréé. LexVera vous aide à comprendre ce que signifie un document et quelles lois s'appliquent, mais ne vous dit pas quoi faire. Pour des conseils propres à votre cas, veuillez consulter un avocat agréé. Nous incluons des liens vers des organisations d'aide juridique gratuite dans chaque résultat.",
+    faq1a:"Non — VeriLex fournit des <strong>informations juridiques</strong>, et non des conseils juridiques. Il y a une différence importante : les informations juridiques expliquent ce que dit la loi en général ; les conseils juridiques appliquent la loi à votre situation spécifique et nécessitent un avocat agréé. VeriLex vous aide à comprendre ce que signifie un document et quelles lois s'appliquent, mais ne vous dit pas quoi faire. Pour des conseils propres à votre cas, veuillez consulter un avocat agréé. Nous incluons des liens vers des organisations d'aide juridique gratuite dans chaque résultat.",
     faq2q:'Mon document reste-t-il privé?',
     faq2a:"Votre document est envoyé de manière sécurisée à Claude AI (par Anthropic) pour analyse et n'est <strong>jamais stocké sur nos serveurs</strong>. Nous ne consignons, ne sauvegardons ni ne partageons le contenu des documents que vous téléchargez ou collez. Le résultat de l'analyse s'affiche uniquement dans votre navigateur et est supprimé lorsque vous quittez la page. Pour les documents très sensibles (ex. : documents d'immigration), vous pouvez supprimer les informations personnelles avant de télécharger.",
     faq3q:'Quels types de documents puis-je analyser?',
-    faq3a:"LexVera fonctionne avec presque tout document juridique : avis d'expulsion, lettres de recouvrement de dettes, contrats de location, citations à comparaître, contrats de travail, avis d'immigration (Notice to Appear, RFE), lettres de l'IRS et fiscales, contraventions routières, et plus. Vous pouvez coller du texte directement ou télécharger un PDF. Les PDF avec du texte sélectionnable sont extraits instantanément ; les PDF scannés ou manuscrits sont traités par vision IA (~20 secondes). Vous pouvez également télécharger une photo JPEG ou PNG d'un document physique.",
+    faq3a:"VeriLex fonctionne avec presque tout document juridique : avis d'expulsion, lettres de recouvrement de dettes, contrats de location, citations à comparaître, contrats de travail, avis d'immigration (Notice to Appear, RFE), lettres de l'IRS et fiscales, contraventions routières, et plus. Vous pouvez coller du texte directement ou télécharger un PDF. Les PDF avec du texte sélectionnable sont extraits instantanément ; les PDF scannés ou manuscrits sont traités par vision IA (~20 secondes). Vous pouvez également télécharger une photo JPEG ou PNG d'un document physique.",
     faq4q:'Quelles langues sont prises en charge?',
-    faq4a:"LexVera prend en charge 15 langues pour l'interface du site et la sortie d'analyse IA : anglais, espagnol, chinois simplifié, chinois traditionnel, vietnamien, tagalog, coréen, arabe, hindi, portugais, russe, français, créole haïtien, pendjabi et amharique. Sélectionnez votre langue de sortie préférée dans la liste déroulante du formulaire d'analyse. Vous pouvez également changer toute l'interface du site avec le bouton de langue dans la barre de navigation supérieure.",
+    faq4a:"VeriLex prend en charge 15 langues pour l'interface du site et la sortie d'analyse IA : anglais, espagnol, chinois simplifié, chinois traditionnel, vietnamien, tagalog, coréen, arabe, hindi, portugais, russe, français, créole haïtien, pendjabi et amharique. Sélectionnez votre langue de sortie préférée dans la liste déroulante du formulaire d'analyse. Vous pouvez également changer toute l'interface du site avec le bouton de langue dans la barre de navigation supérieure.",
     faq5q:'Quelle est la précision des citations juridiques?',
-    faq5a:'LexVera utilise Claude AI d\'Anthropic, très capable d\'identifier les statuts pertinents et de les citer avec précision. Toutes les citations de statuts incluent un lien direct vers le texte officiel (ex. : leginfo.legislature.ca.gov pour la loi californienne). Pour la jurisprudence, nous n\'incluons que les citations dont l\'IA est sûre — une citation manquante est toujours préférable à une citation fabriquée. Les lois évoluent dans le temps, vérifiez donc toujours les versions actuelles.',
+    faq5a:'VeriLex utilise Claude AI d\'Anthropic, très capable d\'identifier les statuts pertinents et de les citer avec précision. Toutes les citations de statuts incluent un lien direct vers le texte officiel (ex. : leginfo.legislature.ca.gov pour la loi californienne). Pour la jurisprudence, nous n\'incluons que les citations dont l\'IA est sûre — une citation manquante est toujours préférable à une citation fabriquée. Les lois évoluent dans le temps, vérifiez donc toujours les versions actuelles.',
     faq6q:"J'ai reçu un avis d'expulsion / de tribunal — que dois-je faire?",
-    faq6a:"D'abord, collez ou téléchargez le document dans LexVera pour comprendre exactement ce qu'il dit et quels sont vos droits. Portez une attention particulière à la section <strong>Dates et délais clés</strong> — manquer une échéance peut gravement nuire à votre dossier. Pour les avis très urgents, LexVera affichera un encadré d'action \"Que faire maintenant\". Contactez ensuite immédiatement une organisation d'aide juridique. Dans la Bay Area : <a href=\"https://ebclc.org\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--sky)\">East Bay Community Law Center</a> (510) 548-4040 et <a href=\"https://baylegal.org\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--sky)\">Bay Area Legal Aid</a> (415) 982-1300 offrent une aide gratuite.",
+    faq6a:"D'abord, collez ou téléchargez le document dans VeriLex pour comprendre exactement ce qu'il dit et quels sont vos droits. Portez une attention particulière à la section <strong>Dates et délais clés</strong> — manquer une échéance peut gravement nuire à votre dossier. Pour les avis très urgents, VeriLex affichera un encadré d'action \"Que faire maintenant\". Contactez ensuite immédiatement une organisation d'aide juridique. Dans la Bay Area : <a href=\"https://ebclc.org\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--sky)\">East Bay Community Law Center</a> (510) 548-4040 et <a href=\"https://baylegal.org\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--sky)\">Bay Area Legal Aid</a> (415) 982-1300 offrent une aide gratuite.",
   },
   ht: {
     navBadge:'Enfòmasyon Legal Sèlman', heroBadge:'✦ Gratis · San kont · 15 lang',
@@ -1992,7 +2087,7 @@ const TRANSLATIONS = {
     sample7:'📬 Lèt IRS', sample8:'🚗 Kontravansyon',
     navAbout:'Konsènan', navFaq:'Kesyon', aboutLabel:'Konsènan', aboutTitle:'Objektif nou',
     fbLabel:'Kòmantè', fbTitle:'Ou gen yon kesyon oswa sijesyon?',
-    fbSub:'Nou li chak mesaj. Kòmantè ou yo ede amelyore LexVera.',
+    fbSub:'Nou li chak mesaj. Kòmantè ou yo ede amelyore VeriLex.',
     fbNameLabel:'Non ou (opsyonèl)', fbCatLabel:'Kategori',
     fbEmailLabel:'Imel (opsyonèl — si ou vle yon repons)',
     fbMsgLabel:'Mesaj', fbSubmit:'Voye Kòmantè',
@@ -2000,17 +2095,17 @@ const TRANSLATIONS = {
     fbNamePh:'Anonim', fbMsgPh:'Di nou sa ou panse…',
     faqLabel:'Kesyon', faqTitle:'Kesyon ki poze souvan', faqSub:'Tout sa ou bezwen konnen anvan ou kòmanse.',
     faq1q:'Èske sa a se vre konsèy legal?',
-    faq1a:'Non — LexVera bay <strong>enfòmasyon legal</strong>, pa konsèy legal. Gen yon diferans enpòtan: enfòmasyon legal eksplike sa lalwa di an jeneral; konsèy legal aplike lalwa nan sitiyasyon espesifik ou epi li mande yon avoka lisansye. LexVera ede ou konprann sa yon dokiman vle di ak ki lwa yo aplike, men li pa di ou sa pou fè. Pou konsèy espesifik nan ka ou, tanpri konsilte yon avoka lisansye. Nou mete lyen pou òganizasyon èd legal gratis nan chak rezilta.',
+    faq1a:'Non — VeriLex bay <strong>enfòmasyon legal</strong>, pa konsèy legal. Gen yon diferans enpòtan: enfòmasyon legal eksplike sa lalwa di an jeneral; konsèy legal aplike lalwa nan sitiyasyon espesifik ou epi li mande yon avoka lisansye. VeriLex ede ou konprann sa yon dokiman vle di ak ki lwa yo aplike, men li pa di ou sa pou fè. Pou konsèy espesifik nan ka ou, tanpri konsilte yon avoka lisansye. Nou mete lyen pou òganizasyon èd legal gratis nan chak rezilta.',
     faq2q:'Èske dokiman mwen rete prive?',
     faq2a:'Dokiman ou voye an sekirite bay Claude AI (pa Anthropic) pou analiz epi li <strong>pa janm estoke sou sèvè nou yo</strong>. Nou pa anrejistre, sove, ni pataje kontni okenn dokiman ou telechaje oswa kole. Rezilta analiz la montre sèlman nan navigatè ou epi jete lè ou kite paj la. Pou dokiman ki trè sansib (pa ekzanp, papye imigrasyon), ou ka vle efase enfòmasyon pèsonèl anvan ou telechaje.',
     faq3q:'Ki kalite dokiman mwen ka analize?',
-    faq3a:'LexVera travay ak prèske nenpòt dokiman legal: avi ekspilsyon, lèt rekouvman dèt, kontra lwaye, konvokasyon tribinal, kontra travay, avi imigrasyon (Notice to Appear, RFE), lèt IRS ak taks, kontravansyon trafik, ak plis. Ou ka kole tèks dirèkteman oswa telechaje yon PDF. PDF ak tèks ki ka chwazi yo ekstrè imedyatman; PDF eskane yo trete ak vizyon AI (~20 segond). Ou ka telechaje yon foto JPEG oswa PNG yon dokiman fizik tou.',
+    faq3a:'VeriLex travay ak prèske nenpòt dokiman legal: avi ekspilsyon, lèt rekouvman dèt, kontra lwaye, konvokasyon tribinal, kontra travay, avi imigrasyon (Notice to Appear, RFE), lèt IRS ak taks, kontravansyon trafik, ak plis. Ou ka kole tèks dirèkteman oswa telechaje yon PDF. PDF ak tèks ki ka chwazi yo ekstrè imedyatman; PDF eskane yo trete ak vizyon AI (~20 segond). Ou ka telechaje yon foto JPEG oswa PNG yon dokiman fizik tou.',
     faq4q:'Ki lang yo sipòte?',
-    faq4a:'LexVera sipòte 15 lang pou tou de entèfas sitwèb la ak pwodiksyon analiz AI: anglè, panyòl, chinwa senplifye, chinwa tradisyonèl, vyetnamyen, tagalog, koreyen, arab, hindi, pòtigè, ris, fransè, kreyòl ayisyen, punjabi, ak amharik. Chwazi lang pwodiksyon prefere ou nan meni dewoutan nan fòm analiz la. Ou ka chanje tout entèfas sitwèb la tou lè w itilize bouton lang nan ba navigasyon anwo.',
+    faq4a:'VeriLex sipòte 15 lang pou tou de entèfas sitwèb la ak pwodiksyon analiz AI: anglè, panyòl, chinwa senplifye, chinwa tradisyonèl, vyetnamyen, tagalog, koreyen, arab, hindi, pòtigè, ris, fransè, kreyòl ayisyen, punjabi, ak amharik. Chwazi lang pwodiksyon prefere ou nan meni dewoutan nan fòm analiz la. Ou ka chanje tout entèfas sitwèb la tou lè w itilize bouton lang nan ba navigasyon anwo.',
     faq5q:'Ki nivo presizyon sitasyon legal yo?',
-    faq5a:'LexVera itilize Claude AI pa Anthropic, ki gen kapasite pou idantifye estati enpòtan yo epi site yo avèk presizyon. Tout sitasyon estati yo gen yon lyen dirèk nan tèks ofisyèl la (pa ekzanp, leginfo.legislature.ca.gov pou lwa Californi). Pou lwa ka, nou sèlman mete sitasyon AI a gen konfyans yo — yon sitasyon ki manke toujou pi bon pase yon ki fabrike. Lwa yo chanje ak tan, kidonk toujou verifye vèsyon aktyèl yo.',
+    faq5a:'VeriLex itilize Claude AI pa Anthropic, ki gen kapasite pou idantifye estati enpòtan yo epi site yo avèk presizyon. Tout sitasyon estati yo gen yon lyen dirèk nan tèks ofisyèl la (pa ekzanp, leginfo.legislature.ca.gov pou lwa Californi). Pou lwa ka, nou sèlman mete sitasyon AI a gen konfyans yo — yon sitasyon ki manke toujou pi bon pase yon ki fabrike. Lwa yo chanje ak tan, kidonk toujou verifye vèsyon aktyèl yo.',
     faq6q:'Mwen resevwa yon avi ekspilsyon / tribinal — kisa mwen dwe fè?',
-    faq6a:'Premye, kole oswa telechaje dokiman an nan LexVera pou konprann egzakteman sa li di ak ki dwa ou genyen. Fè atansyon pou seksyon <strong>Dat ak Delè Kle yo</strong> — rate yon delè ka domaje ka ou seryezman. Pou avi ki gen ijans segondè, LexVera pral montre yon bwat aksyon "Kisa pou fè kounye a". Epi kontakte yon òganizasyon èd legal imedyatman. Nan Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 ak <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ofri èd gratis.',
+    faq6a:'Premye, kole oswa telechaje dokiman an nan VeriLex pou konprann egzakteman sa li di ak ki dwa ou genyen. Fè atansyon pou seksyon <strong>Dat ak Delè Kle yo</strong> — rate yon delè ka domaje ka ou seryezman. Pou avi ki gen ijans segondè, VeriLex pral montre yon bwat aksyon "Kisa pou fè kounye a". Epi kontakte yon òganizasyon èd legal imedyatman. Nan Bay Area: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 ak <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ofri èd gratis.',
   },
   pa: {
     navBadge:'ਕੇਵਲ ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ', heroBadge:'✦ ਮੁਫ਼ਤ · ਕੋਈ ਖਾਤਾ ਨਹੀਂ · 15 ਭਾਸ਼ਾਵਾਂ',
@@ -2041,7 +2136,7 @@ const TRANSLATIONS = {
     sample7:'📬 IRS ਪੱਤਰ', sample8:'🚗 ਟ੍ਰੈਫਿਕ ਜੁਰਮਾਨਾ',
     navAbout:'ਬਾਰੇ', navFaq:'ਸਵਾਲ', aboutLabel:'ਬਾਰੇ', aboutTitle:'ਸਾਡਾ ਮਕਸਦ',
     fbLabel:'ਪ੍ਰਤੀਕਿਰਿਆ', fbTitle:'ਕੋਈ ਸਵਾਲ ਜਾਂ ਸੁਝਾਅ ਹੈ?',
-    fbSub:'ਅਸੀਂ ਹਰ ਸੁਨੇਹਾ ਪੜ੍ਹਦੇ ਹਾਂ। ਤੁਹਾਡੀ ਪ੍ਰਤੀਕਿਰਿਆ LexVera ਨੂੰ ਬਿਹਤਰ ਬਣਾਉਂਦੀ ਹੈ।',
+    fbSub:'ਅਸੀਂ ਹਰ ਸੁਨੇਹਾ ਪੜ੍ਹਦੇ ਹਾਂ। ਤੁਹਾਡੀ ਪ੍ਰਤੀਕਿਰਿਆ VeriLex ਨੂੰ ਬਿਹਤਰ ਬਣਾਉਂਦੀ ਹੈ।',
     fbNameLabel:'ਤੁਹਾਡਾ ਨਾਮ (ਵਿਕਲਪਿਕ)', fbCatLabel:'ਸ਼੍ਰੇਣੀ',
     fbEmailLabel:'ਈਮੇਲ (ਵਿਕਲਪਿਕ — ਜੇ ਜਵਾਬ ਚਾਹੁੰਦੇ ਹੋ)',
     fbMsgLabel:'ਸੁਨੇਹਾ', fbSubmit:'ਪ੍ਰਤੀਕਿਰਿਆ ਭੇਜੋ',
@@ -2049,17 +2144,17 @@ const TRANSLATIONS = {
     fbNamePh:'ਅਣਜਾਣ', fbMsgPh:'ਸਾਨੂੰ ਦੱਸੋ ਕੀ ਸੋਚਦੇ ਹੋ…',
     faqLabel:'ਸਵਾਲ', faqTitle:'ਆਮ ਸਵਾਲ', faqSub:'ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਜੋ ਕੁਝ ਜਾਣਨਾ ਜ਼ਰੂਰੀ ਹੈ।',
     faq1q:'ਕੀ ਇਹ ਅਸਲ ਕਾਨੂੰਨੀ ਸਲਾਹ ਹੈ?',
-    faq1a:'ਨਹੀਂ — LexVera <strong>ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ</strong> ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ, ਕਾਨੂੰਨੀ ਸਲਾਹ ਨਹੀਂ। ਇੱਕ ਮਹੱਤਵਪੂਰਨ ਅੰਤਰ ਹੈ: ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ ਦੱਸਦੀ ਹੈ ਕਿ ਕਾਨੂੰਨ ਕੀ ਕਹਿੰਦਾ ਹੈ; ਕਾਨੂੰਨੀ ਸਲਾਹ ਤੁਹਾਡੀ ਖਾਸ ਸਥਿਤੀ \'ਤੇ ਕਾਨੂੰਨ ਲਾਗੂ ਕਰਦੀ ਹੈ ਅਤੇ ਲਾਇਸੰਸਸ਼ੁਦਾ ਵਕੀਲ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। LexVera ਤੁਹਾਨੂੰ ਸਮਝਣ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ, ਪਰ ਦੱਸਦਾ ਨਹੀਂ ਕਿ ਕੀ ਕਰਨਾ ਹੈ। ਆਪਣੇ ਮਾਮਲੇ ਲਈ ਲਾਇਸੰਸਸ਼ੁਦਾ ਵਕੀਲ ਨਾਲ ਸੰਪਰਕ ਕਰੋ। ਅਸੀਂ ਹਰ ਨਤੀਜੇ ਵਿੱਚ ਮੁਫ਼ਤ ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ ਸੰਸਥਾਵਾਂ ਦੇ ਲਿੰਕ ਸ਼ਾਮਲ ਕਰਦੇ ਹਾਂ।',
+    faq1a:'ਨਹੀਂ — VeriLex <strong>ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ</strong> ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ, ਕਾਨੂੰਨੀ ਸਲਾਹ ਨਹੀਂ। ਇੱਕ ਮਹੱਤਵਪੂਰਨ ਅੰਤਰ ਹੈ: ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ ਦੱਸਦੀ ਹੈ ਕਿ ਕਾਨੂੰਨ ਕੀ ਕਹਿੰਦਾ ਹੈ; ਕਾਨੂੰਨੀ ਸਲਾਹ ਤੁਹਾਡੀ ਖਾਸ ਸਥਿਤੀ \'ਤੇ ਕਾਨੂੰਨ ਲਾਗੂ ਕਰਦੀ ਹੈ ਅਤੇ ਲਾਇਸੰਸਸ਼ੁਦਾ ਵਕੀਲ ਦੀ ਲੋੜ ਹੁੰਦੀ ਹੈ। VeriLex ਤੁਹਾਨੂੰ ਸਮਝਣ ਵਿੱਚ ਮਦਦ ਕਰਦਾ ਹੈ, ਪਰ ਦੱਸਦਾ ਨਹੀਂ ਕਿ ਕੀ ਕਰਨਾ ਹੈ। ਆਪਣੇ ਮਾਮਲੇ ਲਈ ਲਾਇਸੰਸਸ਼ੁਦਾ ਵਕੀਲ ਨਾਲ ਸੰਪਰਕ ਕਰੋ। ਅਸੀਂ ਹਰ ਨਤੀਜੇ ਵਿੱਚ ਮੁਫ਼ਤ ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ ਸੰਸਥਾਵਾਂ ਦੇ ਲਿੰਕ ਸ਼ਾਮਲ ਕਰਦੇ ਹਾਂ।',
     faq2q:'ਕੀ ਮੇਰਾ ਦਸਤਾਵੇਜ਼ ਗੁਪਤ ਰਹਿੰਦਾ ਹੈ?',
     faq2a:'ਤੁਹਾਡਾ ਦਸਤਾਵੇਜ਼ ਵਿਸ਼ਲੇਸ਼ਣ ਲਈ ਸੁਰੱਖਿਅਤ ਢੰਗ ਨਾਲ Claude AI (Anthropic ਦੁਆਰਾ) ਨੂੰ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ ਅਤੇ <strong>ਕਦੇ ਸਾਡੇ ਸਰਵਰਾਂ ਤੇ ਸਟੋਰ ਨਹੀਂ ਹੁੰਦਾ</strong>। ਅਸੀਂ ਤੁਹਾਡੇ ਕਿਸੇ ਵੀ ਦਸਤਾਵੇਜ਼ ਦੀ ਸਮੱਗਰੀ ਨੂੰ ਲੌਗ, ਸੇਵ ਜਾਂ ਸਾਂਝਾ ਨਹੀਂ ਕਰਦੇ। ਵਿਸ਼ਲੇਸ਼ਣ ਦਾ ਨਤੀਜਾ ਸਿਰਫ਼ ਤੁਹਾਡੇ ਬ੍ਰਾਊਜ਼ਰ ਵਿੱਚ ਦਿਖਾਇਆ ਜਾਂਦਾ ਹੈ। ਬਹੁਤ ਸੰਵੇਦਨਸ਼ੀਲ ਦਸਤਾਵੇਜ਼ਾਂ ਲਈ, ਅਪਲੋਡ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਛੁਪਾਉਣਾ ਬਿਹਤਰ ਹੈ।',
     faq3q:'ਮੈਂ ਕਿਸ ਕਿਸਮ ਦੇ ਦਸਤਾਵੇਜ਼ਾਂ ਦਾ ਵਿਸ਼ਲੇਸ਼ਣ ਕਰ ਸਕਦਾ ਹਾਂ?',
-    faq3a:'LexVera ਲਗਭਗ ਕਿਸੇ ਵੀ ਕਾਨੂੰਨੀ ਦਸਤਾਵੇਜ਼ ਨਾਲ ਕੰਮ ਕਰਦਾ ਹੈ: ਬੇਦਖਲੀ ਨੋਟਿਸ, ਕਰਜ਼ਾ ਵਸੂਲੀ ਪੱਤਰ, ਕਿਰਾਏ ਦੇ ਇਕਰਾਰਨਾਮੇ, ਅਦਾਲਤੀ ਸੰਮਨ, ਰੁਜ਼ਗਾਰ ਇਕਰਾਰਨਾਮੇ, ਇਮੀਗ੍ਰੇਸ਼ਨ ਨੋਟਿਸ, IRS ਅਤੇ ਟੈਕਸ ਪੱਤਰ, ਟ੍ਰੈਫਿਕ ਜੁਰਮਾਨੇ ਅਤੇ ਹੋਰ। ਤੁਸੀਂ ਟੈਕਸਟ ਸਿੱਧਾ ਪੇਸਟ ਕਰ ਸਕਦੇ ਹੋ ਜਾਂ PDF ਅਪਲੋਡ ਕਰ ਸਕਦੇ ਹੋ।',
+    faq3a:'VeriLex ਲਗਭਗ ਕਿਸੇ ਵੀ ਕਾਨੂੰਨੀ ਦਸਤਾਵੇਜ਼ ਨਾਲ ਕੰਮ ਕਰਦਾ ਹੈ: ਬੇਦਖਲੀ ਨੋਟਿਸ, ਕਰਜ਼ਾ ਵਸੂਲੀ ਪੱਤਰ, ਕਿਰਾਏ ਦੇ ਇਕਰਾਰਨਾਮੇ, ਅਦਾਲਤੀ ਸੰਮਨ, ਰੁਜ਼ਗਾਰ ਇਕਰਾਰਨਾਮੇ, ਇਮੀਗ੍ਰੇਸ਼ਨ ਨੋਟਿਸ, IRS ਅਤੇ ਟੈਕਸ ਪੱਤਰ, ਟ੍ਰੈਫਿਕ ਜੁਰਮਾਨੇ ਅਤੇ ਹੋਰ। ਤੁਸੀਂ ਟੈਕਸਟ ਸਿੱਧਾ ਪੇਸਟ ਕਰ ਸਕਦੇ ਹੋ ਜਾਂ PDF ਅਪਲੋਡ ਕਰ ਸਕਦੇ ਹੋ।',
     faq4q:'ਕਿਹੜੀਆਂ ਭਾਸ਼ਾਵਾਂ ਸਮਰਥਿਤ ਹਨ?',
-    faq4a:'LexVera ਵੈੱਬਸਾਈਟ ਇੰਟਰਫੇਸ ਅਤੇ AI ਵਿਸ਼ਲੇਸ਼ਣ ਦੋਵਾਂ ਲਈ 15 ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦਾ ਹੈ: ਅੰਗਰੇਜ਼ੀ, ਸਪੇਨੀ, ਸਰਲੀਕ੍ਰਿਤ ਚੀਨੀ, ਰਵਾਇਤੀ ਚੀਨੀ, ਵਿਅਤਨਾਮੀ, ਤਾਗਾਲੋਗ, ਕੋਰੀਅਨ, ਅਰਬੀ, ਹਿੰਦੀ, ਪੁਰਤਗਾਲੀ, ਰੂਸੀ, ਫ੍ਰੈਂਚ, ਹੈਤੀਅਨ ਕ੍ਰੀਓਲ, ਪੰਜਾਬੀ ਅਤੇ ਅਮਹਾਰਿਕ। ਵਿਸ਼ਲੇਸ਼ਣ ਫਾਰਮ ਵਿੱਚ ਡ੍ਰੌਪਡਾਊਨ ਤੋਂ ਆਪਣੀ ਪਸੰਦੀਦਾ ਭਾਸ਼ਾ ਚੁਣੋ।',
+    faq4a:'VeriLex ਵੈੱਬਸਾਈਟ ਇੰਟਰਫੇਸ ਅਤੇ AI ਵਿਸ਼ਲੇਸ਼ਣ ਦੋਵਾਂ ਲਈ 15 ਭਾਸ਼ਾਵਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦਾ ਹੈ: ਅੰਗਰੇਜ਼ੀ, ਸਪੇਨੀ, ਸਰਲੀਕ੍ਰਿਤ ਚੀਨੀ, ਰਵਾਇਤੀ ਚੀਨੀ, ਵਿਅਤਨਾਮੀ, ਤਾਗਾਲੋਗ, ਕੋਰੀਅਨ, ਅਰਬੀ, ਹਿੰਦੀ, ਪੁਰਤਗਾਲੀ, ਰੂਸੀ, ਫ੍ਰੈਂਚ, ਹੈਤੀਅਨ ਕ੍ਰੀਓਲ, ਪੰਜਾਬੀ ਅਤੇ ਅਮਹਾਰਿਕ। ਵਿਸ਼ਲੇਸ਼ਣ ਫਾਰਮ ਵਿੱਚ ਡ੍ਰੌਪਡਾਊਨ ਤੋਂ ਆਪਣੀ ਪਸੰਦੀਦਾ ਭਾਸ਼ਾ ਚੁਣੋ।',
     faq5q:'ਕਾਨੂੰਨੀ ਹਵਾਲੇ ਕਿੰਨੇ ਸਹੀ ਹਨ?',
-    faq5a:'LexVera Anthropic ਦਾ Claude AI ਵਰਤਦਾ ਹੈ, ਜੋ ਸੰਬੰਧਿਤ ਕਾਨੂੰਨਾਂ ਦੀ ਸਹੀ ਢੰਗ ਨਾਲ ਪਛਾਣ ਕਰਨ ਅਤੇ ਹਵਾਲਾ ਦੇਣ ਵਿੱਚ ਬਹੁਤ ਸਮਰੱਥ ਹੈ। ਸਾਰੇ ਹਵਾਲਿਆਂ ਵਿੱਚ ਸਰਕਾਰੀ ਪਾਠ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਸ਼ਾਮਲ ਹੈ। ਕਾਨੂੰਨ ਸਮੇਂ ਦੇ ਨਾਲ ਬਦਲਦੇ ਹਨ, ਇਸਲਈ ਭਰੋਸਾ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਮੌਜੂਦਾ ਸੰਸਕਰਣਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।',
+    faq5a:'VeriLex Anthropic ਦਾ Claude AI ਵਰਤਦਾ ਹੈ, ਜੋ ਸੰਬੰਧਿਤ ਕਾਨੂੰਨਾਂ ਦੀ ਸਹੀ ਢੰਗ ਨਾਲ ਪਛਾਣ ਕਰਨ ਅਤੇ ਹਵਾਲਾ ਦੇਣ ਵਿੱਚ ਬਹੁਤ ਸਮਰੱਥ ਹੈ। ਸਾਰੇ ਹਵਾਲਿਆਂ ਵਿੱਚ ਸਰਕਾਰੀ ਪਾਠ ਦਾ ਸਿੱਧਾ ਲਿੰਕ ਸ਼ਾਮਲ ਹੈ। ਕਾਨੂੰਨ ਸਮੇਂ ਦੇ ਨਾਲ ਬਦਲਦੇ ਹਨ, ਇਸਲਈ ਭਰੋਸਾ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਮੌਜੂਦਾ ਸੰਸਕਰਣਾਂ ਦੀ ਜਾਂਚ ਕਰੋ।',
     faq6q:'ਮੈਨੂੰ ਬੇਦਖਲੀ / ਅਦਾਲਤ ਦਾ ਨੋਟਿਸ ਮਿਲਿਆ — ਕੀ ਕਰਾਂ?',
-    faq6a:'ਪਹਿਲਾਂ, ਦਸਤਾਵੇਜ਼ ਨੂੰ LexVera \'ਤੇ ਪੇਸਟ ਜਾਂ ਅਪਲੋਡ ਕਰੋ ਅਤੇ ਆਪਣੇ ਅਧਿਕਾਰ ਜਾਣੋ। <strong>ਮੁੱਖ ਤਾਰੀਖਾਂ ਅਤੇ ਸਮਾਂ-ਸੀਮਾਵਾਂ</strong> ਵੱਲ ਧਿਆਨ ਦਿਓ। ਫਿਰ ਤੁਰੰਤ ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ ਸੰਸਥਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ। ਬੇ ਏਰੀਆ ਵਿੱਚ: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 ਅਤੇ <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ਮੁਫ਼ਤ ਮਦਦ ਦਿੰਦੇ ਹਨ।',
+    faq6a:'ਪਹਿਲਾਂ, ਦਸਤਾਵੇਜ਼ ਨੂੰ VeriLex \'ਤੇ ਪੇਸਟ ਜਾਂ ਅਪਲੋਡ ਕਰੋ ਅਤੇ ਆਪਣੇ ਅਧਿਕਾਰ ਜਾਣੋ। <strong>ਮੁੱਖ ਤਾਰੀਖਾਂ ਅਤੇ ਸਮਾਂ-ਸੀਮਾਵਾਂ</strong> ਵੱਲ ਧਿਆਨ ਦਿਓ। ਫਿਰ ਤੁਰੰਤ ਕਾਨੂੰਨੀ ਸਹਾਇਤਾ ਸੰਸਥਾ ਨਾਲ ਸੰਪਰਕ ਕਰੋ। ਬੇ ਏਰੀਆ ਵਿੱਚ: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 ਅਤੇ <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ਮੁਫ਼ਤ ਮਦਦ ਦਿੰਦੇ ਹਨ।',
   },
   am: {
     navBadge:'ሕጋዊ መረጃ ብቻ', heroBadge:'✦ ነፃ · መለያ አያስፈልግም · 15 ቋንቋዎች',
@@ -2090,7 +2185,7 @@ const TRANSLATIONS = {
     sample7:'📬 IRS ደብዳቤ', sample8:'🚗 የትራፊክ መቀጮ',
     navAbout:'ስለ', navFaq:'ጥያቄዎች', aboutLabel:'ስለ', aboutTitle:'ዓላማችን',
     fbLabel:'ግብረ መልስ', fbTitle:'ጥያቄ ወይም ሐሳብ አለዎት?',
-    fbSub:'እያንዳንዱ መልዕክት እናነባለን። ግብረ መልስዎ LexVera ን ለማሻሻል ይረዳል።',
+    fbSub:'እያንዳንዱ መልዕክት እናነባለን። ግብረ መልስዎ VeriLex ን ለማሻሻል ይረዳል።',
     fbNameLabel:'ስምዎ (አማራጭ)', fbCatLabel:'ምድብ',
     fbEmailLabel:'ኢሜይል (አማራጭ — ምላሽ ከፈለጉ)',
     fbMsgLabel:'መልዕክት', fbSubmit:'ግብረ መልስ ላክ',
@@ -2098,17 +2193,17 @@ const TRANSLATIONS = {
     fbNamePh:'ስም አልባ', fbMsgPh:'ምን እያሰቡ እንዳሉ ይንገሩን…',
     faqLabel:'ጥያቄዎች', faqTitle:'ተደጋጋሚ ጥያቄዎች', faqSub:'ከመጀመርዎ በፊት ማወቅ ያለብዎት ሁሉ።',
     faq1q:'ይህ እውነተኛ የሕግ ምክር ነው?',
-    faq1a:'አይደለም — LexVera <strong>ሕጋዊ መረጃ</strong> ያቀርባል፣ የሕግ ምክር አይደለም። ጠቃሚ ልዩነት አለ: ሕጋዊ መረጃ ሕጉ በአጠቃላይ ምን እንደሚናገር ያብራራል; የሕግ ምክር ሕጉን ለእርስዎ ልዩ ሁኔታ ይተገብራል እናም ፈቃድ ያለው ጠበቃ ያስፈልጋል። LexVera ሰነዱ ምን ማለት እንደሆነ ለመረዳት ያግዝዎታል፣ ነገር ግን ምን ማድረግ እንዳለብዎ አይነግርዎትም። ፈቃድ ያለው ጠበቃ ያማክሩ። እያንዳንዱ ውጤት ነፃ የሕግ እርዳታ ድርጅቶች ማስፈንጠሪያዎች ይዟል።',
+    faq1a:'አይደለም — VeriLex <strong>ሕጋዊ መረጃ</strong> ያቀርባል፣ የሕግ ምክር አይደለም። ጠቃሚ ልዩነት አለ: ሕጋዊ መረጃ ሕጉ በአጠቃላይ ምን እንደሚናገር ያብራራል; የሕግ ምክር ሕጉን ለእርስዎ ልዩ ሁኔታ ይተገብራል እናም ፈቃድ ያለው ጠበቃ ያስፈልጋል። VeriLex ሰነዱ ምን ማለት እንደሆነ ለመረዳት ያግዝዎታል፣ ነገር ግን ምን ማድረግ እንዳለብዎ አይነግርዎትም። ፈቃድ ያለው ጠበቃ ያማክሩ። እያንዳንዱ ውጤት ነፃ የሕግ እርዳታ ድርጅቶች ማስፈንጠሪያዎች ይዟል።',
     faq2q:'ሰነዴ ሚስጥራዊ ሆኖ ይቆያል?',
     faq2a:'ሰነዶ ለትንተና ወደ Claude AI (ከ Anthropic) ሚስጥራዊ በሆነ መንገድ ይላካል እና <strong>በሰርቨሮቻችን ላይ ፈጽሞ አይከማቹም</strong>። ስለሰቀሉት ወይም ስለለጠፉት ሰነድ ይዘት አንቆጥርም፣ አናስቀምጥም ወይም አናጋራም። የትንተና ውጤቱ በአሳሽዎ ብቻ ይታያል። ለሚስጥራዊ ሰነዶች ከመስቀልዎ በፊት ስምና ID ቁጥርን ማሸፈን ይሻላል።',
     faq3q:'ምን አይነት ሰነዶች መተንተን እችላለሁ?',
-    faq3a:'LexVera ሁሉን ዓይነት ሕጋዊ ሰነዶች ያስተናግዳል: የማስወጣት ማስታወቂያዎች፣ የዕዳ ስብሰባ ደብዳቤዎች፣ የቤት ኪራይ ስምምነቶች፣ የፍርድ ቤት መጥሪያዎች፣ የቅጥር ውሎች፣ የኢሚግሬሽን ማስታወቂያዎች፣ IRS እና የግብር ደብዳቤዎች፣ የትራፊክ መቀጮዎች እና ሌሎችም። ጽሑፍ ቀጥታ መለጠፍ ወይም PDF መጫን ይችላሉ።',
+    faq3a:'VeriLex ሁሉን ዓይነት ሕጋዊ ሰነዶች ያስተናግዳል: የማስወጣት ማስታወቂያዎች፣ የዕዳ ስብሰባ ደብዳቤዎች፣ የቤት ኪራይ ስምምነቶች፣ የፍርድ ቤት መጥሪያዎች፣ የቅጥር ውሎች፣ የኢሚግሬሽን ማስታወቂያዎች፣ IRS እና የግብር ደብዳቤዎች፣ የትራፊክ መቀጮዎች እና ሌሎችም። ጽሑፍ ቀጥታ መለጠፍ ወይም PDF መጫን ይችላሉ።',
     faq4q:'የትኞቹ ቋንቋዎች ይደገፋሉ?',
-    faq4a:'LexVera ለድር ጣቢያ ይዘት እና AI ትንተና ውጤት 15 ቋንቋዎችን ይደግፋል: እንግሊዝኛ፣ ስፓኒሽ፣ ቀለሉ ቻይንኛ፣ ባህላዊ ቻይንኛ፣ ቪትናምኛ፣ ታጋሎግ፣ ኮሪያኛ፣ አረብኛ፣ ሂንዲ፣ ፖርቱጋልኛ፣ ሩሲያኛ፣ ፈረንሳይኛ፣ ሃይቲያን ክርዮሌ፣ ፑንጃቢ እና አምሃርኛ። ተመራጭ የውጤት ቋንቋዎን ከትንተና ፎርሙ ዝርዝር ይምረጡ።',
+    faq4a:'VeriLex ለድር ጣቢያ ይዘት እና AI ትንተና ውጤት 15 ቋንቋዎችን ይደግፋል: እንግሊዝኛ፣ ስፓኒሽ፣ ቀለሉ ቻይንኛ፣ ባህላዊ ቻይንኛ፣ ቪትናምኛ፣ ታጋሎግ፣ ኮሪያኛ፣ አረብኛ፣ ሂንዲ፣ ፖርቱጋልኛ፣ ሩሲያኛ፣ ፈረንሳይኛ፣ ሃይቲያን ክርዮሌ፣ ፑንጃቢ እና አምሃርኛ። ተመራጭ የውጤት ቋንቋዎን ከትንተና ፎርሙ ዝርዝር ይምረጡ።',
     faq5q:'የሕጋዊ ጥቅሶች ትክክለኛነት ምን ያህል ነው?',
-    faq5a:'LexVera የ Anthropic Claude AI ይጠቀማል። ሁሉም ሕጋዊ ጥቅሶች ወደ ኦፊሴላዊ ጽሑፉ ቀጥተኛ ማስፈንጠሪያ ይዘዋል (ለምሳሌ leginfo.legislature.ca.gov ለካሊፎርኒያ ሕግ)። ሕጎች ከጊዜ ወደ ጊዜ ይለወጣሉ፣ ስለዚህ ሁሌ ወቅታዊ ስሪቶችን ያረጋግጡ።',
+    faq5a:'VeriLex የ Anthropic Claude AI ይጠቀማል። ሁሉም ሕጋዊ ጥቅሶች ወደ ኦፊሴላዊ ጽሑፉ ቀጥተኛ ማስፈንጠሪያ ይዘዋል (ለምሳሌ leginfo.legislature.ca.gov ለካሊፎርኒያ ሕግ)። ሕጎች ከጊዜ ወደ ጊዜ ይለወጣሉ፣ ስለዚህ ሁሌ ወቅታዊ ስሪቶችን ያረጋግጡ።',
     faq6q:'የማስወጣት / ፍርድ ቤት ማስታወቂያ ደረሰኝ — ምን ማድረግ አለብኝ?',
-    faq6a:'በመጀመሪያ ሰነዱን ወደ LexVera ለጥፉ ወይም ጫኑ ምን እንደሚናገር እና መብቶቹ ምን እንደሆኑ ለመረዳት። <strong>ቁልፍ ቀኖች እና ጊዜ ገደቦች</strong> ክፍል ላይ ትኩረት ይስጡ — ጊዜ ገደብ መዝለቅ ጉዳዮን ሊጎዳ ይችላል። ከዚያ ወዲያው የሕግ እርዳታ ድርጅት ያግኙ። ቤይ ኤሪያ: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 እና <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ነፃ እርዳታ ያቀርባሉ።',
+    faq6a:'በመጀመሪያ ሰነዱን ወደ VeriLex ለጥፉ ወይም ጫኑ ምን እንደሚናገር እና መብቶቹ ምን እንደሆኑ ለመረዳት። <strong>ቁልፍ ቀኖች እና ጊዜ ገደቦች</strong> ክፍል ላይ ትኩረት ይስጡ — ጊዜ ገደብ መዝለቅ ጉዳዮን ሊጎዳ ይችላል። ከዚያ ወዲያው የሕግ እርዳታ ድርጅት ያግኙ። ቤይ ኤሪያ: <a href="https://ebclc.org" target="_blank" rel="noopener" style="color:var(--sky)">East Bay Community Law Center</a> (510) 548-4040 እና <a href="https://baylegal.org" target="_blank" rel="noopener" style="color:var(--sky)">Bay Area Legal Aid</a> (415) 982-1300 ነፃ እርዳታ ያቀርባሉ።',
   },
 };
 
@@ -2350,7 +2445,7 @@ async function analyze() {
     const res = await fetch('/analyze', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, language: lang, persona }),
+      body: JSON.stringify({ text, language: lang, persona, user_location: userLocation }),
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.detail || 'Analysis failed');
