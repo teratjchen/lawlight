@@ -54,6 +54,20 @@ PERSONA_INSTRUCTIONS = {
     ),
 }
 
+def _ocr_quality_ok(text: str) -> bool:
+    """Return False if OCR output looks like a failed extraction rather than real content."""
+    if len(text) < 20:
+        return False
+    # High '?' ratio is a strong signal of encoding failure / unreadable chars
+    if text.count("?") / len(text) > 0.35:
+        return False
+    # Near-zero character variety means repeated garbage (e.g. "RRRRRRRR")
+    payload = text.lower().replace(" ", "").replace("\n", "")
+    if payload and len(set(payload)) < 4:
+        return False
+    return True
+
+
 # In-memory feedback store (persists until server restarts).
 feedback_db: list[dict] = []
 
@@ -238,10 +252,14 @@ async def extract_pdf(file: UploadFile = File(...)):
         )
 
         extracted = ocr_response.content[0].text.strip()
-        if not extracted:
+        if not extracted or not _ocr_quality_ok(extracted):
             raise HTTPException(
                 status_code=400,
-                detail="Could not read text — image quality may be too low. Try a clearer scan."
+                detail=(
+                    "Could not reliably read this document — the scan quality may be too low, "
+                    "the script may be unrecognized, or the page is mostly images. "
+                    "Try a higher-resolution scan, better lighting, or paste the text directly."
+                )
             )
 
         return {"text": extracted[:60_000], "pages": num_pages, "method": "ocr"}
@@ -307,10 +325,14 @@ async def extract_image(file: UploadFile = File(...)):
             messages=[{"role": "user", "content": vision_content}],
         )
         extracted = response.content[0].text.strip()
-        if not extracted:
+        if not extracted or not _ocr_quality_ok(extracted):
             raise HTTPException(
                 status_code=400,
-                detail="Could not read text from the image. Try a clearer photo with better lighting."
+                detail=(
+                    "Could not reliably read this document — the image quality may be too low, "
+                    "the script may be unrecognized, or the page is mostly non-text. "
+                    "Try a clearer photo with better lighting, or paste the text directly."
+                )
             )
         return {"text": extracted[:60_000], "method": "ocr"}
 
