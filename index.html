@@ -806,6 +806,52 @@
       a { color: #2563eb !important; }
       .law-item, .case-item { page-break-inside: avoid; }
     }
+
+    /* ── FOLLOW-UP CHAT ──────────────────────────────── */
+    .chat-section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 24px 28px; box-shadow: var(--shadow);
+    }
+    .chat-title {
+      font-size: 16px; font-weight: 700; color: var(--ink);
+      display: block; margin-bottom: 4px;
+    }
+    .chat-subtitle { font-size: 13px; color: var(--muted); display: block; margin-bottom: 16px; }
+    .chat-messages {
+      max-height: 380px; overflow-y: auto;
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 14px; scroll-behavior: smooth;
+    }
+    .chat-bubble {
+      padding: 10px 14px; border-radius: 14px;
+      font-size: 14px; line-height: 1.6; max-width: 85%; white-space: pre-wrap;
+    }
+    .chat-bubble-user {
+      background: var(--sky); color: #fff;
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+    .chat-bubble-ai {
+      background: #f1f5f9; color: var(--ink);
+      align-self: flex-start; border-bottom-left-radius: 4px;
+    }
+    .chat-bubble-thinking { opacity: .65; font-style: italic; }
+    .chat-input-row { display: flex; gap: 8px; }
+    .chat-input {
+      flex: 1; padding: 10px 14px; border: 1px solid var(--border);
+      border-radius: 8px; font-size: 14px; font-family: inherit;
+      background: var(--surface); color: var(--ink);
+      outline: none; transition: border-color .15s;
+    }
+    .chat-input:focus { border-color: var(--sky); }
+    .chat-send-btn {
+      padding: 10px 20px; background: var(--sky); color: #fff;
+      border: none; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: opacity .15s; white-space: nowrap;
+    }
+    .chat-send-btn:hover { opacity: .85; }
+    .chat-send-btn:disabled { opacity: .45; cursor: not-allowed; }
+    body.large-text .chat-bubble { font-size: 16px; }
+    body.large-text .chat-input  { font-size: 16px; }
   </style>
 </head>
 <body>
@@ -1246,6 +1292,19 @@
         <div class="tab-panel" id="tab-rights"></div>
       </div>
 
+      <!-- Follow-up chat -->
+      <div class="result-section chat-section" id="chatSection">
+        <span class="chat-title" id="chatTitle">💬 Ask about this document</span>
+        <span class="chat-subtitle" id="chatSubtitle">I can explain what your document says — not give legal advice</span>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-row">
+          <input class="chat-input" type="text" id="chatInput"
+            placeholder="Ask a question about your document…"
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendFollowUp();}">
+          <button class="chat-send-btn" id="chatSendBtn" onclick="sendFollowUp()">Send</button>
+        </div>
+      </div>
+
       <button class="btn-new" onclick="resetAll()">← Analyze Another Document</button>
     </div>
 
@@ -1519,6 +1578,9 @@ let inputMode = 'paste';
 let pdfText = '';
 let persona = 'novice';
 let userLocation = ''; // e.g. "Oakland, California, United States"
+let lastDocText = '';
+let lastAnalysis = null;
+let chatHistory = [];
 
 async function requestLocation() {
   const btn = document.getElementById('locBtn');
@@ -1635,6 +1697,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ Print results', btnCopy:'📋 Copy summary', btnCopied:'✓ Copied!',
     keyDates:'Key Dates & Deadlines',
     footerDisclaimer:'<strong>Legal information only.</strong> VeriLex explains what documents say and what the law provides. It does not give legal advice, make recommendations, or create an attorney-client relationship. For advice specific to your situation, consult a licensed attorney.',
+    chatTitle:'💬 Ask about this document',
+    chatSubtitle:'I can explain what your document says — not give legal advice',
+    chatThinking:'Thinking…', chatSend:'Send',
+    chatPlaceholder:'Ask a question about your document…',
   },
   es: {
     navBadge:'Solo información legal', heroBadge:'✦ Gratis · Sin cuenta · 15 idiomas',
@@ -1708,6 +1774,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ Imprimir resultados', btnCopy:'📋 Copiar resumen', btnCopied:'✓ ¡Copiado!',
     keyDates:'Fechas y plazos clave',
     footerDisclaimer:'<strong>Solo información legal.</strong> VeriLex explica qué dicen los documentos y qué establece la ley. No da asesoramiento legal, no hace recomendaciones ni crea una relación abogado-cliente. Para asesoramiento específico a su situación, consulte a un abogado con licencia.',
+    chatTitle:'💬 Pregunta sobre este documento',
+    chatSubtitle:'Puedo explicar lo que dice tu documento — pero no doy asesoramiento legal',
+    chatThinking:'Pensando…', chatSend:'Enviar',
+    chatPlaceholder:'Haz una pregunta sobre tu documento…',
   },
   zh: {
     navBadge:'仅供法律信息', heroBadge:'✦ 免费 · 无需账户 · 15种语言',
@@ -1781,6 +1851,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ 打印结果', btnCopy:'📋 复制摘要', btnCopied:'✓ 已复制！',
     keyDates:'关键日期和截止日期',
     footerDisclaimer:'<strong>仅供法律信息参考。</strong> VeriLex 解释文件内容和法律规定，不提供法律建议、不作出推荐，也不建立律师-客户关系。如需针对您具体情况的建议，请咨询持牌律师。',
+    chatTitle:'💬 询问关于此文件的问题',
+    chatSubtitle:'我可以解释您的文件内容，但不提供法律建议',
+    chatThinking:'思考中…', chatSend:'发送',
+    chatPlaceholder:'请提问关于您文件的问题…',
   },
   'zh-TW': {
     navBadge:'僅供法律資訊', heroBadge:'✦ 免費 · 無需帳戶 · 15種語言',
@@ -1854,6 +1928,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ 列印結果', btnCopy:'📋 複製摘要', btnCopied:'✓ 已複製！',
     keyDates:'關鍵日期和截止日期',
     footerDisclaimer:'<strong>僅供法律資訊參考。</strong> VeriLex 解釋文件內容和法律規定，不提供法律建議、不作出推薦，也不建立律師-客戶關係。如需針對您具體情況的建議，請諮詢持牌律師。',
+    chatTitle:'💬 詢問關於此文件的問題',
+    chatSubtitle:'我可以解釋您的文件內容，但不提供法律建議',
+    chatThinking:'思考中…', chatSend:'傳送',
+    chatPlaceholder:'請提問關於您文件的問題…',
   },
   vi: {
     navBadge:'Chỉ thông tin pháp lý', heroBadge:'✦ Miễn phí · Không cần tài khoản · 15 ngôn ngữ',
@@ -1927,6 +2005,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ In kết quả', btnCopy:'📋 Sao chép tóm tắt', btnCopied:'✓ Đã sao chép!',
     keyDates:'Ngày quan trọng & Thời hạn',
     footerDisclaimer:'<strong>Chỉ là thông tin pháp lý.</strong> VeriLex giải thích nội dung tài liệu và quy định pháp luật. Không cung cấp tư vấn pháp lý, không đưa ra khuyến nghị, và không tạo ra mối quan hệ luật sư-thân chủ. Để được tư vấn cụ thể cho tình huống của bạn, hãy tham khảo ý kiến luật sư có bằng.',
+    chatTitle:'💬 Hỏi về tài liệu này',
+    chatSubtitle:'Tôi có thể giải thích tài liệu của bạn — nhưng không đưa ra lời khuyên pháp lý',
+    chatThinking:'Đang suy nghĩ…', chatSend:'Gửi',
+    chatPlaceholder:'Đặt câu hỏi về tài liệu của bạn…',
   },
   tl: {
     navBadge:'Impormasyon sa Batas Lamang', heroBadge:'✦ Libre · Walang account · 15 wika',
@@ -2000,6 +2082,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ I-print ang mga resulta', btnCopy:'📋 Kopyahin ang buod', btnCopied:'✓ Nakopya!',
     keyDates:'Mga Pangunahing Petsa at Deadline',
     footerDisclaimer:'<strong>Legal na impormasyon lamang.</strong> Ipinapaliwanag ng VeriLex kung ano ang sinasabi ng mga dokumento at kung ano ang ibinibigay ng batas. Hindi nagbibigay ng legal na payo, hindi gumagawa ng rekomendasyon, at hindi lumilikha ng relasyon ng abogado-kliyente. Para sa payo para sa iyong sitwasyon, kumonsulta sa isang lisensyadong abogado.',
+    chatTitle:'💬 Magtanong tungkol sa dokumentong ito',
+    chatSubtitle:'Maipapaliwanag ko ang iyong dokumento — ngunit hindi magbibigay ng legal na payo',
+    chatThinking:'Nag-iisip…', chatSend:'Ipadala',
+    chatPlaceholder:'Magtanong tungkol sa iyong dokumento…',
   },
   ko: {
     navBadge:'법적 정보만 제공', heroBadge:'✦ 무료 · 계정 불필요 · 15개 언어',
@@ -2073,6 +2159,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ 결과 인쇄', btnCopy:'📋 요약 복사', btnCopied:'✓ 복사됨!',
     keyDates:'주요 날짜 및 마감일',
     footerDisclaimer:'<strong>법적 정보만 제공합니다.</strong> VeriLex는 문서의 내용과 법이 제공하는 것을 설명합니다. 법적 조언을 제공하거나 권고를 하거나 변호사-의뢰인 관계를 형성하지 않습니다. 귀하의 상황에 맞는 조언을 위해 면허 있는 변호사와 상담하세요.',
+    chatTitle:'💬 이 문서에 대해 질문하기',
+    chatSubtitle:'문서 내용을 설명할 수 있지만 법적 조언은 드릴 수 없습니다',
+    chatThinking:'생각 중…', chatSend:'전송',
+    chatPlaceholder:'문서에 대한 질문을 입력하세요…',
   },
   ar: {
     navBadge:'معلومات قانونية فقط', heroBadge:'✦ مجاني · بدون حساب · 15 لغة',
@@ -2146,6 +2236,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ طباعة النتائج', btnCopy:'📋 نسخ الملخص', btnCopied:'✓ تم النسخ!',
     keyDates:'التواريخ والمواعيد النهائية الرئيسية',
     footerDisclaimer:'<strong>معلومات قانونية فقط.</strong> يشرح VeriLex ما تقوله المستندات وما ينص عليه القانون. لا يقدم استشارات قانونية، ولا يقدم توصيات، ولا يُنشئ علاقة محامٍ-موكل. للحصول على مشورة خاصة بوضعك، استشر محامياً مرخصاً.',
+    chatTitle:'💬 اسأل عن هذا المستند',
+    chatSubtitle:'يمكنني شرح ما يقوله مستندك — لكن لا أقدم استشارات قانونية',
+    chatThinking:'جارٍ التفكير…', chatSend:'إرسال',
+    chatPlaceholder:'اطرح سؤالاً حول مستندك…',
   },
   hi: {
     navBadge:'केवल कानूनी जानकारी', heroBadge:'✦ मुफ़्त · कोई खाता नहीं · 15 भाषाएं',
@@ -2219,6 +2313,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ परिणाम प्रिंट करें', btnCopy:'📋 सारांश कॉपी करें', btnCopied:'✓ कॉपी हो गया!',
     keyDates:'मुख्य तिथियाँ और समय-सीमाएँ',
     footerDisclaimer:'<strong>केवल कानूनी जानकारी।</strong> VeriLex दस्तावेजों में क्या कहा गया है और कानून क्या प्रदान करता है यह बताता है। यह कानूनी सलाह नहीं देता, कोई सिफारिश नहीं करता, और वकील-मुवक्किल संबंध नहीं बनाता। अपनी स्थिति के लिए सलाह हेतु किसी लाइसेंस प्राप्त वकील से परामर्श करें।',
+    chatTitle:'💬 इस दस्तावेज़ के बारे में पूछें',
+    chatSubtitle:'मैं आपके दस्तावेज़ की व्याख्या कर सकता हूँ — लेकिन कानूनी सलाह नहीं दे सकता',
+    chatThinking:'सोच रहा हूँ…', chatSend:'भेजें',
+    chatPlaceholder:'अपने दस्तावेज़ के बारे में प्रश्न पूछें…',
   },
   pt: {
     navBadge:'Apenas Informação Legal', heroBadge:'✦ Grátis · Sem conta · 15 idiomas',
@@ -2292,6 +2390,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ Imprimir resultados', btnCopy:'📋 Copiar resumo', btnCopied:'✓ Copiado!',
     keyDates:'Datas e Prazos Importantes',
     footerDisclaimer:'<strong>Apenas informações jurídicas.</strong> O VeriLex explica o que os documentos dizem e o que a lei prevê. Não fornece aconselhamento jurídico, não faz recomendações nem cria uma relação advogado-cliente. Para aconselhamento específico à sua situação, consulte um advogado licenciado.',
+    chatTitle:'💬 Pergunte sobre este documento',
+    chatSubtitle:'Posso explicar o que seu documento diz — mas não dou aconselhamento jurídico',
+    chatThinking:'Pensando…', chatSend:'Enviar',
+    chatPlaceholder:'Faça uma pergunta sobre seu documento…',
   },
   ru: {
     navBadge:'Только правовая информация', heroBadge:'✦ Бесплатно · Без аккаунта · 15 языков',
@@ -2365,6 +2467,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ Печать результатов', btnCopy:'📋 Копировать резюме', btnCopied:'✓ Скопировано!',
     keyDates:'Ключевые даты и сроки',
     footerDisclaimer:'<strong>Только правовая информация.</strong> VeriLex объясняет, что говорится в документах и что предусматривает закон. Не даёт юридических советов, не делает рекомендаций и не создаёт отношений адвоката и клиента. Для консультации по вашей ситуации обратитесь к лицензированному адвокату.',
+    chatTitle:'💬 Задайте вопрос об этом документе',
+    chatSubtitle:'Я могу объяснить содержание документа — но не давать юридических советов',
+    chatThinking:'Думаю…', chatSend:'Отправить',
+    chatPlaceholder:'Задайте вопрос о вашем документе…',
   },
   fr: {
     navBadge:'Informations juridiques uniquement', heroBadge:'✦ Gratuit · Sans compte · 15 langues',
@@ -2438,6 +2544,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ Imprimer les résultats', btnCopy:'📋 Copier le résumé', btnCopied:'✓ Copié !',
     keyDates:'Dates et délais clés',
     footerDisclaimer:"<strong>Information juridique uniquement.</strong> VeriLex explique ce que disent les documents et ce que prévoit la loi. Il ne fournit pas de conseils juridiques, ne fait pas de recommandations et ne crée pas de relation avocat-client. Pour des conseils spécifiques à votre situation, consultez un avocat agréé.",
+    chatTitle:'💬 Posez une question sur ce document',
+    chatSubtitle:"Je peux expliquer ce que dit votre document — mais pas donner de conseils juridiques",
+    chatThinking:'En train de réfléchir…', chatSend:'Envoyer',
+    chatPlaceholder:'Posez une question sur votre document…',
   },
   ht: {
     navBadge:'Enfòmasyon Legal Sèlman', heroBadge:'✦ Gratis · San kont · 15 lang',
@@ -2511,6 +2621,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ Enprime rezilta', btnCopy:'📋 Kopye rezime', btnCopied:'✓ Kopye!',
     keyDates:'Dat ak Dat Limit Kle',
     footerDisclaimer:'<strong>Enfòmasyon legal sèlman.</strong> VeriLex eksplike sa dokiman yo di ak sa lwa a bay. Li pa bay konsèy legal, pa fè rekòmandasyon, epi pa kreye relasyon avoka-kliyan. Pou konsèy espesifik pou sitiyasyon ou, pale ak yon avoka lisansye.',
+    chatTitle:'💬 Poze kesyon sou dokiman sa a',
+    chatSubtitle:'Mwen ka eksplike sa dokiman ou di — men pa bay konsèy legal',
+    chatThinking:'Ap reflechi…', chatSend:'Voye',
+    chatPlaceholder:'Poze yon kesyon sou dokiman ou…',
   },
   pa: {
     navBadge:'ਕੇਵਲ ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ', heroBadge:'✦ ਮੁਫ਼ਤ · ਕੋਈ ਖਾਤਾ ਨਹੀਂ · 15 ਭਾਸ਼ਾਵਾਂ',
@@ -2584,6 +2698,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ ਨਤੀਜੇ ਛਾਪੋ', btnCopy:'📋 ਸਾਰ ਕਾਪੀ ਕਰੋ', btnCopied:'✓ ਕਾਪੀ ਹੋ ਗਿਆ!',
     keyDates:'ਮੁੱਖ ਤਾਰੀਖਾਂ ਅਤੇ ਸਮਾਂ-ਸੀਮਾਵਾਂ',
     footerDisclaimer:'<strong>ਕੇਵਲ ਕਾਨੂੰਨੀ ਜਾਣਕਾਰੀ।</strong> VeriLex ਦੱਸਦਾ ਹੈ ਕਿ ਦਸਤਾਵੇਜ਼ ਕੀ ਕਹਿੰਦੇ ਹਨ ਅਤੇ ਕਾਨੂੰਨ ਕੀ ਪ੍ਰਦਾਨ ਕਰਦਾ ਹੈ। ਇਹ ਕਾਨੂੰਨੀ ਸਲਾਹ ਨਹੀਂ ਦਿੰਦਾ, ਕੋਈ ਸਿਫਾਰਸ਼ ਨਹੀਂ ਕਰਦਾ, ਅਤੇ ਵਕੀਲ-ਮੁਵੱਕਿਲ ਸੰਬੰਧ ਨਹੀਂ ਬਣਾਉਂਦਾ। ਆਪਣੀ ਸਥਿਤੀ ਲਈ ਸਲਾਹ ਲਈ ਕਿਸੇ ਲਾਇਸੈਂਸਸ਼ੁਦਾ ਵਕੀਲ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।',
+    chatTitle:'💬 ਇਸ ਦਸਤਾਵੇਜ਼ ਬਾਰੇ ਪੁੱਛੋ',
+    chatSubtitle:'ਮੈਂ ਤੁਹਾਡੇ ਦਸਤਾਵੇਜ਼ ਦੀ ਵਿਆਖਿਆ ਕਰ ਸਕਦਾ ਹਾਂ — ਪਰ ਕਾਨੂੰਨੀ ਸਲਾਹ ਨਹੀਂ ਦੇ ਸਕਦਾ',
+    chatThinking:'ਸੋਚ ਰਿਹਾ ਹਾਂ…', chatSend:'ਭੇਜੋ',
+    chatPlaceholder:'ਆਪਣੇ ਦਸਤਾਵੇਜ਼ ਬਾਰੇ ਸਵਾਲ ਪੁੱਛੋ…',
   },
   am: {
     navBadge:'ሕጋዊ መረጃ ብቻ', heroBadge:'✦ ነፃ · መለያ አያስፈልግም · 15 ቋንቋዎች',
@@ -2657,6 +2775,10 @@ const TRANSLATIONS = {
     btnPrint:'🖨️ ውጤቶችን ያትሙ', btnCopy:'📋 ማጠቃለያ ቅዳ', btnCopied:'✓ ተቀድቷል!',
     keyDates:'ዋና ቀናቶች እና የመጨረሻ ቀናቶች',
     footerDisclaimer:'<strong>የሕግ መረጃ ብቻ።</strong> VeriLex ሰነዶቹ ምን እንደሚናገሩ እና ሕጉ ምን እንደሚሰጥ ያብራራል። የሕግ ምክር አይሰጥም፣ ምክረ-ሃሳብ አይሰጥም፣ እና የጠበቃ-ደንበኛ ግንኙነት አይፈጥርም። ለእርስዎ ሁኔታ ምክር ለማግኘት የፈቃድ ያለው ጠበቃ ያማክሩ።',
+    chatTitle:'💬 ስለዚህ ሰነድ ጠይቅ',
+    chatSubtitle:'ሰነዱ ምን እንደሚለ ማብራሪያ ሊሰጥ እችላለሁ — ነገር ግን የሕግ ምክር አልሰጥም',
+    chatThinking:'በማሰብ ላይ…', chatSend:'ላክ',
+    chatPlaceholder:'ስለ ሰነዱ ጥያቄ ጠይቅ…',
   },
 };
 
@@ -2720,6 +2842,9 @@ const UI_ELEMENTS = [
   { id:'copySummaryBtn', key:'btnCopy' },
   { id:'keyDatesTitle', key:'keyDates' },
   { id:'footerDisclaimer', key:'footerDisclaimer', html:true },
+  { id:'chatTitle', key:'chatTitle' },
+  { id:'chatSubtitle', key:'chatSubtitle' },
+  { id:'chatSendBtn', key:'chatSend' },
   { id:'chip1', key:'chip1' }, { id:'chip2', key:'chip2' },
   { id:'chip3', key:'chip3' }, { id:'chip4', key:'chip4' },
   { id:'chip5', key:'chip5' }, { id:'chip6', key:'chip6' },
@@ -2779,6 +2904,8 @@ function setUILang(code) {
   if (fbName && t.fbNamePh) fbName.placeholder = t.fbNamePh;
   const fbMsg = document.getElementById('fb-message');
   if (fbMsg && t.fbMsgPh) fbMsg.placeholder = t.fbMsgPh;
+  const chatInput = document.getElementById('chatInput');
+  if (chatInput && t.chatPlaceholder) chatInput.placeholder = t.chatPlaceholder;
   document.documentElement.dir = code === 'ar' ? 'rtl' : 'ltr';
   document.getElementById('uiLangLabel').textContent = LANG_LABELS[code] || code.toUpperCase();
 }
@@ -2994,6 +3121,14 @@ function setUI(state) {
 function T() { return TRANSLATIONS[uiLang] || TRANSLATIONS.en; }
 
 function render(d) {
+  // Store for follow-up chat context
+  lastAnalysis = d;
+  lastDocText = inputMode === 'paste'
+    ? document.getElementById('docText').value.trim()
+    : pdfText;
+  chatHistory = [];
+  document.getElementById('chatMessages').innerHTML = '';
+
   renderSummary(d);
   renderActionSteps(d);
   renderDates(d.key_dates || []);
@@ -3003,6 +3138,56 @@ function render(d) {
   renderGlossary(d.glossary || []);
   renderRights(d.rights_under_law || [], d.local_resources || []);
   switchTab('breakdown', document.querySelector('.pill-tab'));
+}
+
+// ── Follow-up chat ─────────────────────────────────────────────────────────────
+function appendChatBubble(role, content, thinking = false) {
+  const container = document.getElementById('chatMessages');
+  const bubble = document.createElement('div');
+  bubble.className = `chat-bubble chat-bubble-${role}${thinking ? ' chat-bubble-thinking' : ''}`;
+  bubble.textContent = content;
+  container.appendChild(bubble);
+  container.scrollTop = container.scrollHeight;
+  return bubble;
+}
+
+async function sendFollowUp() {
+  const input = document.getElementById('chatInput');
+  const btn   = document.getElementById('chatSendBtn');
+  const question = input.value.trim();
+  if (!question || !lastDocText || !lastAnalysis) return;
+
+  input.value = '';
+  btn.disabled = true;
+  appendChatBubble('user', question);
+  const thinking = appendChatBubble('ai', T().chatThinking, true);
+
+  try {
+    const res = await fetch('/followup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        question,
+        document_text: lastDocText,
+        prior_analysis: lastAnalysis,
+        language: document.getElementById('langSelect').value,
+        persona,
+        conversation: chatHistory,
+      }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Something went wrong.');
+    thinking.remove();
+    appendChatBubble('ai', data.answer);
+    chatHistory.push({ role: 'user', content: question });
+    chatHistory.push({ role: 'assistant', content: data.answer });
+  } catch (e) {
+    thinking.textContent = e.message;
+    thinking.classList.remove('chat-bubble-thinking');
+  } finally {
+    btn.disabled = false;
+    input.focus();
+  }
 }
 
 function renderActionSteps(d) {
@@ -3207,6 +3392,10 @@ function resetAll() {
   document.getElementById('charCount').textContent = '0 characters';
   pdfText = '';
   document.getElementById('pdfStatus').textContent = '';
+  lastDocText = '';
+  lastAnalysis = null;
+  chatHistory = [];
+  document.getElementById('chatMessages').innerHTML = '';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 function setUI(state) {

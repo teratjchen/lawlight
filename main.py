@@ -89,6 +89,20 @@ class FeedbackRequest(BaseModel):
     message: str
 
 
+class ChatMessage(BaseModel):
+    role: str   # "user" or "assistant"
+    content: str
+
+
+class FollowUpRequest(BaseModel):
+    question: str
+    document_text: str
+    prior_analysis: dict
+    language: str = "English"
+    persona: str = "intermediate"
+    conversation: list[ChatMessage] = []
+
+
 @app.get("/")
 async def root():
     return FileResponse("index.html")
@@ -182,6 +196,67 @@ async def analyze(req: AnalyzeRequest):
             "document_type": "api_error",
             "success": False,
         })
+        raise HTTPException(status_code=502, detail=f"AI service error: {e}")
+
+
+FOLLOWUP_SYSTEM = """\
+You are VeriLex, a legal document accessibility assistant. The user has already received a full analysis of their document. They now have follow-up questions.
+
+STRICT RULES:
+1. Only answer questions about the specific document and analysis provided. Do not answer general legal questions unrelated to this document.
+2. NEVER give legal advice. If the user asks what they should do, whether to sign, whether to contest, whether they have a strong case, or any other action recommendation: explain what the document says about the relevant issue, then add — "For advice specific to your situation, please consult a licensed attorney or a free legal aid organization."
+3. Never invent information not present in the document text or prior analysis. If the answer is not in the document, say so.
+4. Be concise. The user already has the full analysis — answer their specific question directly without repeating the whole analysis.
+5. Respond entirely in the language specified in the request."""
+
+
+@app.post("/followup")
+async def followup(req: FollowUpRequest):
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="Server configuration error.")
+
+    question = req.question.strip()
+    if not question:
+        raise HTTPException(status_code=400, detail="Question cannot be empty.")
+    if len(question) > 2000:
+        raise HTTPException(status_code=400, detail="Question too long (max 2000 characters).")
+
+    client = anthropic.Anthropic(api_key=api_key)
+
+    # Document + analysis as a cached first turn so repeated follow-ups are cheap
+    doc_context = (
+        f"DOCUMENT TEXT:\n{req.document_text}\n\n"
+        f"PRIOR ANALYSIS:\n{json.dumps(req.prior_analysis, ensure_ascii=False, indent=2)}\n\n"
+        f"Respond entirely in {req.language}."
+    )
+
+    messages: list[dict] = [
+        {
+            "role": "user",
+            "content": [{"type": "text", "text": doc_context, "cache_control": {"type": "ephemeral"}}],
+        },
+        {
+            "role": "assistant",
+            "content": "I have read the document and analysis. What would you like to know?",
+        },
+    ]
+
+    for msg in req.conversation:
+        messages.append({"role": msg.role, "content": msg.content})
+
+    messages.append({"role": "user", "content": question})
+
+    try:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1024,
+            system=[{"type": "text", "text": FOLLOWUP_SYSTEM, "cache_control": {"type": "ephemeral"}}],
+            messages=messages,
+        )
+        answer = response.content[0].text.strip()
+        return {"answer": answer}
+    except anthropic.APIError as e:
         raise HTTPException(status_code=502, detail=f"AI service error: {e}")
 
 
